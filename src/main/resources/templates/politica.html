@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Política de Privacidad - La Fragata Giratoria</title>
+
+  <!-- Tailwind CSS (opcional, si usas estilos similares a Laravel Jetstream) -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- CSS propio -->
+  <link rel="stylesheet" th:href="@{/css/politica.css}">
+</head>
+
+<body class="bg-gray-100">
+  <div class="min-h-screen flex flex-col items-center pt-6 sm:pt-0">
+    
+    <!-- Logo -->
+    <div class="mb-4">
+      <img th:src="@{/img/logo.png}" alt="Logo Fragata Giratoria" class="w-24 h-24 mx-auto rounded-full shadow-md">
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg prose">
+      <!-- Contenido dinámico -->
+      <div th:utext="${policy}">
+        <!-- Aquí Thymeleaf inyecta el contenido HTML de la política -->
+      </div>
+    </div>
+  </div>
+</body>
+</html>

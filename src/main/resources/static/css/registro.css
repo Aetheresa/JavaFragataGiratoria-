@@ -1,0 +1,152 @@
+/* Fondo*/
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  background: url('/img/BGInicio.jpg') no-repeat center center/cover;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.logo-contenedor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  height: 60px;
+}
+
+.nombre-logo {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+nav a {
+  color: rgb(255, 255, 255);
+  margin-left: 2rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.icono-carrito {
+  margin-left: 1rem;
+}
+
+.icono-carrito img {
+  height: 24px;
+  vertical-align: middle;
+}
+
+.contenido {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding-top: 80px;
+}
+
+/*subfondo*/
+.tarjeta {
+  background-color:#fff;
+  background-size: cover;
+  border-radius: 20px;
+  min-height: 800px;/*subbg altura*/
+  padding: 2.5rem 8rem;/*subbg parte de adentro*/
+  width: 100%;
+  max-width: 100rem;
+  color: #08131F;
+  text-align: left;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+/*titulo*/
+.tarjeta h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  font-family: 'Georgia', serif;
+}
+
+.tarjeta label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.1rem;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+.tarjeta input,
+.tarjeta select {
+  background-color: #ffffff48;
+  color: black;
+  font-size: 1rem;
+  font-weight: 200;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #1A2A3B;
+  box-sizing: border-box;
+}
+
+.tarjeta input::placeholder,
+.tarjeta select::placeholder {
+  font-size: 1.2rem;
+  color: #666;
+  padding: 1rem;
+}
+
+.tarjeta select {
+  font-size: 1.2rem;
+}
+
+.tarjeta select option {
+  font-size: 1.2rem;
+  font-style: normal;
+  color:black;
+}
+
+.registrarse {
+  background-color: #c89f4c;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  padding: 1rem;
+  margin-top: 5.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.cancelar {
+  background-color: transparent;
+  color: #333;
+  text-decoration: underline;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+}
+
+.mensaje-error {
+    font-weight: bold;
+    color: red;        /* opcional */
+    margin-top: 10px;  /* opcional */
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+
+    <!-- Puedes usar Tailwind CSS o Bootstrap según tu preferencia -->
+    <link rel="stylesheet" th:href="@{/css/tailwind.css}">
+</head>
+
+<body class="bg-gray-50">
+    <header class="py-6 text-center">
+        <h2 class="font-semibold text-2xl text-gray-800 leading-tight">
+            Gestión de Productos
+        </h2>
+    </header>
+
+    <main class="py-8 max-w-6xl mx-auto">
+        <!-- Botón de agregar producto -->
+        <div class="mb-4 flex justify-end">
+            <a th:href="@{/productos/nuevo}"
+               class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+                + Agregar Producto
+            </a>
+        </div>
+
+        <!-- Tabla de productos -->
+        <table class="table-auto w-full border-collapse border border-gray-300 shadow-md">
+            <thead class="bg-gray-100">
+                <tr>
+                    <th class="border px-4 py-2">ID</th>
+                    <th class="border px-4 py-2">Nombre</th>
+                    <th class="border px-4 py-2">Descripción</th>
+                    <th class="border px-4 py-2">Precio</th>
+                    <th class="border px-4 py-2">Stock</th>
+                    <th class="border px-4 py-2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iteración de productos -->
+                <tr th:each="producto : ${productos}" class="text-center">
+                    <td class="border px-4 py-2" th:text="${producto.idProducto}">1</td>
+                    <td class="border px-4 py-2" th:text="${producto.nombre}">Ejemplo</td>
+                    <td class="border px-4 py-2" th:text="${producto.descripcion}">Descripción del producto</td>
+                    <td class="border px-4 py-2" th:text="${#numbers.formatDecimal(producto.precio, 1, 'COMMA', 2, 'POINT')}">
+                        $0.00
+                    </td>
+                    <td class="border px-4 py-2" th:text="${producto.stock}">0</td>
+                    <td class="border px-4 py-2">
+                        <!-- Botón Editar -->
+                        <a th:href="@{'/productos/editar/' + ${producto.idProducto}}"
+                           class="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                            ✏️ Editar
+                        </a>
+
+                        <!-- Botón Borrar -->
+                        <form th:action="@{'/productos/eliminar/' + ${producto.idProducto}}" method="post"
+                              style="display:inline"
+                              onsubmit="return confirm('¿Seguro de borrar este producto?')">
+                            <button type="submit"
+                                    class="px-2 py-1 bg-red-600 text-white rounded hover:bg-red-700">
+                                🗑️ Borrar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+
+                <!-- Caso sin productos -->
+                <tr th:if="${#lists.isEmpty(productos)}">
+                    <td colspan="6" class="border px-4 py-2 text-center text-gray-500">
+                        No hay productos registrados
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Paginación (si la implementas en tu controlador) -->
+        <div class="mt-4 flex justify-center" th:if="${productos.totalPages > 1}">
+            <nav>
+                <ul class="flex space-x-2">
+                    <li th:each="pageNum : ${#numbers.sequence(1, productos.totalPages)}">
+                        <a th:href="@{'/productos?page=' + ${pageNum}}"
+                           th:text="${pageNum}"
+                           class="px-3 py-1 border rounded hover:bg-gray-200"
+                           th:classappend="${pageNum == productos.number + 1} ? 'bg-blue-500 text-white' : ''">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </main>
+</body>
+</html>

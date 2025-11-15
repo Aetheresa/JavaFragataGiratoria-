@@ -1,0 +1,131 @@
+/* ====== General ====== */
+body {
+    background: url('/img/BGgeneral.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* ====== Caja principal ====== */
+.dashboard-box { background: rgba(255, 255, 255, 0.92); 
+    border-radius: 0.8rem; padding: 2rem; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+    margin: 1rem; 
+    width: 100%; }
+
+/* ====== Mensajes ====== */
+.alert-success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* ====== Títulos ====== */
+.dashboard-box h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ====== Contenedor del botón agregar ====== */
+.actions-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+/* ====== Botón Agregar ====== */
+.btn-agregar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #10b981;
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.btn-agregar:hover {
+    background: #059669;
+}
+
+/* ====== Tablas ====== */
+.table-platillos {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+
+.table-platillos th,
+.table-platillos td {
+    border: 1px solid #e5e7eb;
+    padding: 0.75rem;
+    text-align: center;
+}
+
+.table-platillos th {
+    background: #f9fafb;
+    font-weight: 600;
+    color: #374151;
+}
+
+.table-platillos tr:hover {
+    background: #f3f4f6;
+}
+
+/* ====== Acciones ====== */
+.acciones {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn.edit {
+    background: #f59e0b;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+}
+.btn.edit:hover {
+    background: #d97706;
+}
+
+.btn.delete {
+    background: #ef4444;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+.btn.delete:hover {
+    background: #b91c1c;
+}
+
+/* ====== Sin datos ====== */
+.no-data {
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    padding: 1rem;
+}

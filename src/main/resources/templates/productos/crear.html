@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Productos - Lista</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-4">
+    <h2 class="mb-3">Listado de Productos</h2>
+
+    <a href="/productos/crear" class="btn btn-primary mb-3">➕ Nuevo Producto</a>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Unidad Medida</th>
+                <th>Stock Actual</th>
+                <th>Stock Mínimo</th>
+                <th>Proveedor</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- Lista dinámica -->
+        <tr th:each="producto : ${productos}">
+            <td th:text="${producto.idProducto}"></td>
+            <td th:text="${producto.nombreProducto}"></td>
+            <td th:text="${producto.unidadMedida}"></td>
+            <td th:text="${producto.stockActual}"></td>
+            <td th:text="${producto.stockMinimo}"></td>
+            <td th:text="${producto.proveedor.nombreProveedor}"></td>
+
+            <td>
+                <a th:href="@{/productos/editar/{id}(id=${producto.idProducto})}" class="btn btn-warning btn-sm">Editar</a>
+
+                <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="return confirm('¿Seguro que deseas eliminar este producto?')">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
