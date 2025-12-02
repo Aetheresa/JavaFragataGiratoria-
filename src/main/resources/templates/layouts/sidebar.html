@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${title} ?: 'La Fragata Giratoria'">La Fragata Giratoria</title>
+
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+</head>
+<body>
+    <div style="display:flex; height:100vh; overflow:hidden;">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo">La Fragata Giratoria</div>
+
+                <input class="search-input" type="search" id="search-input" placeholder="🔍 Búsqueda" />
+
+                <nav class="menu">
+                    <a th:href="@{/dashboard}" class="nav-button" th:classappend="${activePage == 'dashboard'} ? ' active' : ''">Inicio</a>
+                    <a th:href="@{/productos}" class="nav-button" th:classappend="${activePage == 'productos'} ? ' active' : ''">Productos</a>
+                    <a th:href="@{/platillos}" class="nav-button" th:classappend="${activePage == 'platillos'} ? ' active' : ''">Platillos</a>
+                    <a th:href="@{/compras}" class="nav-button" th:classappend="${activePage == 'compras'} ? ' active' : ''">Compras</a>
+                    <a th:href="@{/pedidos}" class="nav-button" th:classappend="${activePage == 'pedidos'} ? ' active' : ''">Pedidos</a>
+                    <a th:href="@{/usuarios}" class="nav-button" th:classappend="${activePage == 'usuarios'} ? ' active' : ''">Usuarios</a>
+                    <a th:href="@{/metodosdepago}" class="nav-button" th:classappend="${activePage == 'metodosdepago'} ? ' active' : ''">Métodos de Pago</a>
+                </nav>
+            </div>
+
+            <div class="bottom-buttons">
+                <a th:href="@{/ajustes}" class="nav-button" th:classappend="${activePage == 'ajustes'} ? ' active' : ''">Ajustes</a>
+                <a th:href="@{/ayuda}" class="nav-button" th:classappend="${activePage == 'ayuda'} ? ' active' : ''">Ayuda</a>
+
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="nav-button">Salir</button>
+                </form>
+            </div>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main style="flex:1; overflow-y:auto; padding:1.5rem;">
+            <section th:replace="${content}"></section>
+        </main>
+    </div>
+
+    <!-- Script buscador -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const searchInput = document.getElementById("search-input");
+            const navButtons = document.querySelectorAll(".nav-button");
+            searchInput.addEventListener("input", function() {
+                const term = searchInput.value.toLowerCase();
+                navButtons.forEach(button => {
+                    const text = button.textContent.toLowerCase();
+                    button.style.backgroundColor = text.includes(term) ? "#ff8c00" : "";
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

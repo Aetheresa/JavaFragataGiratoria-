@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📦 Pedidos - La Fragata Giratoria</title>
+
+  <!-- Enlace al CSS -->
+  <link rel="stylesheet" th:href="@{/css/pedidos.css}">
+</head>
+
+<body>
+
+  <!-- Incluye layout general con sidebar -->
+  <div th:replace="~{layouts/sidebar :: sidebar}"></div>
+
+  <main class="dashboard-box">
+    <h1 class="text-2xl font-bold mb-4 text-center">📦 Lista de Pedidos</h1>
+
+    <div class="actions-header mb-4 flex justify-end">
+      <a th:href="@{/pedidos/nuevo}" class="btn-agregar">➕ Nuevo Pedido</a>
+    </div>
+
+    <table class="table-pedidos">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Cliente</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Total</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Iteración con Thymeleaf -->
+        <tr th:each="pedido : ${pedidos}">
+          <td th:text="${pedido.idPedido}"></td>
+          <td th:text="${pedido.cliente}"></td>
+          <td th:text="${pedido.fecha}"></td>
+          <td th:text="${pedido.estado}"></td>
+          <td th:text="'$' + ${#numbers.formatDecimal(pedido.total, 1, 'POINT', 2, 'POINT')}"></td>
+
+          <td class="acciones">
+            <a th:href="@{'/pedidos/editar/' + ${pedido.idPedido}}" class="btn edit">✏️</a>
+
+            <form th:action="@{'/pedidos/eliminar/' + ${pedido.idPedido}}" method="post" style="display:inline;">
+              <input type="hidden" name="_method" value="delete">
+              <button type="submit" class="btn delete" onclick="return confirm('¿Eliminar este pedido?')">🗑️</button>
+            </form>
+          </td>
+        </tr>
+
+        <!-- Mostrar mensaje si no hay pedidos -->
+        <tr th:if="${#lists.isEmpty(pedidos)}">
+          <td colspan="6" class="no-data">⚠️ No hay pedidos registrados</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Paginación (opcional) -->
+    <div class="mt-4 pagination">
+      <span th:if="${pedidos.hasPrevious()}">
+        <a th:href="@{|/pedidos?page=${pedidos.number - 1}|}">⬅️ Anterior</a>
+      </span>
+      <span th:text="'Página ' + ${pedidos.number + 1} + ' de ' + ${pedidos.totalPages}"></span>
+      <span th:if="${pedidos.hasNext()}">
+        <a th:href="@{|/pedidos?page=${pedidos.number + 1}|}">Siguiente ➡️</a>
+      </span>
+    </div>
+  </main>
+
+</body>
+</html>

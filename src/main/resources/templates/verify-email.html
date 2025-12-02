@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verificar Correo Electrónico - La Fragata Giratoria</title>
+  <link rel="stylesheet" th:href="@{/css/auth.css}" />
+</head>
+<body class="bg-gray-100">
+  <div class="min-h-screen flex flex-col items-center pt-10">
+
+    <!-- Logo -->
+    <div>
+      <img th:src="@{/images/logo.png}" alt="Logo La Fragata Giratoria" style="width:120px; border-radius:50%;" />
+    </div>
+
+    <!-- Tarjeta -->
+    <div class="w-full sm:max-w-md mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg">
+      <div class="mb-4 text-sm text-gray-600 text-center">
+        Antes de continuar, por favor verifica tu dirección de correo electrónico haciendo clic en el enlace que te enviamos.  
+        <br><br>
+        Si no recibiste el correo, podemos enviarte otro sin problema.
+      </div>
+
+      <!-- ✅ Mensaje de confirmación si se reenvió el correo -->
+      <div th:if="${status == 'verification-link-sent'}"
+           class="mb-4 font-medium text-sm text-green-600 text-center">
+        Se ha enviado un nuevo enlace de verificación al correo que registraste en tu perfil.
+      </div>
+
+      <!-- 🔁 Reenviar verificación -->
+      <div class="mt-4 flex items-center justify-between">
+        <form th:action="@{/verification/send}" method="post">
+          <button type="submit"
+                  class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            Reenviar correo de verificación
+          </button>
+        </form>
+
+        <div class="text-right">
+          <a th:href="@{/perfil}"
+             class="underline text-sm text-gray-600 hover:text-gray-900">
+            Editar perfil
+          </a>
+
+          <form th:action="@{/logout}" method="post" class="inline">
+            <button type="submit"
+                    class="underline text-sm text-gray-600 hover:text-gray-900 ms-2">
+              Cerrar sesión
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

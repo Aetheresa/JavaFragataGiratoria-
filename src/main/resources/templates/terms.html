@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Términos y Condiciones - La Fragata Giratoria</title>
+
+    <link rel="stylesheet" th:href="@{/css/auth.css}" />
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col items-center pt-10">
+        <!-- Logo -->
+        <div>
+            <img th:src="@{/images/logo.png}" alt="Logo La Fragata Giratoria" style="width: 120px; border-radius: 50%;" />
+        </div>
+
+        <!-- Contenedor principal -->
+        <div class="w-full sm:max-w-2xl mt-6 p-6 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            <h1 class="text-2xl font-bold mb-4 text-center">Términos y Condiciones</h1>
+            
+            <!-- Aquí se renderiza el contenido -->
+            <div th:utext="${terms}">
+                <!-- Si no hay datos, muestra un texto genérico -->
+                <p>Actualmente no hay términos y condiciones disponibles.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Producto Agregado - La Fragata Giratoria</title>
+    
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+    
+    <link rel="stylesheet" th:href="@{/css/agregadoCarrito.css}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    
+    <div th:replace="~{layouts/header :: header}"></div> 
+    
+    <main class="confirmacion-container">
+        <div class="confirmacion-box">
+            
+            <i class="fas fa-check-circle icono-check"></i>
+            <h2>¡Producto Agregado!</h2>
+
+            <div class="producto-agregado">
+                <h3><span th:text="${producto.nombre}">Ceviche Clásico</span></h3>
+                <p>Se ha añadido a tu carrito por <span th:text="${#numbers.formatCurrency(producto.precio)}">$ 20.000</span>.</p>
+            </div>
+            
+            <div class="acciones">
+                <a th:href="@{/roles/cliente/menu}" class="btn-seguir">
+                    <i class="fas fa-chevron-left"></i> Seguir Comprando
+                </a>
+                
+                <a th:href="@{/carrito}" class="btn-carrito">
+                    Ir al Carrito <i class="fas fa-shopping-cart"></i>
+                </a>
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>

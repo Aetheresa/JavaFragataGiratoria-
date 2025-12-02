@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Fragata Giratoria - Dashboard</title>
+
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body>
+<div style="display:flex; height:100vh; overflow:hidden;">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-top">
+
+            <div class="logo">
+                La Fragata Giratoria
+            </div>
+
+            <input class="search-input" type="search" id="search-input" placeholder="🔍 Búsqueda" />
+
+            <nav class="menu">
+                <a href="/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/crud/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main style="flex:1; overflow-y:auto; padding:1.5rem;">
+
+        <div class="dashboard-wrapper">
+            <div class="welcome-container">
+                <h1>🍽️ Bienvenido al Sistema de Gestión</h1>
+                <p>
+                    Este panel te permitirá administrar los 
+                    <strong>usuarios</strong>, 
+                    <strong>productos</strong> y 
+                    <strong>compras</strong> de tu restaurante.
+                </p>
+
+                <div class="stats-preview">
+
+                    <!-- Usuarios -->
+                    <div class="stat-card">
+                        <!-- Thymeleaf: ${totalUsuarios} -->
+                        <h2 th:text="${usuarios}">0</h2>
+                        <span>Usuarios registrados</span>
+                    </div>
+
+                    <!-- Productos -->
+                    <div class="stat-card">
+                        <h2 th:text="${productos}">0</h2>
+                        <span>Productos activos</span>
+                    </div>
+
+                    <!-- Compras -->
+                    <div class="stat-card">
+                        <h2 th:text="${compras}">0</h2>
+                        <span>Compras registradas</span>
+                    </div>
+
+                </div>
+
+                <a href="/logout" class="welcome-btn">Salir Del dashboard</a>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById("search-input");
+        const navButtons = document.querySelectorAll(".nav-button");
+
+        searchInput.addEventListener("input", function() {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            navButtons.forEach(button => {
+                const buttonText = button.textContent.toLowerCase();
+
+                if (buttonText.includes(searchTerm)) {
+                    button.style.backgroundColor = "#ff8c00";
+                } else {
+                    button.style.backgroundColor = "";
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

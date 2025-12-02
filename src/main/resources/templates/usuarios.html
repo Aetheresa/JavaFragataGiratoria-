@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/usuarios.css}">
+    <title>Usuarios</title>
+</head>
+<body>
+
+<div class="dashboard-box">
+    <h1>👥 Usuarios Registrados</h1>
+
+    <form class="search-form" method="GET" th:action="@{/usuarios}">
+        <input type="text" name="search" placeholder="Buscar usuarios...">
+    </form>
+
+    <div class="actions-header">
+        <a th:href="@{/usuarios/crear}" class="btn add">➕ Agregar Usuario</a>
+    </div>
+
+    <table class="table-usuarios">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre Usuario</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${usuarios}">
+            <td th:text="${u.idUsuario}"></td>
+            <td th:text="${u.nombreUsuario}"></td>
+            <td th:text="${u.email}"></td>
+            <td th:text="${u.rol.nombreRol}"></td>
+
+            <td class="acciones">
+                <a th:href="@{'/usuarios/editar/' + ${u.idUsuario}}" class="btn edit">✏️ Editar</a>
+                <a th:href="@{'/usuarios/eliminar/' + ${u.idUsuario}}" class="btn delete">🗑️ Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

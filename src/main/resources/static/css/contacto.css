@@ -1,0 +1,183 @@
+/* Fondo general */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url("/img/BGgeneral.jpg") no-repeat center center/cover;
+  color: #fff;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.logo-contenedor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-img {
+  height: 60px;
+}
+
+.nombre-logo {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+}
+
+nav a {
+  color: rgb(255, 255, 255);
+  margin-left: 2rem;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.icono-carrito {
+  margin-left: 1rem;
+}
+
+.icono-carrito img {
+  height: 24px;
+  vertical-align: middle;
+}
+
+/* Contenido principal */
+.contenido {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+/* Sub-fondo tarjeta */
+.tarjeta {
+  background-image: url("../JPG/sbbg1.png");
+  border-radius: 20px;
+  padding: 3rem 4rem;
+  max-width: 900px;
+  width: 100%;
+  color: #08131F;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  min-height: 800px;
+  padding: 2.5rem 8rem; 
+  max-width: 90rem;
+}
+
+/* Título */
+.tarjeta h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 4rem;
+  font-family: 'Georgia', serif;
+}
+
+/* Campo con ícono */
+.input-con-icono {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.input-con-icono i {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: #1A2A3B;
+  font-size: 1.3rem;
+}
+
+.input-con-icono input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  font-size: 1.3rem;
+  color: #000;
+  background-color: #ffffff36;
+  border: 1px solid #1A2A3B;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.input-con-icono input::placeholder {
+  color: #676767;
+}
+
+/* Campo de mensaje (sin ícono) */
+.input-sin-icono {
+  margin-bottom: 2.5rem;
+}
+
+.input-sin-icono textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.3rem;
+  color: #000;
+  background-color: #ffffff36;
+  border: 1px solid #1A2A3B;
+  border-radius: 10px;
+  box-sizing: border-box;
+  resize: vertical;
+  min-height: 130px;
+}
+
+.input-sin-icono textarea::placeholder {
+  color: #676767;
+}
+
+/* Botón */
+.ingresar {
+  background-color: #c89f4c;
+  color: white;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.3rem;
+  transition: background-color 0.3s ease;
+}
+
+.ingresar:hover {
+  background-color: #b5883b;
+}
+
+/* Alertas */
+.alerta-exito, .alerta-error {
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.15);
+}
+
+.alerta-exito {
+  background-color: rgba(200, 159, 76, 0.9); /* dorado */
+  color: #fff;
+  border: 2px solid #b5883b;
+}
+
+.alerta-error {
+  background-color: rgba(138, 20, 20, 0.9); /* rojo oscuro */
+  color: #fff;
+  border: 2px solid #801515;
+}
+
+.alerta-error ul {
+  margin: 0.5rem 0 0 1.5rem;
+  padding: 0;
+}
