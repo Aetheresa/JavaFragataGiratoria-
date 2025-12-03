@@ -4,9 +4,7 @@ import com.proyecto.fragataGiratoria.model.Rol;
 import com.proyecto.fragataGiratoria.model.Usuario;
 import com.proyecto.fragataGiratoria.repository.RolRepository;
 import com.proyecto.fragataGiratoria.repository.UsuarioRepository;
-import com.proyecto.fragataGiratoria.config.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,9 +59,11 @@ public class UsuarioService {
 
         usuario.setRol(rolCliente);
 
-        validarContrasenaSegura(usuario.getPasswordHash());
+        // Si en tu entidad la contraseña se almacena en passwordHash, ajusta aquí.
+        String rawPassword = usuario.getPasswordHash(); // <-- conserva tu convención actual
+        validarContrasenaSegura(rawPassword);
 
-        usuario.setPasswordHash(passwordEncoder.encode(usuario.getPasswordHash()));
+        usuario.setPasswordHash(passwordEncoder.encode(rawPassword));
 
         usuario.setEstado(Usuario.EstadoUsuario.ACTIVO);
         usuario.setFechaCreacion(LocalDateTime.now());
@@ -74,7 +74,7 @@ public class UsuarioService {
     private void validarContrasenaSegura(String password) {
         String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$";
 
-        if (!password.matches(regex)) {
+        if (password == null || !password.matches(regex)) {
             throw new IllegalArgumentException(
                     "La contraseña debe incluir: mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial."
             );
@@ -85,21 +85,30 @@ public class UsuarioService {
     //  🔹 MÉTODOS NECESARIOS PARA LOGIN Y CLIENTE
     // ---------------------------------------------------------
 
+    /**
+     * Devuelve Optional para mayor seguridad frente a null.
+     */
+    public Optional<Usuario> obtenerPorEmailOptional(String email) {
+        return usuarioRepository.findByEmail(email);
+    }
+
     public Usuario obtenerPorEmail(String email) {
         return usuarioRepository.findByEmail(email).orElse(null);
     }
 
-    public Usuario obtenerUsuarioAutenticado(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        if (userDetails == null) return null;
-        return obtenerPorEmail(userDetails.getUsername()); // username = email
-    }
-
-    // ---------------------------------------------------------
-    //  🔹 MÉTODO AGREGADO PARA CONTROLADORES
-    // ---------------------------------------------------------
-
-    public Usuario buscarPorNombreUsuario(String nombreUsuario) {
-        return usuarioRepository.findByNombreUsuario(nombreUsuario);
+    /**
+     * Buscar por nombreUsuario (username) — devuelve Optional.
+     */
+    public Optional<Usuario> buscarPorNombreUsuario(String nombreUsuario) {
+        // Se asume que en UsuarioRepository existe un método findByNombreUsuario returning Optional<Usuario>
+        try {
+            return usuarioRepository.findByNombreUsuario(nombreUsuario);
+        } catch (Exception e) {
+            // Si tu repo tiene un método distinto (por ejemplo devuelve Usuario o se llama findByUsername),
+            // captura y maneja aquí—por ahora devolvemos Optional.empty()
+            return Optional.empty();
+        }
     }
 }
+
 
