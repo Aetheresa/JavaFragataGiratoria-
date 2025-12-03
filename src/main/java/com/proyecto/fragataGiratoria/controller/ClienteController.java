@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/roles/cliente")
 public class ClienteController {
@@ -16,57 +18,46 @@ public class ClienteController {
     @Autowired
     private UsuarioService usuarioService;
 
+    /**
+     * Cargar los datos del usuario logueado usando Authentication.
+     */
+    private void cargarDatosUsuario(Model model, Authentication auth) {
+        if (auth != null && auth.isAuthenticated()) {
+            String username = auth.getName(); // puede ser username o email, depende de tu configuración
+            Optional<Usuario> usuarioOpt = usuarioService.buscarPorNombreUsuario(username);
+
+            if (usuarioOpt.isPresent()) {
+                model.addAttribute("usuario", usuarioOpt.get());
+            } else {
+                // Si no lo encuentra por "nombreUsuario", intentamos por email (por si getName() devuelve email)
+                Optional<Usuario> usuarioPorEmail = usuarioService.obtenerPorEmailOptional(username);
+                if (usuarioPorEmail.isPresent()) {
+                    model.addAttribute("usuario", usuarioPorEmail.get());
+                } else {
+                    // advertencia — no se encontró registro en la DB para el principal autenticado
+                    System.out.println("ADVERTENCIA: Usuario autenticado '" + username + "' no encontrado en la base de datos.");
+                    // opcional: model.addAttribute("usuario", null);  Thymeleaf debe manejar el null con operador ternario si es necesario
+                }
+            }
+        }
+    }
+
+    /**
+     * Página de inicio para clientes: /roles/cliente/inicio
+     */
     @GetMapping("/inicio")
     public String inicioCliente(Model model, Authentication auth) {
-        System.out.println("=== DEBUG INICIO CLIENTE ===");
-        
-        if (auth != null && auth.isAuthenticated()) {
-            String username = auth.getName();
-            System.out.println("Usuario autenticado: " + username);
-            
-            // Buscar usuario en BD
-            Usuario usuario = usuarioService.buscarPorNombreUsuario(username);
-            
-            if (usuario != null) {
-                System.out.println("Usuario encontrado en BD: " + usuario.getNombreUsuario());
-                model.addAttribute("usuario", usuario);
-            } else {
-                System.out.println("ERROR: Usuario no encontrado en BD para: " + username);
-                
-                // SOLUCIÓN DE EMERGENCIA: Crear usuario de prueba
-                // Esto es TEMPORAL - debes arreglar tu base de datos
-                usuario = new Usuario();
-                usuario.setNombreUsuario(username); // Usa el nombre con el que se registró
-                usuario.setEmail(username + "@fragata.com");
-                
-                model.addAttribute("usuario", usuario);
-            }
-        } else {
-            return "redirect:/login";
-        }
-        
+        cargarDatosUsuario(model, auth);
         return "roles/cliente/inicio";
     }
 
+    /**
+     * Página de menú para clientes: /roles/cliente/menu
+     */
     @GetMapping("/menu")
     public String menuCliente(Model model, Authentication auth) {
-        if (auth != null && auth.isAuthenticated()) {
-            String username = auth.getName();
-            Usuario usuario = usuarioService.buscarPorNombreUsuario(username);
-            
-            if (usuario != null) {
-                model.addAttribute("usuario", usuario);
-            } else {
-                // Misma solución temporal
-                usuario = new Usuario();
-                usuario.setNombreUsuario(username);
-                usuario.setEmail(username + "@fragata.com");
-                model.addAttribute("usuario", usuario);
-            }
-        } else {
-            return "redirect:/login";
-        }
-        
-        return "roles/cliente/menu"; 
+        cargarDatosUsuario(model, auth);
+        return "roles/cliente/menu";
     }
 }
+
