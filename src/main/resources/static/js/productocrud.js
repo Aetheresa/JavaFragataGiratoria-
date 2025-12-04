@@ -1,209 +1,189 @@
 // productocrud.js - Funcionalidades para CRUD de Productos
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Búsqueda en Sidebar
-    const searchInput = document.getElementById('search-input');
+
+    /* ===== 1. BÚSQUEDA EN SIDEBAR ===== */
+    const sidebarSearch = document.querySelector('.search-input');
     const navButtons = document.querySelectorAll('.nav-button');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase().trim();
-            
-            navButtons.forEach(button => {
-                const buttonText = button.textContent.toLowerCase();
-                
-                if (searchTerm === '') {
-                    button.style.backgroundColor = '';
-                } else if (buttonText.includes(searchTerm)) {
-                    button.style.backgroundColor = '#ff8c00';
-                } else {
-                    button.style.backgroundColor = '';
-                }
+
+    if (sidebarSearch) {
+        sidebarSearch.addEventListener('input', function() {
+            const term = this.value.toLowerCase().trim();
+            navButtons.forEach(btn => {
+                const text = btn.textContent.toLowerCase();
+                btn.style.backgroundColor = term && text.includes(term) ? '#ff8c00' : '';
             });
         });
     }
-    
-    // 2. Búsqueda en Tabla de Productos
-    function initTableSearch() {
-        const tableRows = document.querySelectorAll('#products-body tr');
-        const searchInputTable = document.querySelector('.search-table');
-        
-        if (searchInputTable && tableRows.length > 0) {
-            searchInputTable.addEventListener('input', function() {
-                const filter = this.value.toLowerCase();
-                
-                tableRows.forEach(row => {
-                    const text = row.textContent.toLowerCase();
-                    row.style.display = text.includes(filter) ? '' : 'none';
-                });
-            });
-        }
-    }
-    
-    // 3. Resaltar filas de la tabla al pasar el mouse
-    function initTableHover() {
-        const tableRows = document.querySelectorAll('#products-body tr');
-        
+
+/* ===== 2. TABLA DE PRODUCTOS ===== */
+const table = document.querySelector('.products-table');
+if (!table) return;
+
+const tbody = table.querySelector('tbody');
+if (!tbody) return; // Protección extra por si no existe tbody
+
+let tableRows = Array.from(tbody.querySelectorAll('tr'));
+
+/* ===== 3. BÚSQUEDA EN TABLA ===== */
+const tableSearch = document.querySelector('.table-search');
+if (tableSearch) {
+    tableSearch.addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+
+        // Actualizar las filas cada vez por si hay cambios dinámicos
+        tableRows = Array.from(tbody.querySelectorAll('tr'));
+
         tableRows.forEach(row => {
-            row.addEventListener('mouseenter', function() {
-                this.style.backgroundColor = '#f8f9fa';
-            });
-            
-            row.addEventListener('mouseleave', function() {
-                this.style.backgroundColor = '';
-            });
+            const cells = Array.from(row.querySelectorAll('td'));
+            const match = cells.some(td => td.textContent.toLowerCase().includes(filter));
+            row.style.display = match ? '' : 'none';
         });
-    }
-    
-    // 4. Ordenar tabla por columnas (opcional)
-    function initTableSorting() {
-        const tableHeaders = document.querySelectorAll('.products-table th');
-        
-        tableHeaders.forEach((header, index) => {
-            header.style.cursor = 'pointer';
-            
-            header.addEventListener('click', function() {
-                sortTable(index);
-            });
+    });
+}
+
+    /* ===== 4. HOVER EN FILAS ===== */
+    tableRows.forEach(row => {
+        row.addEventListener('mouseenter', () => row.style.backgroundColor = '#f8f9fa');
+        row.addEventListener('mouseleave', () => row.style.backgroundColor = '');
+    });
+
+    /* ===== 5. ORDENAR TABLA POR COLUMNAS ===== */
+    const tableHeaders = table.querySelectorAll('th');
+    tableHeaders.forEach((th, idx) => {
+        th.style.cursor = 'pointer';
+        th.addEventListener('click', () => sortTable(idx));
+    });
+
+    function sortTable(colIndex) {
+        const rowsArray = tableRows.filter(r => r.style.display !== 'none');
+        if (rowsArray.length === 0) return;
+
+        const isNumeric = !isNaN(rowsArray[0].cells[colIndex].textContent.trim());
+
+        rowsArray.sort((a, b) => {
+            const aText = a.cells[colIndex].textContent.trim();
+            const bText = b.cells[colIndex].textContent.trim();
+            if (isNumeric) return parseFloat(aText) - parseFloat(bText);
+            return aText.localeCompare(bText);
         });
+
+        rowsArray.forEach(row => tbody.appendChild(row));
     }
-    
-    function sortTable(columnIndex) {
-        const table = document.querySelector('.products-table');
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        
-        // Excluir la fila de "no hay productos"
-        const filteredRows = rows.filter(row => !row.classList.contains('no-products-row'));
-        
-        if (filteredRows.length === 0) return;
-        
-        const isAscending = !table.querySelector('th').classList.contains('sorted-asc');
-        
-        filteredRows.sort((rowA, rowB) => {
-            const cellA = rowA.cells[columnIndex].textContent.trim();
-            const cellB = rowB.cells[columnIndex].textContent.trim();
-            
-            // Intentar convertir a número si es posible
-            const numA = isNaN(cellA) ? cellA : parseFloat(cellA);
-            const numB = isNaN(cellB) ? cellB : parseFloat(cellB);
-            
-            if (isAscending) {
-                return numA > numB ? 1 : -1;
-            } else {
-                return numA < numB ? 1 : -1;
+
+    /* ===== 6. CONFIRMACIÓN AL ELIMINAR PRODUCTO ===== */
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', e => {
+            if (!confirm('¿Eliminar este producto? Esta acción no se puede deshacer.')) {
+                e.preventDefault();
             }
         });
-        
-        // Limpiar tbody y agregar filas ordenadas
-        tbody.innerHTML = '';
-        filteredRows.forEach(row => tbody.appendChild(row));
-        
-        // Agregar la fila de "no hay productos" si existía
-        const noProductsRow = rows.find(row => row.classList.contains('no-products-row'));
-        if (noProductsRow) {
-            tbody.appendChild(noProductsRow);
-        }
-        
-        // Actualizar indicadores de orden
-        table.querySelectorAll('th').forEach(th => {
-            th.classList.remove('sorted-asc', 'sorted-desc');
-        });
-        
-        tableHeaders[columnIndex].classList.add(isAscending ? 'sorted-asc' : 'sorted-desc');
-    }
-    
-    // 5. Confirmación para eliminar productos
-    function initDeleteConfirmations() {
-        const deleteButtons = document.querySelectorAll('.btn-delete');
-        
-        deleteButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                if (!confirm('¿Estás seguro de que quieres eliminar este producto? Esta acción no se puede deshacer.')) {
-                    e.preventDefault();
+    });
+
+    /* ===== 7. FILTRO POR ESTADO DE STOCK ===== */
+    const stockFilter = document.querySelector('.stock-filter');
+    if (stockFilter) {
+        stockFilter.addEventListener('change', function() {
+            const val = this.value;
+            tableRows.forEach(row => {
+                if (row.classList.contains('no-products-row')) return;
+                const status = row.querySelector('.status-badge')?.textContent.trim() || '';
+                if (val === 'all' || (val === 'low' && status === 'BAJO STOCK') || (val === 'ok' && status === 'NORMAL')) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
                 }
             });
         });
     }
-    
-    // 6. Filtrar por estado de stock
-    function initStockFilter() {
-        const filterSelect = document.querySelector('.stock-filter');
-        
-        if (filterSelect) {
-            filterSelect.addEventListener('change', function() {
-                const filterValue = this.value;
-                const tableRows = document.querySelectorAll('#products-body tr');
-                
-                tableRows.forEach(row => {
-                    if (row.classList.contains('no-products-row')) return;
-                    
-                    const statusBadge = row.querySelector('.status-badge');
-                    const statusText = statusBadge ? statusBadge.textContent.trim() : '';
-                    
-                    if (filterValue === 'all' || 
-                        (filterValue === 'low' && statusText === 'BAJO STOCK') ||
-                        (filterValue === 'ok' && statusText === 'NORMAL')) {
-                        row.style.display = '';
-                    } else {
-                        row.style.display = 'none';
-                    }
-                });
-            });
-        }
-    }
-    
-    // 7. Inicializar todas las funcionalidades
-    function initAll() {
-        initTableSearch();
-        initTableHover();
-        initTableSorting();
-        initDeleteConfirmations();
-        initStockFilter();
-        
-        console.log('CRUD de Productos - JavaScript inicializado');
-    }
-    
-    // Inicializar cuando el DOM esté listo
-    initAll();
-    
-    // 8. Exportar datos (ejemplo adicional)
+
+    /* ===== 8. EXPORTAR DATOS (Ejemplo) ===== */
     window.exportTableData = function(format) {
-        const table = document.querySelector('.products-table');
-        let data = [];
-        
-        // Obtener encabezados
-        const headers = [];
-        table.querySelectorAll('thead th').forEach(th => {
-            headers.push(th.textContent.trim());
-        });
-        
-        // Obtener datos de las filas
-        table.querySelectorAll('tbody tr').forEach(row => {
-            if (row.style.display === 'none') return;
-            
-            const rowData = [];
-            row.querySelectorAll('td').forEach(td => {
-                rowData.push(td.textContent.trim());
-            });
-            data.push(rowData);
-        });
-        
-        console.log('Exportando datos en formato:', format);
-        console.log('Encabezados:', headers);
-        console.log('Datos:', data);
-        
-        // Aquí iría la lógica real de exportación
+        const data = tableRows
+            .filter(r => r.style.display !== 'none')
+            .map(r => Array.from(r.querySelectorAll('td')).map(td => td.textContent.trim()));
+
         alert(`Exportando ${data.length} productos en formato ${format.toUpperCase()}`);
     };
+
+    console.log('CRUD de Productos inicializado');
 });
 
-// 9. Funciones utilitarias
-function formatNumber(number) {
-    return new Intl.NumberFormat('es-ES').format(number);
-}
+document.addEventListener('DOMContentLoaded', () => {
 
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES');
-}
+    const form = document.getElementById('crearProductoForm');
+
+    form.addEventListener('submit', (e) => {
+        // Validación simple antes de enviar
+        const nombre = document.getElementById('nombre').value.trim();
+        const precio = document.getElementById('precio').value;
+        const stock = document.getElementById('stock').value;
+
+        if (!nombre || precio < 0 || stock < 0) {
+            e.preventDefault();
+            alert('Por favor completa todos los campos correctamente.');
+        }
+    });
+
+    // Interactividad: resaltar inputs al enfocarlos
+    const inputs = form.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => input.style.borderColor = '#ff8c00');
+        input.addEventListener('blur', () => input.style.borderColor = '#ccc');
+    });
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const productForm = document.getElementById('productForm');
+    const imageInput = document.getElementById('image');
+    const imagePreview = document.getElementById('imagePreview');
+    const noImageText = document.getElementById('noImageText');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    // Preview de imagen en tiempo real
+    imageInput.addEventListener('change', () => {
+        const file = imageInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+                noImageText.style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = '';
+            imagePreview.style.display = 'none';
+            noImageText.style.display = 'block';
+        }
+    });
+
+    // Cancelar - limpia el formulario y preview
+    cancelBtn.addEventListener('click', e => {
+        e.preventDefault();
+        productForm.reset();
+        imagePreview.src = '';
+        imagePreview.style.display = 'none';
+        noImageText.style.display = 'block';
+    });
+
+    // Validación y envío básico del formulario
+    productForm.addEventListener('submit', e => {
+        e.preventDefault();
+
+        if (!productForm.checkValidity()) {
+            alert('Por favor, completa todos los campos requeridos correctamente.');
+            return;
+        }
+
+        // Aquí iría la lógica para enviar datos a backend (AJAX, fetch, etc.)
+        alert('Producto creado correctamente (simulado).');
+
+        productForm.reset();
+        imagePreview.src = '';
+        imagePreview.style.display = 'none';
+        noImageText.style.display = 'block';
+    });
+});
+

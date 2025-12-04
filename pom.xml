@@ -23,7 +23,6 @@
     </properties>
 
     <dependencies>
-
         <!-- Web y Thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -114,7 +113,6 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -136,6 +134,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>com.proyecto.fragataGiratoria.FragataGiratoriaApplication</mainClass> <!-- Aquí se agrega la clase principal -->
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -146,5 +145,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

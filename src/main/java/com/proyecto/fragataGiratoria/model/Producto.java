@@ -1,60 +1,104 @@
 package com.proyecto.fragataGiratoria.model;
 
-import java.util.Date;
-
 import jakarta.persistence.*;
-import lombok.*;
 
 @Entity
-@Table(name = "producto")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Table(name = "productos")
 public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
-    private Integer idProducto;
+    private Integer id;
 
-    @Column(name = "nombre_producto", nullable = false, length = 100)
-    private String nombreProducto;
+    private String nombre;
+    private String descripcion;
+    private String categoria;
+    private String codigo;
+    private Double precio;
+    private Boolean activo;
+    private Integer stock;
+    private Integer stockMinimo;
+    private Integer stockActual;
 
-    @Column(name = "unidad_medida", length = 20)
-    private String unidadMedida;
+    // ----- GETTERS Y SETTERS -----
 
-    @Column(name = "stock_actual")
-    private Double stockActual;
-
-    @Column(name = "stock_minimo")
-    private Double stockMinimo;
-
-    @ManyToOne
-    @JoinColumn(name = "id_proveedor")
-    private Proveedor proveedor;
-
-    // Si necesitas calcular cantidad disponible, usa este método:
-    public Double getCantidadDisponible() {
-        if (stockActual == null || stockMinimo == null) {
-            return null;
-        }
-        return stockActual - stockMinimo;
+    public Integer getId() {
+        return id;
     }
 
-    public String getTipoProducto() {
-        // todo Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTipoProducto'");
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Date getStockInicial() {
-        // todo Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStockInicial'");
+    public String getNombre() {
+        return nombre;
     }
 
-    public Date getStockFinal() {
-        // todo Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStockFinal'");
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+    public Integer getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(Integer stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public Integer getStockActual() {
+        return stockActual;
+    }
+
+    public void setStockActual(Integer stockActual) {
+        this.stockActual = stockActual;
     }
 }

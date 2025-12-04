@@ -1,0 +1,199 @@
+/* ===== RESETEO GENERAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: url('/img/BGgeneral.jpg') no-repeat center center / cover fixed;
+    color: #222;
+}
+
+/* ===== LAYOUT ===== */
+.layout-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 280px;
+    background: #ffffffee;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.08);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.nav-button {
+    padding: 0.9rem;
+    border-radius: 10px;
+    text-decoration: none;
+    background: white;
+    border: 1px solid #e5e7eb;
+    color: #555;
+    transition: 0.25s;
+}
+
+.nav-button:hover {
+    background: #ffe9c4;
+    color: #a45b00;
+}
+
+.nav-button.active {
+    background: #f59e0b;
+    color: white;
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.dashboard-wrapper {
+    background: #ffffffdd;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+    backdrop-filter: blur(10px);
+}
+
+/* ===== TITULO GENERAL ===== */
+.header-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.header-title h1 {
+    font-size: 2.2rem;
+    color: #d97706;
+    font-weight: 800;
+}
+
+.header-title p {
+    color: #6b7280;
+    margin-top: 0.5rem;
+}
+
+/* ===== FORMULARIO CREAR PRODUCTO ===== */
+.form-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #ff8c00;
+    box-shadow: 0 0 5px rgba(255,140,0,0.5);
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* Vista previa de la imagen */
+.image-preview {
+    margin-top: 10px;
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* Botones */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-submit,
+.btn-cancel {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-submit {
+    background-color: #ff8c00;
+    color: #fff;
+    border: none;
+}
+
+.btn-submit:hover {
+    background-color: #e67600;
+}
+
+.btn-cancel {
+    background-color: #ddd;
+    color: #333;
+    text-decoration: none;
+}
+
+.btn-cancel:hover {
+    background-color: #ccc;
+}
+
+/* Volver al Dashboard */
+.back-to-dashboard {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: #4b5563;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+.back-to-dashboard:hover {
+    background-color: #374151;
+}

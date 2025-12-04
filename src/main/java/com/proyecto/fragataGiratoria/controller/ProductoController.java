@@ -1,114 +1,143 @@
 package com.proyecto.fragataGiratoria.controller;
 
 import com.proyecto.fragataGiratoria.model.Producto;
-import com.proyecto.fragataGiratoria.model.Proveedor;
 import com.proyecto.fragataGiratoria.repository.ProductoRepository;
-import com.proyecto.fragataGiratoria.repository.ProveedorRepository;
-
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.*;
 
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import org.apache.poi.xssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Row;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.ImageIO;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.List;
 
 @Controller
-@RequestMapping("/productos")  // ← IMPORTANTE: Se queda en /productos
+@RequestMapping("/productos")
 public class ProductoController {
 
     @Autowired
     private ProductoRepository productoRepository;
 
-    @Autowired
-    private ProveedorRepository proveedorRepository;
-
-    // ----------------------------------------------------
-    // LISTAR
-    // ----------------------------------------------------
+    // ------------------------
+    // LISTAR + FILTRO
+    // ------------------------
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("productos", productoRepository.findAll());
-        return "CRUD_Productos/index";
+    public String index(@RequestParam(value = "search", required = false) String search, 
+                        Model model) {
+
+        List<Producto> productos;
+
+        if (search != null && !search.trim().isEmpty()) {
+            productos = productoRepository.buscar(search.trim());
+        } else {
+            productos = productoRepository.findAll();
+        }
+
+        model.addAttribute("productos", productos);
+        model.addAttribute("search", search);
+
+        return "roles/admin/crud/crud_productos/index";
     }
 
-    // ----------------------------------------------------
-    // CREAR - FORMULARIO
-    // ----------------------------------------------------
+    // ------------------------
+    // CREAR
+    // ------------------------
     @GetMapping("/crear")
     public String mostrarFormularioCrear(Model model) {
         model.addAttribute("producto", new Producto());
-        model.addAttribute("proveedores", proveedorRepository.findAll());
-        return "CRUD_Productos/crear";
+        return "roles/admin/crud/crud_productos/crear";
     }
 
-    // ----------------------------------------------------
+    // ------------------------
     // GUARDAR
-    // ----------------------------------------------------
+    // ------------------------
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Producto producto) {
+        // Verificar si el stock_actual es null y asignar un valor predeterminado
+        if (producto.getStockActual() == null) {
+            producto.setStockActual(0);  // Asignamos 0 si es null
+        }
+
+        // Validar precio
+        if (producto.getPrecio() == null) {
+            producto.setPrecio(0.0);  // Asignamos 0.0 si es null
+        }
+
+        // Validar nombre
+        if (producto.getNombre() == null || producto.getNombre().trim().isEmpty()) {
+            return "redirect:/productos/crear";  // Redirige al formulario de creación si el nombre está vacío
+        }
+
+        // Guardar el producto en la base de datos
         productoRepository.save(producto);
-        return "redirect:/productos";
+        return "redirect:/productos";  // Redirige a la lista de productos
     }
 
-    // ----------------------------------------------------
-    // EDITAR
-    // ----------------------------------------------------
+    // ------------------------
+    // EDITAR FORMULARIO
+    // ------------------------
     @GetMapping("/editar/{id}")
     public String editar(@PathVariable Integer id, Model model) {
         Producto producto = productoRepository.findById(id).orElse(null);
+        if (producto == null) return "redirect:/productos";
+
         model.addAttribute("producto", producto);
-        model.addAttribute("proveedores", proveedorRepository.findAll());
-        return "CRUD_Productos/editar";
+        return "roles/admin/crud/crud_productos/editar";
     }
 
-    // ----------------------------------------------------
+    // ------------------------
     // ACTUALIZAR
-    // ----------------------------------------------------
+    // ------------------------
     @PostMapping("/actualizar/{id}")
     public String actualizar(@PathVariable Integer id, @ModelAttribute Producto productoActualizado) {
+        Producto producto = productoRepository.findById(id).orElse(null);
+        if (producto == null) return "redirect:/productos";
 
-        Producto producto = productoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("ID de producto inválido"));
-
-        producto.setNombreProducto(productoActualizado.getNombreProducto());
-        producto.setUnidadMedida(productoActualizado.getUnidadMedida());
-        producto.setStockActual(productoActualizado.getStockActual());
+        producto.setNombre(productoActualizado.getNombre());
+        producto.setDescripcion(productoActualizado.getDescripcion());
+        producto.setCategoria(productoActualizado.getCategoria());
+        producto.setCodigo(productoActualizado.getCodigo());
+        producto.setPrecio(productoActualizado.getPrecio());
+        producto.setActivo(productoActualizado.getActivo());
+        producto.setStock(productoActualizado.getStock());
         producto.setStockMinimo(productoActualizado.getStockMinimo());
-        producto.setProveedor(productoActualizado.getProveedor());
+
+        // Verificar y actualizar el stock_actual
+        if (productoActualizado.getStockActual() == null) {
+            producto.setStockActual(0);  // Asignar 0 si es null
+        } else {
+            producto.setStockActual(productoActualizado.getStockActual());
+        }
 
         productoRepository.save(producto);
-
         return "redirect:/productos";
     }
 
-    // ----------------------------------------------------
+    // ------------------------
     // ELIMINAR
-    // ----------------------------------------------------
+    // ------------------------
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Integer id) {
-        productoRepository.deleteById(id);
+        if (productoRepository.existsById(id)) {
+            productoRepository.deleteById(id);
+        }
         return "redirect:/productos";
     }
 
-    // ----------------------------------------------------
+    // ------------------------
     // EXPORTAR PDF
-    // ----------------------------------------------------
+    // ------------------------
     @GetMapping("/export/pdf")
     public void exportarPDF(HttpServletResponse response) throws IOException, DocumentException {
-
         response.setContentType("application/pdf");
         response.setHeader("Content-Disposition", "attachment; filename=productos.pdf");
 
@@ -118,23 +147,18 @@ public class ProductoController {
         PdfWriter.getInstance(document, response.getOutputStream());
         document.open();
 
-        // ---- CORRECCIÓN DEL FONT DE iTEXT ----
-        com.itextpdf.text.Font tituloFont = new com.itextpdf.text.Font(
-                com.itextpdf.text.Font.FontFamily.HELVETICA,
-                18,
-                com.itextpdf.text.Font.BOLD
-        );
-
+        Font tituloFont = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
         Paragraph titulo = new Paragraph("Reporte de Productos", tituloFont);
         titulo.setAlignment(Element.ALIGN_CENTER);
         document.add(titulo);
         document.add(new Paragraph(" "));
 
-        PdfPTable table = new PdfPTable(5);
+        PdfPTable table = new PdfPTable(10);
         table.setWidthPercentage(100);
-        table.setWidths(new float[]{3, 3, 2, 2, 3});
+        table.setWidths(new float[]{1f, 2f, 3f, 2f, 2f, 2f, 1.5f, 2f, 2f, 2f});
 
-        String[] headers = {"Nombre", "Unidad", "Stock Actual", "Stock Mínimo", "Proveedor"};
+        String[] headers = {"ID", "Nombre", "Descripción", "Categoría", "Código", "Precio",
+                "Activo", "Stock", "Stock Mínimo", "Stock Actual"};
 
         for (String h : headers) {
             PdfPCell cell = new PdfPCell(new Phrase(h));
@@ -144,122 +168,75 @@ public class ProductoController {
         }
 
         for (Producto p : productos) {
-            table.addCell(valorSeguro(p.getNombreProducto()));
-            table.addCell(valorSeguro(p.getUnidadMedida()));
-            table.addCell(String.valueOf(p.getStockActual()));
-            table.addCell(String.valueOf(p.getStockMinimo()));
-            table.addCell(valorSeguro(p.getProveedor()));
+            table.addCell(str(p.getId()));
+            table.addCell(str(p.getNombre()));
+            table.addCell(str(p.getDescripcion()));
+            table.addCell(str(p.getCategoria()));
+            table.addCell(str(p.getCodigo()));
+            table.addCell(str(p.getPrecio()));
+            table.addCell(str(p.getActivo()));
+            table.addCell(str(p.getStock()));
+            table.addCell(str(p.getStockMinimo()));
+            table.addCell(str(p.getStockActual()));
         }
 
         document.add(table);
         document.close();
     }
 
-    // ----------------------------------------------------
+    // ------------------------
     // EXPORTAR EXCEL
-    // ----------------------------------------------------
+    // ------------------------
     @GetMapping("/export/excel")
-    public void exportarExcel(HttpServletResponse response) throws IOException {
-
-        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    public void exportExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment; filename=productos.xlsx");
 
         List<Producto> productos = productoRepository.findAll();
 
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Productos");
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet("Productos");
 
-        String[] headers = {"Nombre", "Unidad", "Stock Actual", "Stock Mínimo", "Proveedor"};
+        int fila = 0;
 
-        Row headerRow = sheet.createRow(0);
-        CellStyle headerStyle = workbook.createCellStyle();
-        org.apache.poi.ss.usermodel.Font font = workbook.createFont();
-        font.setBold(true);
-        headerStyle.setFont(font);
+        // Encabezados
+        Row header = sheet.createRow(fila++);
+        String[] cols = {"ID", "Nombre", "Descripción", "Categoría", "Código", "Precio",
+                "Activo", "Stock", "Stock Mínimo", "Stock Actual"};
 
-        for (int i = 0; i < headers.length; i++) {
-            Cell c = headerRow.createCell(i);
-            c.setCellValue(headers[i]);
-            c.setCellStyle(headerStyle);
+        for (int i = 0; i < cols.length; i++) {
+            header.createCell(i).setCellValue(cols[i]);
         }
 
-        int idx = 1;
+        // Datos
         for (Producto p : productos) {
-            Row row = sheet.createRow(idx++);
-
-            row.createCell(0).setCellValue(valorSeguro(p.getNombreProducto()));
-            row.createCell(1).setCellValue(valorSeguro(p.getUnidadMedida()));
-            row.createCell(2).setCellValue(p.getStockActual());
-            row.createCell(3).setCellValue(p.getStockMinimo());
-            row.createCell(4).setCellValue(valorSeguro(p.getProveedor()));
+            Row row = sheet.createRow(fila++);
+            row.createCell(0).setCellValue(num(p.getId()));
+            row.createCell(1).setCellValue(str(p.getNombre()));
+            row.createCell(2).setCellValue(str(p.getDescripcion()));
+            row.createCell(3).setCellValue(str(p.getCategoria()));
+            row.createCell(4).setCellValue(str(p.getCodigo()));
+            row.createCell(5).setCellValue(num(p.getPrecio()));
+            row.createCell(6).setCellValue(p.getActivo() != null && p.getActivo());
+            row.createCell(7).setCellValue(num(p.getStock()));
+            row.createCell(8).setCellValue(num(p.getStockMinimo()));
+            row.createCell(9).setCellValue(num(p.getStockActual()));
         }
 
-        for (int i = 0; i < headers.length; i++) sheet.autoSizeColumn(i);
+        for (int i = 0; i < cols.length; i++) sheet.autoSizeColumn(i);
 
         workbook.write(response.getOutputStream());
         workbook.close();
     }
 
-    // ----------------------------------------------------
-    // EXPORTAR IMAGEN
-    // ----------------------------------------------------
-    @GetMapping("/export/{format}")
-    public void exportarImagen(@PathVariable String format, HttpServletResponse response) throws IOException {
-
-        List<Producto> productos = productoRepository.findAll();
-
-        int width = 1000;
-        int height = 60 + productos.size() * 30;
-
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-        Graphics2D g = image.createGraphics();
-
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, width, height);
-
-        g.setColor(Color.BLACK);
-        g.setFont(new Font("Arial", Font.PLAIN, 16));
-
-        g.drawString("REPORTE DE PRODUCTOS", 380, 30);
-
-        int y = 60;
-        g.drawString("Nombre", 20, y);
-        g.drawString("Unidad", 250, y);
-        g.drawString("Stock Actual", 450, y);
-        g.drawString("Stock Mínimo", 650, y);
-        g.drawString("Proveedor", 850, y);
-
-        y += 25;
-
-        for (Producto p : productos) {
-            g.drawString(valorSeguro(p.getNombreProducto()), 20, y);
-            g.drawString(valorSeguro(p.getUnidadMedida()), 250, y);
-            g.drawString(String.valueOf(p.getStockActual()), 450, y);
-            g.drawString(String.valueOf(p.getStockMinimo()), 650, y);
-            g.drawString(valorSeguro(p.getProveedor()), 850, y);
-            y += 25;
-        }
-
-        g.dispose();
-
-        if (!format.equalsIgnoreCase("png") && !format.equalsIgnoreCase("jpg")) {
-            format = "png";
-        }
-
-        response.setContentType("image/" + format);
-        response.setHeader("Content-Disposition", "attachment; filename=productos." + format);
-
-        ImageIO.write(image, format, response.getOutputStream());
-    }
-
-    // ----------------------------------------------------
+    // ------------------------
     // MÉTODOS AUXILIARES
-    // ----------------------------------------------------
-    private String valorSeguro(Proveedor proveedor) {
-        return (proveedor != null) ? proveedor.getNombreProveedor() : "";
+    // ------------------------
+    private String str(Object o) {
+        return o == null ? "" : o.toString();
     }
 
-    private String valorSeguro(String s) {
-        return (s != null) ? s : "";
+    private double num(Number n) {
+        return n == null ? 0 : n.doubleValue();
     }
 }
