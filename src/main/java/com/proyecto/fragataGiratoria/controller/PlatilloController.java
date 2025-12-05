@@ -5,86 +5,73 @@ import com.proyecto.fragataGiratoria.service.PlatilloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/crud/platillos")
 public class PlatilloController {
 
-    @Autowired
-    private PlatilloService platilloService;
+ @Autowired
+private PlatilloService platilloService;
 
-    // Mostrar todos los platillos
-    @GetMapping
-    public String mostrarPlatillos(Model model) {
-        List<Platillo> platillos = platilloService.listarPlatillos();
-        model.addAttribute("platillos", platillos);
-        return "roles/admin/crud/platillos/platillos";
-    }
+ // --- 1. LEER (READ) ---
+ 
+ // Muestra la lista de platillos (platillos.html)
+ @GetMapping
+public String mostrarPlatillos(Model model) {
+List<Platillo> platillos = platilloService.listarPlatillos();
+ model.addAttribute("platillos", platillos);
+ return "roles/admin/crud/platillos/platillos";
+ }
 
-    // Formulario para crear un nuevo platillo
-    @GetMapping("/nuevo")
-    public String nuevoPlatillo(Model model) {
-        Platillo platillo = new Platillo();
-        platillo.setCategoria(""); // Inicializamos como String vacío
-        model.addAttribute("platillo", platillo);
-        return "roles/admin/crud/platillos/nuevo";
-    }
+// ------------------------------------------------------------------
+ // --- 2. CREAR Y ACTUALIZAR (CREATE & UPDATE) ---
+ // ------------------------------------------------------------------
 
-    // Guardar platillo
-    @PostMapping("/guardar")
-    public String guardarPlatillo(@ModelAttribute Platillo platillo) {
-        platilloService.guardarPlatillo(platillo);
-        return "redirect:/crud/platillos";
-    }
+ // Muestra el formulario vacío para un nuevo platillo (nuevo.html)
+@GetMapping("/nuevo")
+public String mostrarFormularioNuevo(Model model) {
+model.addAttribute("platillo", new Platillo());
+return "roles/admin/crud/platillos/nuevo";
+ }
 
-    // Exportar PDF
-    @GetMapping("/export/pdf")
-    public void exportarPDF(HttpServletResponse response) throws IOException {
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=platillos.pdf");
+ // Muestra el formulario de edición con datos precargados
+// Corregido el tipo de ID a Integer
+ @GetMapping("/editar/{id}")
+ public String mostrarFormularioEdicion(@PathVariable Integer id, Model model) {
+ Optional<Platillo> optionalPlatillo = platilloService.obtenerPlatilloPorId(id);
 
-        List<Platillo> platillos = platilloService.listarPlatillos();
+ // CORRECCIÓN CLAVE: Se verifica y extrae el Platillo del Optional
+ if (optionalPlatillo.isPresent()) {
+ model.addAttribute("platillo", optionalPlatillo.get()); 
+ return "roles/admin/crud/platillos/nuevo"; // Usamos la misma plantilla
+ } else {
+ // Si el platillo no existe, redirige a la lista
+return "redirect:/crud/platillos";
+ }
+ }
 
-        StringBuilder pdfContent = new StringBuilder();
-        pdfContent.append("Lista de Platillos\n\n");
-        for (Platillo p : platillos) {
-            pdfContent.append("ID: ").append(p.getIdPlatillo())
-                      .append(", Nombre: ").append(p.getNombre())
-                      .append(", Precio: ").append(p.getPrecio())
-                      .append("\n");
-        }
+ // Maneja el formulario POST: Guarda (si ID es nulo) o Actualiza (si ID existe).
+ @PostMapping
+public String guardarPlatillo(@ModelAttribute Platillo platillo) {
+ platilloService.guardarPlatillo(platillo);
+ return "redirect:/crud/platillos";
+ }
 
-        response.getOutputStream().write(pdfContent.toString().getBytes());
-        response.getOutputStream().flush();
-    }
+ // --- 3. ELIMINAR (DELETE) ---
 
-    // Exportar Excel (CSV simple)
-    @GetMapping("/export/excel")
-    public void exportarExcel(HttpServletResponse response) throws IOException {
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "attachment; filename=platillos.xlsx");
-
-        List<Platillo> platillos = platilloService.listarPlatillos();
-
-        StringBuilder excelContent = new StringBuilder();
-        excelContent.append("ID,Nombre,Precio,Categoria,Descripcion,Imagen URL,Emojis\n");
-        for (Platillo p : platillos) {
-            excelContent.append(p.getIdPlatillo())
-                        .append(",").append(p.getNombre())
-                        .append(",").append(p.getPrecio())
-                        .append(",").append(p.getCategoria())
-                        .append(",").append(p.getDescripcion())
-                        .append(",").append(p.getImagenUrl())
-                        .append(",").append(p.getEmojis())
-                        .append("\n");
-        }
-
-        response.getOutputStream().write(excelContent.toString().getBytes());
-        response.getOutputStream().flush();
-    }
+// Ruta para eliminar un platillo por ID
+ // Corregido el tipo de ID a Integer
+ @GetMapping("/eliminar/{id}")
+public String eliminarPlatillo(@PathVariable Integer id) {
+ platilloService.eliminarPlatillo(id);
+  return "redirect:/crud/platillos"; }
 }

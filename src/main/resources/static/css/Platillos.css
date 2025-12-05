@@ -7,17 +7,17 @@
 
 body {
     font-family: 'Inter', sans-serif;
+    /* Asegúrate de tener la imagen BGgeneral.jpg en la carpeta /img/ */
     background: url('/img/BGgeneral.jpg') no-repeat center center / cover fixed;
     color: #f5d487; /* Dorado premium */
 }
 
-/* ===== LAYOUT ===== */
+/* ===== LAYOUT & SIDEBAR (Estilos adaptados de tu código) ===== */
 .layout-container {
     display: flex;
     min-height: 100vh;
 }
 
-/* ===== SIDEBAR ===== */
 .sidebar {
     width: 280px;
     background: #000000e8; /* negro elegante */
@@ -50,139 +50,188 @@ body {
     color: #caa856; /* placeholder dorado tenue */
 }
 
-/* ===== CONTENIDO ===== */
+/* ===== MENU ===== */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.nav-button {
+    padding: 0.9rem;
+    border-radius: 10px;
+    text-decoration: none;
+    background: #111;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    transition: 0.25s;
+    font-weight: 500;
+}
+
+.nav-button:hover {
+    background: #d4af37;
+    color: #111;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+.nav-button.active {
+    background: #000000;
+    color: rgb(255, 255, 255);
+    border-color: #f5d487;
+    box-shadow: 0 0 15px rgba(245, 212, 135, 0.8);
+}
+
+/* ===== BOTONES ABAJO ===== */
+.bottom-buttons {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.bottom-buttons .nav-button {
+    background: #111;
+    border: 1px solid #a8862c;
+}
+
+.bottom-buttons .nav-button:hover {
+    background: #a8862c;
+    color: black;
+    box-shadow: 0 0 12px rgba(168, 134, 44, 0.7);
+}
+
+/* ===== CONTENIDO PRINCIPAL Y ENCABEZADO ===== */
 .main-content {
     flex: 1;
     padding: 2rem;
 }
 
 .dashboard-wrapper {
-    background: #0b0b0bcc;
-    padding: 2rem;
+    background: rgba(0, 0, 0, 0.7);
     border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 40px rgba(212, 175, 55, 0.15); /* sombra dorada */
+    backdrop-filter: blur(10px);
     border: 1px solid #d4af37;
-    box-shadow: 0 8px 40px rgba(212,175,55,0.1);
 }
 
-/* ===== TITULOS ===== */
 .header-title {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333; /* Separador */
 }
 
 .header-title h1 {
-    color: #f5d487;
-    font-size: 2rem;
+    font-size: 2.2rem;
+    color: #f5d487; /* dorado */
+    font-weight: 800;
 }
 
-/* ===== TABLA CONTAINER ===== */
-.products-table-container {
-    background: #0f0f0f;
-    padding: 2rem;
-    border-radius: 15px;
-    border: 1px solid #d4af37;
-    box-shadow: 0 5px 25px rgba(212,175,55,0.1);
+.header-title p {
+    color: #bba163;
+    margin-top: 0.5rem;
 }
 
-/* ===== TOP BAR ===== */
-.table-top-bar {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1.5rem;
-    align-items: center;
-}
-
-/* ===== BUSCAR ===== */
-.table-search {
-    border: 1px solid #d4af37;
-    background: #1a1a1a;
-    padding: .6rem 1rem;
-    border-radius: 8px;
-    color: #f5d487;
-}
-
-/* ===== BOTÓN NUEVO ===== */
-.btn-new-product {
-    padding: .6rem 1.2rem;
-    background: #005a09;
+.btn-primary {
+    padding: 0.75rem 1.5rem;
     border-radius: 8px;
     text-decoration: none;
-    color: white;
-    border: 1px solid #f5d487;
+    font-weight: 600;
+    background: #d4af37;
+    color: #111;
+    transition: 0.25s;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
 }
 
-/* ===== EXPORTAR ===== */
-.btn-export {
-    padding: .6rem 1.2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    border: 1px solid #d4af37;
-    background: #111;
-    color: #f5d487;
+.btn-primary:hover {
+    background: #f5d487;
+    box-shadow: 0 4px 15px rgba(245, 212, 135, 0.6);
 }
 
-.btn-export.pdf {
-    color: #ff6b6b;
-    border-color: #ff6b6b;
+/* ===== ESTILO DE LA TABLA (Tabla de Platillos) ===== */
+.table-container {
+    overflow-x: auto;
 }
 
-.btn-export.excel {
-    color: #4caf50;
-    border-color: #4caf50;
-}
-
-/* ===== TABLA ===== */
-.products-table {
+table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 1rem;
 }
 
-.products-table th {
-    padding: 1rem;
+thead {
+    background-color: #1a1a1a;
     border-bottom: 2px solid #d4af37;
-    color: #f5d487;
 }
 
-.products-table td {
+th {
     padding: 1rem;
+    text-align: left;
+    color: #f5d487;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+tbody tr {
     border-bottom: 1px solid #333;
-    color: #e6d8a8;
+    transition: background-color 0.2s;
 }
 
-/* ===== ACCIONES ===== */
-.action-buttons {
+tbody tr:nth-child(even) {
+    background-color: #111;
+}
+
+tbody tr:hover {
+    background-color: #222;
+    box-shadow: inset 3px 0 0 #d4af37;
+}
+
+td {
+    padding: 1rem;
+    color: #ccc;
+    font-size: 0.95rem;
+}
+
+/* Estilo para las celdas de Acciones */
+td:last-child {
     display: flex;
-    gap: .5rem;
+    gap: 0.5rem;
 }
 
-.btn-action {
-    padding: .45rem .7rem;
-    border-radius: 8px;
+/* Botones de acción dentro de la tabla */
+.btn-edit, .btn-delete {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
     text-decoration: none;
-    font-size: .8rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: 0.2s;
+    white-space: nowrap; /* Evita que el texto se rompa */
 }
 
 .btn-edit {
+    background: #a8862c; /* Dorado más oscuro */
+    color: #111;
+    border: 1px solid #a8862c;
+}
+
+.btn-edit:hover {
     background: #f5d487;
-    color: black;
+    box-shadow: 0 0 8px rgba(245, 212, 135, 0.5);
 }
 
 .btn-delete {
-    background: #ef4444;
-    color: white;
+    background: #8b0000; /* Rojo oscuro */
+    color: #fff;
+    border: 1px solid #8b0000;
 }
 
-/* Alinear los botones correctamente al lado derecho */
-.right-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: .6rem;
-}
-
-/* Centrar texto donde corresponde */
-.header-title h1,
-.header-title p,
-.no-products {
-    text-align: center;
+.btn-delete:hover {
+    background: #ff4d4d;
+    color: #111;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.5);
 }

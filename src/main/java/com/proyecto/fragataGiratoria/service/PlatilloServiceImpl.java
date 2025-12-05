@@ -18,46 +18,46 @@ import java.util.Optional;
 @Service
 public class PlatilloServiceImpl implements PlatilloService {
 
-    @Autowired
-    private PlatilloRepository platilloRepository;
+@Autowired
+private PlatilloRepository platilloRepository;
 
-    @Override
-    public List<Platillo> listarPlatillos() {
-        return platilloRepository.findAll();
-    }
+ @Override
+public List<Platillo> listarPlatillos() {
+ return platilloRepository.findAll();
+}
 
-    @Override
-    public Optional<Platillo> obtenerPlatilloPorId(Integer id) {
-        return platilloRepository.findById(id);
-    }
+ @Override
+ public Optional<Platillo> obtenerPlatilloPorId(Integer id) {
+ return platilloRepository.findById(id);
+}
 
-    @Override
-    public Platillo guardarPlatillo(Platillo platillo) {
-        return platilloRepository.save(platillo);
-    }
+ @Override
+ public Platillo guardarPlatillo(Platillo platillo) {
+return platilloRepository.save(platillo);
+}
 
-    @Override
-    public void eliminarPlatillo(Integer id) {
-        platilloRepository.deleteById(id);
-    }
+@Override
+ public void eliminarPlatillo(Integer id) {
+ platilloRepository.deleteById(id);
+ }
 
-    @Override
-    public Page<Platillo> listarPlatillosPaginados(Pageable pageable) {
-        return platilloRepository.findAll(pageable);
-    }
+ @Override
+public Page<Platillo> listarPlatillosPaginados(Pageable pageable) {
+ return platilloRepository.findAll(pageable);
+ }
 
-    @Override
-    public void subirArchivo(MultipartFile file) {
-        if (file.isEmpty()) {
-            throw new RuntimeException("No se ha seleccionado ningún archivo.");
-        }
-        try {
-            Path path = Paths.get("uploads/" + file.getOriginalFilename());
-            Files.createDirectories(path.getParent());
-            Files.write(path, file.getBytes());
-            System.out.println("Archivo subido a: " + path.toString());
-        } catch (IOException e) {
-            throw new RuntimeException("Error al subir el archivo", e);
-        }
-    }
+@Override
+ public void subirArchivo(MultipartFile file) {
+ if (file.isEmpty()) {
+ throw new RuntimeException("No se ha seleccionado ningún archivo.");
+}
+ try {
+Path path = Paths.get("uploads/" + file.getOriginalFilename());
+ Files.createDirectories(path.getParent());
+Files.write(path, file.getBytes());
+System.out.println("Archivo subido a: " + path.toString());
+ } catch (IOException e) {
+ throw new RuntimeException("Error al subir el archivo", e);
+  }
+}
 }

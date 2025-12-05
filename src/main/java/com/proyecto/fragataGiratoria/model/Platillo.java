@@ -13,25 +13,25 @@ import lombok.*;
 public class Platillo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_platillo")
-    private Integer idPlatillo;
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "id_platillo")
+ private Integer idPlatillo;
 
-    @Column(nullable = false, length = 100)
-    private String nombre;
+@Column(nullable = false, length = 100)
+private String nombre;
 
-    @Column(nullable = false, length = 500)
-    private String descripcion;
+@Column(nullable = false, length = 500)
+private String descripcion;
 
-    @Column(nullable = false)
-    private Double precio;
+@Column(nullable = false)
+private Double precio;
 
-    @Column(nullable = false, length = 100)
-    private String categoria;
+@Column(nullable = false, length = 100)
+private String categoria;
 
-    @Column(name = "imagen_url", nullable = false)
-    private String imagenUrl;
+@Column(name = "imagen_url", nullable = false)
+private String imagenUrl;
 
-    @Column(name = "emojis", length = 500)
-    private String emojis;
+ @Column(name = "emojis", length = 500)
+private String emojis;
 }

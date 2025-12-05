@@ -10,10 +10,10 @@ import java.util.Optional;
 
 public interface PlatilloService {
 
-    List<Platillo> listarPlatillos();
-    Platillo guardarPlatillo(Platillo platillo);
-    Optional<Platillo> obtenerPlatilloPorId(Integer id);
-    void eliminarPlatillo(Integer id);
-    Page<Platillo> listarPlatillosPaginados(Pageable pageable);
-    void subirArchivo(MultipartFile file);
+List<Platillo> listarPlatillos();
+Platillo guardarPlatillo(Platillo platillo);
+  Optional<Platillo> obtenerPlatilloPorId(Integer id);
+ void eliminarPlatillo(Integer id);
+ Page<Platillo> listarPlatillosPaginados(Pageable pageable);
+void subirArchivo(MultipartFile file);
 }

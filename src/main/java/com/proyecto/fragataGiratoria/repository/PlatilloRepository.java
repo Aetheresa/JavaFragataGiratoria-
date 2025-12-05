@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlatilloRepository extends JpaRepository<Platillo, Integer> {
 
-    boolean existsByNombre(String nombre);
+boolean existsByNombre(String nombre);
 }
