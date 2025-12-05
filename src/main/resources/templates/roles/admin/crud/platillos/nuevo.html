@@ -6,7 +6,6 @@
     <title>La Fragata Giratoria - Nuevo Platillo</title>
     <link rel="stylesheet" href="/css/platillonuevo.css" />
 </head>
-
 <body>
 
 <div class="layout-container">
@@ -15,9 +14,7 @@
     <aside class="sidebar">
         <div class="sidebar-top">
             <div class="logo">La Fragata Giratoria</div>
-
             <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
-
             <nav class="menu">
                 <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
                 <a href="/productos" class="nav-button active">Productos</a>
@@ -28,7 +25,6 @@
                 <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
             </nav>
         </div>
-
         <div class="bottom-buttons">
             <a href="/admin/ajustes" class="nav-button">Ajustes</a>
             <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
@@ -38,9 +34,7 @@
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="main-content">
-
         <div class="dashboard-wrapper">
-
             <div class="header-title">
                 <h1>Nuevo Platillo</h1>
                 <p>Rellena los campos para agregar un nuevo platillo</p>
@@ -49,9 +43,8 @@
             <!-- FORMULARIO NUEVO PLATILLO -->
             <div class="form-container">
                 <form th:action="@{/crud/platillos/guardar}" th:object="${platillo}" method="post">
-                    
                     <label for="nombre">Nombre del Platillo:</label>
-                    <input type="text" id="nombre" th:field="*{nombre}" placeholder="Nombre del platillo" required />
+                    <input type="text" id="nombre" th:field="*{nombre}" placeholder="Ej: Ceviche de Camarón" required />
 
                     <label for="descripcion">Descripción:</label>
                     <textarea id="descripcion" th:field="*{descripcion}" placeholder="Descripción del platillo" required></textarea>
@@ -59,8 +52,20 @@
                     <label for="precio">Precio:</label>
                     <input type="number" id="precio" th:field="*{precio}" step="0.01" placeholder="0.00" required />
 
-                    <label for="categoria">Categoría:</label>
-                    <input type="text" id="categoria" th:field="*{categoria.nombreCategoria}" placeholder="Categoría" required />
+                    <label for="categoria" class="input">Categoría:</label>
+                    <select id="categoria" th:field="*{categoria}" required>
+                        <option value="">-- Selecciona --</option>
+                        <option value="Entradas">Entradas</option>
+                        <option value="Platos Fuertes">Platos Fuertes</option>
+                        <option value="Postres">Postres</option>
+                        <option value="Bebidas">Bebidas</option>
+                    </select>
+
+                    <label for="imagenUrl">URL de Imagen:</label>
+                    <input type="text" id="imagenUrl" th:field="*{imagenUrl}" placeholder="https://example.com/imagen.jpg" required />
+
+                    <label for="emojis">Emojis:</label>
+                    <input type="text" id="emojis" th:field="*{emojis}" placeholder="Ej: 🥗🍤" />
 
                     <div class="form-buttons">
                         <button type="submit" class="btn-save">Guardar</button>
@@ -70,7 +75,6 @@
             </div>
 
         </div>
-
     </main>
 
 </div>

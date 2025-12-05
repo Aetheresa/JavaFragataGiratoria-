@@ -30,7 +30,7 @@ public class PlatilloController {
     @GetMapping("/nuevo")
     public String nuevoPlatillo(Model model) {
         Platillo platillo = new Platillo();
-        platillo.setCategoria(new Categoria()); // 🔹 Inicializamos la categoría para evitar errores Thymeleaf
+        platillo.setCategoria(""); // Inicializamos como String vacío
         model.addAttribute("platillo", platillo);
         return "roles/admin/crud/platillos/nuevo";
     }
@@ -72,11 +72,15 @@ public class PlatilloController {
         List<Platillo> platillos = platilloService.listarPlatillos();
 
         StringBuilder excelContent = new StringBuilder();
-        excelContent.append("ID,Nombre,Precio\n");
+        excelContent.append("ID,Nombre,Precio,Categoria,Descripcion,Imagen URL,Emojis\n");
         for (Platillo p : platillos) {
             excelContent.append(p.getIdPlatillo())
                         .append(",").append(p.getNombre())
                         .append(",").append(p.getPrecio())
+                        .append(",").append(p.getCategoria())
+                        .append(",").append(p.getDescripcion())
+                        .append(",").append(p.getImagenUrl())
+                        .append(",").append(p.getEmojis())
                         .append("\n");
         }
 
