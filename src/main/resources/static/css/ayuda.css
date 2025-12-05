@@ -1,6 +1,4 @@
-/* ========================== */
-/* RESET GENERAL */
-/* ========================== */
+/* ===== RESETEO GENERAL ===== */
 * {
     margin: 0;
     padding: 0;
@@ -9,21 +7,16 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: url('/img/BGgeneral.jpg') center/cover no-repeat fixed;
-    color: #f5d487;
+    background: url('/img/BGgeneral.jpg') no-repeat center center / cover fixed;
 }
 
-/* ========================== */
-/* LAYOUT */
-/* ========================== */
+/* ===== LAYOUT ===== */
 .layout-container {
     display: flex;
     min-height: 100vh;
 }
 
-/* ========================== */
-/* SIDEBAR */
-/* ========================== */
+/* ===== SIDEBAR ===== */
 .sidebar {
     width: 280px;
     background: #000000e8;
@@ -38,20 +31,23 @@ body {
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
+    color: #f5d487;
 }
 
-/* Buscador */
 .search-input {
     width: 100%;
     padding: 0.7rem;
     border-radius: 10px;
+    margin-bottom: 1rem;
     border: 1px solid #d4af37;
     background: #1a1a1a;
     color: #f5d487;
-    margin-bottom: 1rem;
 }
 
-/* MENU */
+.search-input::placeholder {
+    color: #caa856;
+}
+
 .menu {
     display: flex;
     flex-direction: column;
@@ -61,63 +57,78 @@ body {
 .nav-button {
     padding: 0.9rem;
     border-radius: 10px;
+    text-decoration: none;
     background: #111;
     border: 1px solid #ffffff;
-    color: white;
-    text-decoration: none;
+    color: #ffffff;
     transition: 0.25s;
     font-weight: 500;
+
 }
 
 .nav-button:hover {
     background: #d4af37;
-    color: black;
+    color: #111;
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
 }
 
 .nav-button.active {
+    background: #000000;
+    color: rgb(255, 255, 255);
     border-color: #f5d487;
-    box-shadow: 0 0 15px rgba(245, 212, 135, 0.6);
+    box-shadow: 0 0 15px rgba(245, 212, 135, 0.8);
 }
 
-/* BOTONES ABAJO */
 .bottom-buttons {
     margin-top: auto;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
-    padding-top: 1rem;
-    border-top: 1px solid #d4af37;
+    gap: 0.5rem;
 }
 
 .bottom-buttons .nav-button {
-    background: #0d0d0d;
+    background: #111;
     border: 1px solid #a8862c;
 }
 
-/* ========================== */
-/* ÁREA DE AYUDA */
-/* ========================== */
+.bottom-buttons .nav-button:hover {
+    background: #a8862c;
+    color: black;
+    box-shadow: 0 0 12px rgba(168, 134, 44, 0.7);
+}
+
+/* ===== CONTENIDO ===== */
 .ayuda-container {
     flex: 1;
+    display: flex;
+    justify-content: center;
     padding: 2rem;
-
-    /* 💎 FONDO BLANCO SEMI TRANSPARENTE BONITO */
-    background: rgba(255, 255, 255, 0.78);
-    backdrop-filter: blur(6px);
-
     overflow-y: auto;
-    color: black;
+}
+
+.ayuda-content {
+    width: 90%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
 }
 
 /* HEADER */
+.ayuda-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
 .ayuda-title {
     font-size: 2rem;
-    font-weight: 800;
-    color: #3a2e00;
+    margin-bottom: 0.5rem;
 }
 
 .ayuda-subtitle {
-    color: #5e5e5e;
+    font-size: 1rem;
+    color: #555;
     margin-bottom: 1rem;
 }
 
@@ -125,111 +136,118 @@ body {
 .search-container {
     position: relative;
     max-width: 400px;
-}
-
-.search-container .search-input {
-    padding-left: 2rem;
-    border: 1px solid #cfcfcf;
-    border-radius: 10px;
-    background: white;
+    margin: 0 auto;
 }
 
 .search-icon {
     position: absolute;
-    top: 50%;
     left: 10px;
+    top: 50%;
     transform: translateY(-50%);
 }
 
-/* ========================== */
-/* CATEGORÍAS */
-/* ========================== */
+.search-container input {
+    width: 100%;
+    padding: 0.7rem 0.7rem 0.7rem 2rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+/* CATEGORIES */
 .categories-grid {
-    margin: 2rem 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .category-card {
-    background: #ffffffbf;
-    backdrop-filter: blur(4px);
+    background: #fff;
     border-radius: 12px;
     padding: 1rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
     cursor: pointer;
     transition: 0.25s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .category-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 
-/* ========================== */
+.category-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
 /* FAQ */
-/* ========================== */
+.faq-section {
+    margin-bottom: 2rem;
+}
+
 .faq-item {
-    border: 1px solid #ddd;
-    border-radius: 10px;
     margin-bottom: 1rem;
-    background: #ffffffd2;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    overflow: hidden;
 }
 
 .faq-question {
     padding: 0.8rem 1rem;
-    background: #f8f8f8;
+    background: #f9f9f9;
     cursor: pointer;
     position: relative;
+}
+
+.faq-question .chevron {
+    position: absolute;
+    right: 1rem;
+    transition: 0.25s;
+}
+
+.faq-question.active .chevron.rotated {
+    transform: rotate(180deg);
 }
 
 .faq-answer {
     max-height: 0;
     overflow: hidden;
-    transition: 0.3s ease;
     padding: 0 1rem;
+    transition: 0.3s;
 }
 
 .faq-answer.active {
-    max-height: 350px;
+    max-height: 1000px;
     padding: 1rem;
 }
 
-.chevron {
-    position: absolute;
-    right: 1rem;
-    transition: transform 0.3s;
-}
-
-.rotated {
-    transform: rotate(180deg);
-}
-
-/* ========================== */
 /* CONTACTO */
-/* ========================== */
 .contact-section {
-    background: #ffffffd9;
+    padding: 1rem;
+    background: #fff;
     border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+    text-align: center;
 }
 
 .contact-buttons {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
     margin-top: 1rem;
 }
 
 .contact-button {
-    padding: 0.6rem 1rem;
+    padding: 0.7rem 1rem;
     border-radius: 10px;
     border: none;
-    cursor: pointer;
     background: #f59e0b;
-    color: white;
+    color: #fff;
+    cursor: pointer;
     transition: 0.25s;
 }
 
 .contact-button:hover {
-    background: #d98306;
+    background: #d97706;
 }

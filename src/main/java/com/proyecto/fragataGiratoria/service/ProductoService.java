@@ -1,14 +1,25 @@
 package com.proyecto.fragataGiratoria.service;
 
 import com.proyecto.fragataGiratoria.model.Producto;
-
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductoService {
 
-    List<Producto> listarProductos();
-    Producto guardarProducto(Producto producto);
-    Optional<Producto> obtenerProductoPorId(Integer id);
-    void eliminarProducto(Integer id);
+    // Obtener todos los productos
+    List<Producto> findAll();
+
+    // Guardar o actualizar un producto
+    Producto save(Producto producto);
+
+    // Obtener producto por ID
+    Producto findById(Long id);
+
+    // Eliminar un producto
+    void delete(Long id);
+
+    // Contar productos bajos de stock
+    long countBajoStock();
+
+    // Contar proveedores
+    long countProveedores();
 }

@@ -1,5 +1,7 @@
 package com.proyecto.fragataGiratoria.model;
 
+import com.proyecto.fragataGiratoria.controller.Categoria;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,16 +19,26 @@ public class Platillo {
     @Column(name = "id_platillo")
     private Integer idPlatillo;
 
-    @Column(name = "nombre_platillo", nullable = false, length = 100)
-    private String nombrePlatillo;
+    @Column(nullable = false, length = 100)
+    private String nombre;
 
-    @Column(name = "descripcion")
+    @Column(nullable = false, length = 500)
     private String descripcion;
 
-    @Column(name = "precio", nullable = false)
+    @Column(nullable = false)
     private Double precio;
 
-    @ManyToOne
-    @JoinColumn(name = "id_categoria")
-    private CategoriaMenu categoria;
+    @Column(nullable = false)
+    private String categoria;
+
+    @Column(name = "imagen_url", nullable = false)
+    private String imagenUrl;
+
+    @Column(name = "emojis", length = 500)
+    private String emojis;
+
+    public void setCategoria(Categoria categoria2) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setCategoria'");
+    }
 }

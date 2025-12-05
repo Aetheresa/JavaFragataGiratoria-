@@ -1,33 +1,28 @@
 package com.proyecto.fragataGiratoria.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "productos")
 public class Producto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long idProducto;  // Identificador único del producto
+    private String nombre;    // Nombre del producto
+    private String descripcion;  // Descripción del producto
+    private String categoria;    // Categoría a la que pertenece
+    private Double precioUnitario;  // Precio unitario del producto
+    private Integer stockActual;  // Cantidad de stock disponible
+    private Integer stockMinimo;  // Stock mínimo requerido
+    private String unidadMedida;  // Unidad de medida (ej. piezas, litros, etc.)
 
-    private String nombre;
-    private String descripcion;
-    private String categoria;
-    private String codigo;
-    private Double precio;
-    private Boolean activo;
-    private Integer stock;
-    private Integer stockMinimo;
-    private Integer stockActual;
-
-    // ----- GETTERS Y SETTERS -----
-
-    public Integer getId() {
-        return id;
+    // Getters y Setters
+    public Long getIdProducto() {
+        return idProducto;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {
@@ -54,40 +49,12 @@ public class Producto {
         this.categoria = categoria;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public Double getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
-    public Integer getStockMinimo() {
-        return stockMinimo;
-    }
-
-    public void setStockMinimo(Integer stockMinimo) {
-        this.stockMinimo = stockMinimo;
+    public void setPrecioUnitario(Double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
     public Integer getStockActual() {
@@ -98,8 +65,19 @@ public class Producto {
         this.stockActual = stockActual;
     }
 
-    public void setCodigo(String codigo2) {
-        // todo Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setCodigo'");
+    public Integer getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(Integer stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public String getUnidadMedida() {
+        return unidadMedida;
+    }
+
+    public void setUnidadMedida(String unidadMedida) {
+        this.unidadMedida = unidadMedida;
     }
 }

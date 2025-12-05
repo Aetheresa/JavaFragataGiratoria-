@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>La Fragata Giratoria - Productos</title>
+    <title>La Fragata Giratoria - Platillos</title>
     <link rel="stylesheet" href="/css/productocrud.css" />
 </head>
 
@@ -20,8 +20,8 @@
 
             <nav class="menu">
                 <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
-                <a href="/productos" class="nav-button active">Productos</a>
-                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button active">Platillos</a>
                 <a href="/crud/compras" class="nav-button">Compras</a>
                 <a href="/crud/pedidos" class="nav-button">Pedidos</a>
                 <a href="/crud/usuarios" class="nav-button">Usuarios</a>
@@ -57,22 +57,18 @@
 
                         <!-- Buscar -->
                         <input id="searchInput" type="text" class="table-search"
-                               placeholder="Buscar platillo...">
+                               placeholder="🔍 Buscar platillo...">
 
                         <!-- Nuevo Platillo -->
-                        <a th:href="@{/roles/admin/platillos/nuevo}" class="btn-new-product">
-                            + Nuevo Platillo
+                        <a th:href="@{/crud/platillos/nuevo}" class="btn-new-product">
+                            ✚ Nuevo Platillo
                         </a>
 
-                        <!-- PDF -->
-                        <a th:href="@{/roles/admin/platillos/export/pdf}" class="btn-export pdf">
-                            PDF
-                        </a>
+                        <!-- Exportar a PDF -->
+                        <a th:href="@{/crud/platillos/export/pdf}" class="btn-export pdf">📄 PDF</a>
 
-                        <!-- Excel -->
-                        <a th:href="@{/roles/admin/platillos/export/excel}" class="btn-export excel">
-                            Excel
-                        </a>
+                        <!-- Exportar a Excel -->
+                        <a th:href="@{/crud/platillos/export/excel}" class="btn-export excel">📗 Excel</a>
 
                     </div>
                 </div>
@@ -86,6 +82,8 @@
                         <th>Descripción</th>
                         <th>Precio</th>
                         <th>Categoría</th>
+                        <th>Emojis</th>
+                        <th>URL</th>
                         <th style="text-align:center;">Acciones</th>
                     </tr>
                     </thead>
@@ -94,10 +92,12 @@
 
                     <tr th:each="p : ${platillos}">
                         <td th:text="${p.idPlatillo}"></td>
-                        <td th:text="${p.nombrePlatillo}"></td>
+                        <td th:text="${p.nombre}"></td>
                         <td th:text="${p.descripcion}"></td>
                         <td>$ <span th:text="${#numbers.formatDecimal(p.precio,1,2)}"></span></td>
-                        <td th:text="${p.categoria != null ? p.categoria.nombreCategoria : 'Sin categoría'}"></td>
+                        <td th:text="${p.categoria}"></td>
+                        <td th:text="${p.emojis}"></td>
+                        <td><a th:href="@{${p.url}}" target="_blank">Ver</a></td>
 
                         <td>
                             <div class="action-buttons">
@@ -115,8 +115,8 @@
 
                     <!-- VACÍO -->
                     <tr th:if="${#lists.isEmpty(platillos)}">
-                        <td colspan="6" class="no-products">
-                            No hay platillos registrados —
+                        <td colspan="8" class="no-products">
+                            No hay platillos registrados — 
                             <a th:href="@{/roles/admin/platillos/nuevo}">crear uno nuevo</a>
                         </td>
                     </tr>
