@@ -58,10 +58,6 @@ public class Producto {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Double getPrecio() {
         return precio;
     }
@@ -100,5 +96,10 @@ public class Producto {
 
     public void setStockActual(Integer stockActual) {
         this.stockActual = stockActual;
+    }
+
+    public void setCodigo(String codigo2) {
+        // todo Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setCodigo'");
     }
 }

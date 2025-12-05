@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const term = this.value.toLowerCase().trim();
             navButtons.forEach(btn => {
                 const text = btn.textContent.toLowerCase();
-                btn.style.backgroundColor = term && text.includes(term) ? '#ff8c00' : '';
+                btn.style.backgroundColor = term && text.includes(term) ? '#ff7b00ff' : '';
             });
         });
     }

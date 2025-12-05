@@ -1,240 +1,235 @@
-/* ====== Fondo general ====== */
-body {
-    background: url('/img/BGgeneral.jpg') no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ========================== */
+/* RESET GENERAL */
+/* ========================== */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.ayuda-container {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+body {
+    font-family: 'Inter', sans-serif;
+    background: url('/img/BGgeneral.jpg') center/cover no-repeat fixed;
+    color: #f5d487;
+}
 
-    margin: 0 auto;
-    padding: 2rem;
-    background: rgba(255, 255, 255, 0.92);
+/* ========================== */
+/* LAYOUT */
+/* ========================== */
+.layout-container {
+    display: flex;
     min-height: 100vh;
 }
 
-.ayuda-header {
-    text-align: center;
-    margin-bottom: 3rem;
+/* ========================== */
+/* SIDEBAR */
+/* ========================== */
+.sidebar {
+    width: 280px;
+    background: #000000e8;
+    box-shadow: 2px 0 20px rgba(255, 215, 0, 0.15);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #d4af37;
 }
 
-.ayuda-title {
-    font-size: 2.5rem;
+.logo {
+    font-size: 1.3rem;
     font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Buscador */
+.search-input {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 10px;
+    border: 1px solid #d4af37;
+    background: #1a1a1a;
+    color: #f5d487;
+    margin-bottom: 1rem;
+}
+
+/* MENU */
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.nav-button {
+    padding: 0.9rem;
+    border-radius: 10px;
+    background: #111;
+    border: 1px solid #ffffff;
+    color: white;
+    text-decoration: none;
+    transition: 0.25s;
+    font-weight: 500;
+}
+
+.nav-button:hover {
+    background: #d4af37;
+    color: black;
+}
+
+.nav-button.active {
+    border-color: #f5d487;
+    box-shadow: 0 0 15px rgba(245, 212, 135, 0.6);
+}
+
+/* BOTONES ABAJO */
+.bottom-buttons {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-top: 1rem;
+    border-top: 1px solid #d4af37;
+}
+
+.bottom-buttons .nav-button {
+    background: #0d0d0d;
+    border: 1px solid #a8862c;
+}
+
+/* ========================== */
+/* ÁREA DE AYUDA */
+/* ========================== */
+.ayuda-container {
+    flex: 1;
+    padding: 2rem;
+
+    /* 💎 FONDO BLANCO SEMI TRANSPARENTE BONITO */
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(6px);
+
+    overflow-y: auto;
+    color: black;
+}
+
+/* HEADER */
+.ayuda-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #3a2e00;
 }
 
 .ayuda-subtitle {
-    font-size: 1.125rem;
-    color: #64748b;
-    margin-bottom: 2rem;
+    color: #5e5e5e;
+    margin-bottom: 1rem;
 }
 
-/* ===== Buscador ===== */
+/* SEARCH */
 .search-container {
     position: relative;
-    max-width: 500px;
-    margin: 0 auto 3rem;
+    max-width: 400px;
 }
 
-.search-input {
-    width: 100%;
-    padding: 1rem 1.5rem 1rem 3rem; /* espacio para el icono */
-    border: 2px solid #e2e8f0;
-    border-radius: 0.75rem;
-    font-size: 1rem;
-    transition: all 0.2s ease;
-    background: rgba(255, 255, 255, 0.92);
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+.search-container .search-input {
+    padding-left: 2rem;
+    border: 1px solid #cfcfcf;
+    border-radius: 10px;
+    background: white;
 }
 
 .search-icon {
     position: absolute;
-    left: 1rem;
-    top: 30%;
+    top: 50%;
+    left: 10px;
     transform: translateY(-50%);
-    font-size: 1.2rem;
-    color: #94a3b8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
 }
 
-/* ===== Categorías ===== */
+/* ========================== */
+/* CATEGORÍAS */
+/* ========================== */
 .categories-grid {
+    margin: 2rem 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
 }
 
 .category-card {
-    background: rgba(255, 255, 255, 0.92);
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease;
-    border: 1px solid #e2e8f0;
+    background: #ffffffbf;
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    padding: 1rem;
     cursor: pointer;
+    transition: 0.25s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .category-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    border-color: #3b82f6;
+    transform: translateY(-4px);
 }
 
-.category-icon {
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 0.75rem;
-    margin-bottom: 1rem;
-    color: #3b82f6;
-}
-
-.category-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #1e293b;
-    margin-bottom: 0.5rem;
-}
-
-.category-description {
-    color: #64748b;
-    line-height: 1.6;
-}
-
-/* ===== FAQ ===== */
-.faq-section {
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
-    overflow: hidden;
-}
-
+/* ========================== */
+/* FAQ */
+/* ========================== */
 .faq-item {
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.faq-item:last-child {
-    border-bottom: none;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background: #ffffffd2;
 }
 
 .faq-question {
-    padding: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 0.8rem 1rem;
+    background: #f8f8f8;
     cursor: pointer;
-    font-weight: 600;
-    color: #1e293b;
-    transition: all 0.2s ease;
-}
-
-.faq-question:hover {
-    background: #f8fafc;
-}
-
-.faq-question.active {
-    background: rgba(255, 255, 255, 0.92);
-    color: #3b82f6;
+    position: relative;
 }
 
 .faq-answer {
-    padding: 0 1.5rem;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    color: #64748b;
-    line-height: 1.6;
+    transition: 0.3s ease;
+    padding: 0 1rem;
 }
 
 .faq-answer.active {
-    padding: 0 1.5rem 1.5rem;
-    max-height: 500px;
+    max-height: 350px;
+    padding: 1rem;
 }
 
 .chevron {
-    transition: transform 0.3s ease;
+    position: absolute;
+    right: 1rem;
+    transition: transform 0.3s;
 }
 
-.chevron.rotated {
+.rotated {
     transform: rotate(180deg);
 }
 
-/* ===== Contacto ===== */
+/* ========================== */
+/* CONTACTO */
+/* ========================== */
 .contact-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 3rem;
-    border-radius: 1rem;
-    text-align: center;
-    margin-top: 3rem;
-}
-
-.contact-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    background: #ffffffd9;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
 
 .contact-buttons {
     display: flex;
     gap: 1rem;
-    justify-content: center;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
 }
 
 .contact-button {
-    padding: 0.75rem 1.5rem;
-    border: 2px solid white;
-    border-radius: 0.5rem;
-    background: transparent;
-    color: white;
-    font-weight: 600;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    border: none;
     cursor: pointer;
-    transition: all 0.2s ease;
+    background: #f59e0b;
+    color: white;
+    transition: 0.25s;
 }
 
 .contact-button:hover {
-    background: rgba(255, 255, 255, 0.92);
-    color: #667eea;
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-    .ayuda-container {
-        padding: 1rem;
-    }
-    
-    .ayuda-title {
-        font-size: 2rem;
-    }
-    
-    .categories-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .contact-buttons {
-        flex-direction: column;
-    }
-    
-    .contact-section {
-        padding: 2rem 1rem;
-    }
+    background: #d98306;
 }

@@ -32,13 +32,11 @@ public class CarritoService {
     }
 
     /**
-     * Agregar producto al carrito. 
-     * Si el usuario es null, se agrega en la sesión.
+     * Agregar producto al carrito.
      */
     public void agregarProducto(Usuario usuario, HttpSession session, Producto producto) {
         if (usuario != null) {
-            // todo: Aquí podrías guardar el carrito en base de datos por usuario
-            // ejemplo: carritoRepository.agregarProducto(usuario, producto);
+            // Aquí podrías guardar el carrito en base de datos
         } else {
             List<Producto> carrito = obtenerCarritoDeSesion(session);
             carrito.add(producto);
@@ -51,16 +49,16 @@ public class CarritoService {
      */
     public void quitarProducto(Usuario usuario, HttpSession session, Integer productoId) {
         if (usuario != null) {
-            // todo: Quitar producto del carrito persistente del usuario
+            // Carrito persistente
         } else {
             List<Producto> carrito = obtenerCarritoDeSesion(session);
-            carrito.removeIf(p -> p.getIdProducto().equals(productoId));
+            carrito.removeIf(p -> p.getId().equals(productoId));
             session.setAttribute(SESSION_CARRITO, carrito);
         }
     }
 
     /**
-     * Obtener producto por id (opcional, ayuda a validar)
+     * Obtener producto por id
      */
     public Optional<Producto> obtenerProductoPorId(Integer id) {
         return productoRepository.findById(id);

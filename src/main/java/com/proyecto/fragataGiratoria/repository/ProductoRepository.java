@@ -11,10 +11,16 @@ import java.util.List;
 @Repository
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
-    @Query("SELECT p FROM Producto p WHERE " +
-            "LOWER(p.nombre) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-            "LOWER(p.descripcion) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-            "LOWER(p.categoria) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
-            "LOWER(p.codigo) LIKE LOWER(CONCAT('%', :search, '%'))")
+    @Query("""
+           SELECT p 
+           FROM Producto p 
+           WHERE LOWER(p.nombre) LIKE LOWER(CONCAT('%', :search, '%'))
+           OR LOWER(p.descripcion) LIKE LOWER(CONCAT('%', :search, '%'))
+           OR LOWER(p.categoria) LIKE LOWER(CONCAT('%', :search, '%'))
+           OR LOWER(p.codigo) LIKE LOWER(CONCAT('%', :search, '%'))
+           """)
     List<Producto> buscar(@Param("search") String search);
+
+    // 🔥 Cuenta los productos activos
+    long countByActivoTrue();
 }

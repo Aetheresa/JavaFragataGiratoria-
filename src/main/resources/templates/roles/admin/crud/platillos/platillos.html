@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Fragata Giratoria - Productos</title>
+    <link rel="stylesheet" href="/css/productocrud.css" />
+</head>
+
+<body>
+
+<div class="layout-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button active">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+        <div class="dashboard-wrapper">
+
+            <div class="header-title">
+                <h1>Gestión de Platillos</h1>
+                <p>Administrar todos los platillos registrados</p>
+            </div>
+
+            <!-- CONTENEDOR TABLA -->
+            <div class="products-table-container">
+
+                <!-- TOP BAR -->
+                <div class="table-top-bar">
+                    <h3>Listado de Platillos</h3>
+
+                    <div class="right-actions">
+
+                        <!-- Buscar -->
+                        <input id="searchInput" type="text" class="table-search"
+                               placeholder="Buscar platillo...">
+
+                        <!-- Nuevo Platillo -->
+                        <a th:href="@{/roles/admin/platillos/nuevo}" class="btn-new-product">
+                            + Nuevo Platillo
+                        </a>
+
+                        <!-- PDF -->
+                        <a th:href="@{/roles/admin/platillos/export/pdf}" class="btn-export pdf">
+                            PDF
+                        </a>
+
+                        <!-- Excel -->
+                        <a th:href="@{/roles/admin/platillos/export/excel}" class="btn-export excel">
+                            Excel
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- TABLA -->
+                <table class="products-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Platillo</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Categoría</th>
+                        <th style="text-align:center;">Acciones</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="p : ${platillos}">
+                        <td th:text="${p.idPlatillo}"></td>
+                        <td th:text="${p.nombrePlatillo}"></td>
+                        <td th:text="${p.descripcion}"></td>
+                        <td>$ <span th:text="${#numbers.formatDecimal(p.precio,1,2)}"></span></td>
+                        <td th:text="${p.categoria != null ? p.categoria.nombreCategoria : 'Sin categoría'}"></td>
+
+                        <td>
+                            <div class="action-buttons">
+
+                                <a th:href="@{'/roles/admin/platillos/editar/' + ${p.idPlatillo}}"
+                                   class="btn-action btn-edit">Editar</a>
+
+                                <a th:href="@{'/roles/admin/platillos/eliminar/' + ${p.idPlatillo}}"
+                                   onclick="return confirm('¿Eliminar este platillo?')"
+                                   class="btn-action btn-delete">Eliminar</a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- VACÍO -->
+                    <tr th:if="${#lists.isEmpty(platillos)}">
+                        <td colspan="6" class="no-products">
+                            No hay platillos registrados —
+                            <a th:href="@{/roles/admin/platillos/nuevo}">crear uno nuevo</a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/js/platillos.js"></script>
+
+</body>
+</html>

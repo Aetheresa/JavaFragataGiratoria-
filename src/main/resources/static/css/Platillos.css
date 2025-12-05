@@ -1,131 +1,188 @@
-/* ====== General ====== */
-body {
-    background: url('/img/BGgeneral.jpg') no-repeat center center fixed;
-    background-size: cover;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* ===== RESETEO GENERAL ===== */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-/* ====== Caja principal ====== */
-.dashboard-box { background: rgba(255, 255, 255, 0.92); 
-    border-radius: 0.8rem; padding: 2rem; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-    margin: 1rem; 
-    width: 100%; }
-
-/* ====== Mensajes ====== */
-.alert-success {
-    background: #d1fae5;
-    color: #065f46;
-    border: 1px solid #10b981;
-    padding: 0.8rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-weight: bold;
+body {
+    font-family: 'Inter', sans-serif;
+    background: url('/img/BGgeneral.jpg') no-repeat center center / cover fixed;
+    color: #f5d487; /* Dorado premium */
 }
 
-/* ====== Títulos ====== */
-.dashboard-box h1 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    color: #111827;
+/* ===== LAYOUT ===== */
+.layout-container {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    min-height: 100vh;
 }
 
-/* ====== Contenedor del botón agregar ====== */
-.actions-header {
+/* ===== SIDEBAR ===== */
+.sidebar {
+    width: 280px;
+    background: #000000e8; /* negro elegante */
+    box-shadow: 2px 0 20px rgba(255, 215, 0, 0.15); /* brillo dorado */
+    padding: 1.5rem;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    border-right: 1px solid #d4af37; /* dorado */
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #f5d487; /* dorado */
+}
+
+/* === INPUT DE BUSQUEDA === */
+.search-input {
+    width: 100%;
+    padding: 0.7rem;
+    border-radius: 10px;
     margin-bottom: 1rem;
+    border: 1px solid #d4af37;
+    background: #1a1a1a;
+    color: #f5d487;
 }
 
-/* ====== Botón Agregar ====== */
-.btn-agregar {
-    display: inline-flex;
+.search-input::placeholder {
+    color: #caa856; /* placeholder dorado tenue */
+}
+
+/* ===== CONTENIDO ===== */
+.main-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+.dashboard-wrapper {
+    background: #0b0b0bcc;
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid #d4af37;
+    box-shadow: 0 8px 40px rgba(212,175,55,0.1);
+}
+
+/* ===== TITULOS ===== */
+.header-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header-title h1 {
+    color: #f5d487;
+    font-size: 2rem;
+}
+
+/* ===== TABLA CONTAINER ===== */
+.products-table-container {
+    background: #0f0f0f;
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid #d4af37;
+    box-shadow: 0 5px 25px rgba(212,175,55,0.1);
+}
+
+/* ===== TOP BAR ===== */
+.table-top-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
     align-items: center;
-    gap: 0.4rem;
-    background: #10b981;
-    color: #fff;
-    padding: 0.6rem 1rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.2s;
-}
-.btn-agregar:hover {
-    background: #059669;
 }
 
-/* ====== Tablas ====== */
-.table-platillos {
+/* ===== BUSCAR ===== */
+.table-search {
+    border: 1px solid #d4af37;
+    background: #1a1a1a;
+    padding: .6rem 1rem;
+    border-radius: 8px;
+    color: #f5d487;
+}
+
+/* ===== BOTÓN NUEVO ===== */
+.btn-new-product {
+    padding: .6rem 1.2rem;
+    background: #005a09;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    border: 1px solid #f5d487;
+}
+
+/* ===== EXPORTAR ===== */
+.btn-export {
+    padding: .6rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid #d4af37;
+    background: #111;
+    color: #f5d487;
+}
+
+.btn-export.pdf {
+    color: #ff6b6b;
+    border-color: #ff6b6b;
+}
+
+.btn-export.excel {
+    color: #4caf50;
+    border-color: #4caf50;
+}
+
+/* ===== TABLA ===== */
+.products-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 0.95rem;
 }
 
-.table-platillos th,
-.table-platillos td {
-    border: 1px solid #e5e7eb;
-    padding: 0.75rem;
-    text-align: center;
-}
-
-.table-platillos th {
-    background: #f9fafb;
-    font-weight: 600;
-    color: #374151;
-}
-
-.table-platillos tr:hover {
-    background: #f3f4f6;
-}
-
-/* ====== Acciones ====== */
-.acciones {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.btn.edit {
-    background: #f59e0b;
-    color: #fff;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.4rem;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-    border: none;
-    cursor: pointer;
-}
-.btn.edit:hover {
-    background: #d97706;
-}
-
-.btn.delete {
-    background: #ef4444;
-    color: #fff;
-    padding: 0.4rem 0.8rem;
-    border-radius: 0.4rem;
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background 0.2s;
-}
-.btn.delete:hover {
-    background: #b91c1c;
-}
-
-/* ====== Sin datos ====== */
-.no-data {
-    text-align: center;
-    color: #6b7280;
-    font-style: italic;
+.products-table th {
     padding: 1rem;
+    border-bottom: 2px solid #d4af37;
+    color: #f5d487;
+}
+
+.products-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #333;
+    color: #e6d8a8;
+}
+
+/* ===== ACCIONES ===== */
+.action-buttons {
+    display: flex;
+    gap: .5rem;
+}
+
+.btn-action {
+    padding: .45rem .7rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: .8rem;
+}
+
+.btn-edit {
+    background: #f5d487;
+    color: black;
+}
+
+.btn-delete {
+    background: #ef4444;
+    color: white;
+}
+
+/* Alinear los botones correctamente al lado derecho */
+.right-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .6rem;
+}
+
+/* Centrar texto donde corresponde */
+.header-title h1,
+.header-title p,
+.no-products {
+    text-align: center;
 }

@@ -24,7 +24,7 @@ public class DashboardController {
     public String dashboardAdmin(Model model) {
 
         model.addAttribute("activePage", "dashboard");
-        model.addAttribute("content", "admin/inicio :: content");
+        model.addAttribute("content", "roles/admin/inicio :: content");
 
         model.addAttribute("totalUsuarios", usuarioRepository.count());
         model.addAttribute("totalProductos", productoRepository.count());

@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/usuarios")
+@RequestMapping("/crud/usuarios") // <-- ruta base actualizada
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -16,41 +16,40 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    // 📋 Listar todos los usuarios
+    // Listar usuarios (vista admin)
     @GetMapping
-    public String listar(Model model) {
+    public String listarAdmin(Model model) {
         model.addAttribute("usuarios", usuarioService.listar());
-        return "usuarios"; // Nombre de la vista Thymeleaf
+        return "roles/admin/crud/usuarios/usuarios"; // Template correcto
     }
 
-    // ➕ Mostrar formulario de nuevo usuario
+    // Formulario nuevo usuario
     @GetMapping("/nuevo")
     public String nuevo(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "usuario-form";
+        return "roles/admin/crud/usuarios/usuario-form"; // Debe existir
     }
 
-    // 💾 Guardar usuario
+    // Guardar usuario
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Usuario usuario) {
         usuarioService.guardar(usuario);
-        return "redirect:/usuarios";
+        return "redirect:/crud/usuarios";
     }
 
-    // ✏️ Editar usuario existente
+    // Editar usuario
     @GetMapping("/editar/{idUsuario}")
     public String editar(@PathVariable Integer idUsuario, Model model) {
         Usuario usuario = usuarioService.obtenerPorId(idUsuario)
                                          .orElse(new Usuario());
         model.addAttribute("usuario", usuario);
-        return "usuario-form";
+        return "roles/admin/crud/usuarios/usuario-form";
     }
 
-    // 🗑️ Eliminar usuario
+    // Eliminar usuario
     @GetMapping("/eliminar/{idUsuario}")
     public String eliminar(@PathVariable Integer idUsuario) {
         usuarioService.eliminar(idUsuario);
-        return "redirect:/usuarios";
+        return "redirect:/crud/usuarios";
     }
 }
-

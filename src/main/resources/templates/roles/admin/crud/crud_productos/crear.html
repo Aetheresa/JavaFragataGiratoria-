@@ -13,13 +13,16 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="sidebar-top">
-            <div class="logo">La Fragata Giratoria</div>
 
-            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+            <div class="logo">
+                La Fragata Giratoria
+            </div>
+
+            <input class="search-input" type="search" id="search-input" placeholder="🔍 Búsqueda" />
 
             <nav class="menu">
                 <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
-                <a href="/productos" class="nav-button active">Productos</a>
+                <a href="/crud/productos" class="nav-button">Productos</a>
                 <a href="/crud/platillos" class="nav-button">Platillos</a>
                 <a href="/crud/compras" class="nav-button">Compras</a>
                 <a href="/crud/pedidos" class="nav-button">Pedidos</a>
@@ -74,12 +77,6 @@
                             <option value="Categoría 3">Especialidades de la Casa 🌟</option>
                             <option value="Categoría 3">Extra ⚓️</option>
                         </select>
-                    </div>
-
-                    <!-- Código único -->
-                    <div class="form-group">
-                        <label for="codigo">Código</label>
-                        <input type="text" id="codigo" name="codigo" placeholder="Código único" required>
                     </div>
 
                     <!-- Precio -->

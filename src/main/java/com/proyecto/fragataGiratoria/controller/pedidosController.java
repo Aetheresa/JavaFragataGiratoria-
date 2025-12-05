@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/crud")
-public class CompraController {
+public class pedidosController {
 
-    @GetMapping("/compras")
-    public String listarCompras() {
-        return "roles/admin/crud/compras/compras";
+    @GetMapping("/pedidos")
+    public String listarPedidos() {
+        return "roles/admin/crud/pedidos/pedidos";
     }
 }
