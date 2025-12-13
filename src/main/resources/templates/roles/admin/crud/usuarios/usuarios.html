@@ -10,9 +10,10 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-top">
-                <div class="logo">La Fragata Giratoria</div>
-
-                <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+        <div class="logo">
+            <img th:src="@{/img/icono-fragata.jpg}" alt="Logo">La Fragata Giratoria
+        </div>
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
 
                 <nav class="menu">
                     <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
@@ -49,8 +50,8 @@
                     <div class="right-actions">
                         <input type="text" class="table-search" placeholder="🔍 Buscar usuario...">
                         <a th:href="@{/crud/usuarios/nuevo}" class="btn-new-product">+ Crear Nuevo Usuario</a>
-                        <a th:href="@{/crud/usuarios/export/pdf}" class="btn-export pdf">📄 PDF</a>
-                        <a th:href="@{/crud/usuarios/export/excel}" class="btn-export excel">📗 Excel</a>
+                        <a th:href="@{/crud/usuarios/export/pdf}" class="btn-export pdf">📄 Exportar a PDF</a>
+                        <a th:href="@{/crud/usuarios/export/excel}" class="btn-export excel">📗 Exportar a Excel</a>
                     </div>
                 </div>
 
@@ -89,6 +90,6 @@
         </main>
     </div>
 
-    <script src="/js/pedidos.js"></script>
+    <script src="/js/usuario.js"></script>
 </body>
 </html>

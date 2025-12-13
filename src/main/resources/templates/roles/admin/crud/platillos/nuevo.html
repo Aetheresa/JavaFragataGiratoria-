@@ -2,56 +2,96 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Editar Platillo - La Fragata Giratoria</title>
-    <link rel="stylesheet" href="/css/platillonuevo.css" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <link rel="stylesheet" th:href="@{/css/platillonuevo.css}" />
 </head>
 <body>
-
 <div class="layout-container">
 
     <aside class="sidebar">
-        </aside>
+        <div class="logo">
+                <img th:src="@{/img/icono-fragata.jpg}" alt="Logo">La Fragata Giratoria
+            </div>
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+
+        <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button active">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
 
     <main class="main-content">
-        <div class="dashboard-wrapper">
-            
-            <div class="header-title">
-                <h1>Editar Platillo Existente</h1>
-                <p>Modifica los campos del platillo con ID: <span th:text="${platillo.idPlatillo}"></span></p>
+        <div class="form-container">
+            <div class="form-header">
+                <h1>🍽️ Crear Platillo</h1>
+                <p>Agrega un nuevo platillo al menú del restaurante.</p>
             </div>
-            
-            <form th:action="@{/crud/platillos}" th:object="${platillo}" method="post" class="platillo-form">
 
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                
-                <input type="hidden" th:field="*{idPlatillo}" /> 
+            <form th:action="@{/crud/platillos}" method="post" class="platillo-form">
+
+                <input type="hidden" 
+                        th:if="${_csrf != null}"
+                        th:name="${_csrf.parameterName}" 
+                        th:value="${_csrf.token}" />
 
                 <div class="form-group">
-                    <label for="nombre">Nombre del Platillo</label>
-                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ej. Pizza Margarita" required>
+                    <label>Nombre del Platillo</label>
+                    <input type="text" name="nombre" placeholder="Ej: Camarones Fritos" required />
                 </div>
 
                 <div class="form-group">
-                    <label for="precio">Precio</label>
-                    <input type="number" id="precio" name="precio" th:field="*{precio}" step="0.01" placeholder="Ej. 120.50" required>
+                    <label>Precio</label>
+                    <input type="number" step="0.01" name="precio" placeholder="Ej: 25.000" required />
                 </div>
-                
+
                 <div class="form-group">
                     <label for="descripcion">Descripción del Platillo</label>
-                    <textarea id="descripcion" name="descripcion" th:field="*{descripcion}" rows="3" placeholder="Ej. Deliciosa pizza con tomates frescos y albahaca."></textarea>
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="submit" class="btn-submit">💾 Actualizar Platillo</button>
-                    <a th:href="@{/crud/platillos}" class="btn-cancel">✖ Cancelar</a>
+                    <textarea id="descripcion" name="descripcion" placeholder="Una breve descripción de los ingredientes y el sabor."></textarea> 
                 </div>
 
+                <div class="form-group">
+                    <label>Categoría</label>
+                    <select name="categoria" required>
+                        <option value="">--Selecciona una categoría--</option>
+                        <option value="Mariscos">Mariscos</option>
+                        <option value="Comidas Rápidas">Comidas Rápidas</option>
+                        <option value="Bebidas">Bebidas</option>
+                        <option value="Postres">Postres</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Emojis</label>
+                    <input type="text" name="emojis" placeholder="Ej: 🍤🔥" />
+                </div>
+
+                <div class="form-group">
+                    <label>URL de Imagen</label>
+                    <input type="text" name="imagenUrl" placeholder="Ej: url_imagen_camarones" />
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-submit">💾 Guardar Producto</button>
+                    <button type="reset" class="btn-clear">🧹 Limpiar</button>
+                    <a href="/crud/platillos" class="btn-cancel">✖ Cancelar</a>
+                </div>
             </form>
-            
-            <a href="/crud/platillos" class="back-to-dashboard">← Volver al Dashboard</a>
+
+            <a th:href="@{/crud/platillos}" class="back-to-dashboard">← Volver al Listado de Platillos</a>
         </div>
     </main>
 </div>
+<script src="/js/platillo.js"></script>
 </body>
 </html>

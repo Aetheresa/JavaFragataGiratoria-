@@ -86,7 +86,8 @@
                         <tr th:each="pedido : ${pedidos}">
                             <td th:text="${pedido.id}">1</td>
                             <td th:text="${pedido.fecha}">2025-12-05</td>
-                            <td th:text="${pedido.idPlatillo}">101</td> <td th:text="${pedido.cantidad}">2</td>
+                            <td th:text="${pedido.nombrePlatillo}">Nombre del Platillo Aquí</td>
+                            <td th:text="${pedido.cantidad}">2</td>
                             <td th:text="${pedido.total}">150.00</td>
                             <td th:text="${pedido.estado}">Pendiente</td> 
                             <td>

@@ -4,33 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Editar Platillo - La Fragata Giratoria</title>
-    <link rel="stylesheet" href="/css/editar_platillo.css" />
+    <link rel="stylesheet" th:href="@{/css/editar_platillo.css}" />
 </head>
 <body>
 
-<div class="layout-container">
-
+<div class="layout-container"> 
     <aside class="sidebar">
         <div class="sidebar-top">
-            <div class="logo">La Fragata Giratoria</div>
 
+        <div class="logo">
+            <img th:src="@{/img/icono-fragata.jpg}" alt="Logo">La Fragata Giratoria
+        </div>
             <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
 
             <nav class="menu">
-                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
-                <a href="/productos" class="nav-button">Productos</a>
-                <a href="/crud/platillos" class="nav-button active">Platillos</a>
-                <a href="/crud/compras" class="nav-button">Compras</a>
-                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
-                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
-                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+                <a th:href="@{/roles/admin/dashboard}" class="nav-button">Inicio</a>
+                <a th:href="@{/crud/productos}" class="nav-button">Productos</a>
+                <a th:href="@{/crud/platillos}" class="nav-button active">Platillos</a>
+                <a th:href="@{/crud/compras}" class="nav-button">Compras</a>
+                <a th:href="@{/crud/pedidos}" class="nav-button">Pedidos</a>
+                <a th:href="@{/crud/usuarios}" class="nav-button">Usuarios</a>
+                <a th:href="@{/crud/metodosdepago}" class="nav-button">Métodos de Pago</a>
             </nav>
         </div>
 
         <div class="bottom-buttons">
-            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
-            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
-            <a href="/logout" class="nav-button">Salir</a>
+            <a th:href="@{/admin/ajustes}" class="nav-button">Ajustes</a>
+            <a th:href="@{/roles/admin/ayuda}" class="nav-button">Ayuda</a>
+            <a th:href="@{/logout}" class="nav-button">Salir</a>
         </div>
     </aside>
 
@@ -43,11 +44,13 @@
                 <p>Actualiza la información del platillo seleccionado.</p>
             </div>
 
-            <!-- Información del platillo (ya existente) -->
             <div class="platillo-info">
                 <h3>Información del Platillo</h3>
                 <div class="info-item">
                     <strong>Nombre:</strong> <span th:text="${platillo.nombre}">Pizza Margarita</span>
+                </div>
+                <div class="info-item">
+                    <strong>Descripción:</strong> <span th:text="${platillo.descripcion}">Delgada y crujiente</span>
                 </div>
                 <div class="info-item">
                     <strong>Precio:</strong> <span th:text="${platillo.precio}">120.50</span> 
@@ -63,12 +66,16 @@
                 </div>
             </div>
 
-            <!-- Formulario de edición -->
             <form th:action="@{/crud/platillos/editar/{id}(id=${platillo.idPlatillo})}" th:object="${platillo}" method="post" class="platillo-form">
 
                 <div class="form-group">
                     <label for="nombre">Nombre del Platillo</label>
                     <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ej. Pizza Margarita" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" th:field="*{descripcion}" placeholder="Ingredientes principales, preparación, o notas del chef." required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -78,13 +85,13 @@
 
                 <div class="form-group categoria-group">
                     <label for="categoriaSelect">Categoría</label>
-                    <select id="categoriaSelect" name="categoria" class="categoria-select" required>
-                        <option value="" disabled selected>--Selecciona una categoría--</option>
+                    <select id="categoriaSelect" name="categoria" th:field="*{categoria}" class="categoria-select" required>
+                        <option value="" disabled>--Selecciona una categoría--</option>
                         <option value="Entrada">Entrada</option>
                         <option value="Platos Principales">Platos Principales</option>
                         <option value="Adicionales">Adicionales</option>
                         <option value="Bebidas">Bebidas</option>
-                    </select>
+                        </select>
                 </div>
 
                 <div class="form-group">
@@ -100,12 +107,12 @@
                 <div class="form-buttons">
                     <button type="submit" class="btn-submit">💾 Guardar Platillo</button>
                     <button type="reset" class="btn-clear">🧹 Limpiar</button>
-                    <a href="/crud/platillos" class="btn-cancel">✖ Cancelar</a>
+                    <a th:href="@{/crud/platillos}" class="btn-cancel">✖ Cancelar</a>
                 </div>
 
             </form>
 
-            <a href="/crud/platillos" class="back-to-dashboard">← Volver al Dashboard</a>
+            <a th:href="@{/crud/platillos}" class="back-to-dashboard">← Volver al Listado de Platillos</a>
 
         </div>
 
@@ -113,6 +120,6 @@
 
 </div>
 
-<script src="/js/editarPlatillo.js"></script>
+<script src="/js/platillo.js"></script>
 </body>
 </html>

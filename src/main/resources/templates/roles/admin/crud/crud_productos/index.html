@@ -14,8 +14,9 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="sidebar-top">
-            <div class="logo">La Fragata Giratoria</div>
-
+            <div class="logo">
+                <img th:src="@{/img/icono-fragata.jpg}" alt="Logo">La Fragata Giratoria
+            </div>
             <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
 
             <nav class="menu">
@@ -49,6 +50,7 @@
 
             <!-- ESTADÍSTICAS -->
             <div class="stats-preview">
+
                 <div class="stat-card">
                     <h2 th:text="${totalProductos}">0</h2>
                     <span>Total Productos</span>
@@ -59,11 +61,7 @@
                     <span>Bajo Stock</span>
                 </div>
 
-                <div class="stat-card">
-                    <h2 th:text="${totalProveedores}">0</h2>
-                    <span>Proveedores</span>
-                </div>
-            </div>
+            </div> <!-- ✔ cierre correcto -->
 
             <!-- TABLA + FILTRO -->
             <div class="products-table-container">
@@ -72,13 +70,10 @@
                     <h3>Lista de Productos</h3>
 
                     <div class="right-actions">
-                        <!-- Filtro búsqueda -->
                         <input type="text" class="table-search" placeholder="🔍 Buscar producto...">
-
-                        <!-- Botones -->
                         <a th:href="@{/productos/crear}" class="btn-new-product">✚ Nuevo Producto</a>
-                        <a th:href="@{/productos/export/pdf}" class="btn-export pdf">📄 PDF</a>
-                        <a th:href="@{/productos/export/excel}" class="btn-export excel">📗 Excel</a>
+                        <a th:href="@{/productos/export/pdf}" class="btn-export pdf">📄 Exportar a PDF</a>
+                        <a th:href="@{/productos/export/excel}" class="btn-export excel">📗 Exportar a Excel</a>
                     </div>
                 </div>
 
@@ -87,7 +82,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>fecha de vencimiento</th>
+                        <th>fecharegistro</th>
                         <th>Precio</th>
                         <th>Stock</th>
                         <th>Stock Mínimo</th>
@@ -100,11 +95,12 @@
                     <tr th:each="producto : ${productos}" th:if="${producto != null}">
                         <td th:text="${producto.idProducto}"></td>
                         <td th:text="${producto.nombre}"></td>
-                        <td th:text="${producto.fechaVencimiento}"></td>
+                        <td th:text="${producto.fechaRegistro}"></td>
                         <td th:text="${producto.precioUnitario}"></td>
                         <td th:text="${producto.stockActual}"></td>
                         <td th:text="${producto.stockMinimo}"></td>
                         <td th:text="${producto.unidadMedida}"></td>
+
                         <td class="action-buttons">
                             <a th:href="@{/productos/editar/{id}(id=${producto.idProducto})}" class="btn-action btn-edit">Editar</a>
                             <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}" 

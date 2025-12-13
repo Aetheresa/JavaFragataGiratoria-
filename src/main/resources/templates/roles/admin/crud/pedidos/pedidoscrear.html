@@ -1,120 +1,141 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Crear Pedido - La Fragata Giratoria</title>
-    <link rel="stylesheet" href="/css/pedidoscrear.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crear Pedido - La Fragata Giratoria</title>
+<link rel="stylesheet" href="/css/pedidoscrear.css" />
 </head>
 <body>
-
 <div class="layout-container">
 
-    <aside class="sidebar">
-        <div class="sidebar-top">
-            <div class="logo">La Fragata Giratoria</div>
-
-            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
-
-            <nav class="menu">
-                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
-                <a href="/productos" class="nav-button">Productos</a>
-                <a href="/crud/platillos" class="nav-button">Platillos</a>
-                <a href="/crud/compras" class="nav-button">Compras</a>
-                <a href="/crud/pedidos" class="nav-button active">Pedidos</a>
-                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
-                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
-            </nav>
-        </div>
-
-        <div class="bottom-buttons">
-            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
-            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
-            <a href="/logout" class="nav-button">Salir</a>
-        </div>
-    </aside>
-
-    <main class="main-content">
-        <div class="dashboard-wrapper">
-            <div class="header-title">
-                <h1>Registrar Nuevo Pedido</h1>
-                <p>Ingresa los detalles del nuevo pedido.</p>
-            </div>
-            
-            <form th:action="@{/crud/pedidos}" th:object="${pedido}" method="post" class="pedido-form">
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="fecha">Fecha del Pedido</label>
-                        <input type="date" id="fecha" name="fecha" th:field="*{fecha}" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="cantidad">Cantidad</label>
-                        <input type="number" id="cantidad" name="cantidad" th:field="*{cantidad}" placeholder="1" required>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="precioUnitario">Precio Unitario</label>
-                        <input type="number" id="precioUnitario" name="precioUnitario" th:field="*{precioUnitario}" step="0.01" placeholder="99.99" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="subtotal">Subtotal</label>
-                        <input type="number" id="subtotal" name="subtotal" th:field="*{subtotal}" step="0.01" placeholder="199.98" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="total">Total</label>
-                    <input type="number" id="total" name="total" th:field="*{total}" step="0.01" placeholder="250.50" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="estado">Estado del Pedido</label>
-                    <input type="text" id="estado" name="estado" th:field="*{estado}" placeholder="Pendiente, Enviado, Entregado" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="observaciones">Observaciones</label>
-                    <textarea id="observaciones" name="observaciones" th:field="*{observaciones}" rows="3" placeholder="Sin cebolla, extra picante, etc."></textarea>
-                </div>
-                
-                <h3>Asignación de IDs (Relaciones)</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="idCliente">ID Cliente</label>
-                        <input type="number" id="idCliente" name="idCliente" th:field="*{idCliente}" placeholder="1" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="idPlatillo">ID Platillo</label>
-                        <input type="number" id="idPlatillo" name="idPlatillo" th:field="*{idPlatillo}" placeholder="101" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="idUsuario">ID Usuario (Mesero/Sistema)</label>
-                        <input type="number" id="idUsuario" name="idUsuario" th:field="*{idUsuario}" placeholder="5" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="idAdicional">ID Adicional</label>
-                        <input type="number" id="idAdicional" name="idAdicional" th:field="*{idAdicional}" placeholder="1, 2 ..." required>
-                    </div>
-                </div>
-                
-                <div class="form-buttons">
-                    <button type="submit" class="btn-submit">Guardar Pedido</button>
-                    <a th:href="@{/crud/pedidos}" class="btn-cancel">Cancelar</a>
-                </div>
-
-            </form>
-            
-            <a th:href="@{/crud/pedidos}" class="back-to-dashboard">Volver a Pedidos</a>
-        </div>
-    </main>
+<aside class="sidebar">
+<div class="sidebar-top">
+<div class="logo">
+<img th:src="@{/img/icono-fragata.jpg}" alt="Logo">
+La Fragata Giratoria
 </div>
+<input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+<nav class="menu">
+<a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+<a href="/productos" class="nav-button">Productos</a>
+<a href="/crud/platillos" class="nav-button">Platillos</a>
+<a href="/crud/compras" class="nav-button">Compras</a>
+<a href="/crud/pedidos" class="nav-button active">Pedidos</a>
+<a href="/crud/usuarios" class="nav-button">Usuarios</a>
+<a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+</nav>
+</div>
+<div class="bottom-buttons">
+<a href="/admin/ajustes" class="nav-button">Ajustes</a>
+<a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+<a href="/logout" class="nav-button">Salir</a>
+</div>
+</aside>
+
+<main class="main-content">
+<div class="dashboard-wrapper">
+
+<div class="header-title">
+<h1>Registrar Nuevo Pedido</h1>
+<p>Ingresa los detalles del nuevo pedido.</p>
+</div>
+
+<form th:action="@{/crud/pedidos}" th:object="${pedido}" method="post" class="pedido-form">
+
+<div class="form-row">
+<div class="form-group">
+<label for="fecha">Fecha del Pedido</label>
+<input type="date" id="fecha" th:field="*{fecha}" required>
+</div>
+<div class="form-group">
+<label for="cantidad">Cantidad</label>
+<input type="number" id="cantidad" th:field="*{cantidad}" placeholder="1" required>
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label for="precioUnitario">Precio Unitario</label>
+<input type="number" id="precioUnitario" th:field="*{precioUnitario}" step="0.01" placeholder="99.99" required>
+</div>
+<div class="form-group">
+<label for="subtotal">Subtotal</label>
+<input type="number" id="subtotal" th:field="*{subtotal}" step="0.01" placeholder="199.98" required>
+</div>
+</div>
+
+<div class="form-group">
+<label for="total">Total</label>
+<input type="number" id="total" th:field="*{total}" step="0.01" placeholder="250.50" required>
+</div>
+
+<div class="form-group">
+<label for="estado">Estado del Pedido</label>
+<select id="estado" th:field="*{estado}" required>
+<option value="" disabled selected>-- Seleccione un estado --</option>
+<option value="PENDIENTE">Pendiente</option>
+<option value="ENVIADO">Enviado</option>
+<option value="ENTREGADO">Entregado</option>
+<option value="CANCELADO">Cancelado</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="observaciones">Observaciones</label>
+<textarea id="observaciones" th:field="*{observaciones}" rows="3" placeholder="Sin cebolla, extra picante, etc."></textarea>
+</div>
+
+<h3>Asignación de Relaciones</h3>
+<div class="form-row">
+
+<div class="form-group">
+<label for="nombrePlatillo">Platillo Solicitado</label>
+<select class="form-control" id="platilloSelect" th:field="*{idPlatillo}" required>
+<option value="" disabled selected>-- Seleccione un Platillo --</option>
+<option th:each="platillo : ${platillos}" 
+        th:value="${platillo.idPlatillo}" 
+        th:text="${platillo.nombre} + ' ($' + ${platillo.precio} + ')'">Platillo</option>
+</select>
+</div>
+
+
+</div>
+
+<div class="form-group">
+<label for="usuario">Usuario (Mesero/Encargado)</label>
+<select id="usuario" th:field="*{usuario}" required>
+<option value="" disabled selected>-- Seleccione un Usuario --</option>
+<option 
+th:each="u : ${usuarios}" 
+th:value="${u.idUsuario}" 
+th:text="${u.nombreUsuario} + ' (' + ${u.rol} + ')'">
+Nombre del Usuario
+</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="idAdicional">ID Adicional</label>
+<input type="number" id="idAdicional" th:field="*{idAdicional}" placeholder="1, 2 ..." required>
+</div>
+
+
+<div class="form-buttons">
+<button type="submit" class="btn-submit">💾 Guardar Pedido</button>
+<button type="reset" class="btn-clear">🧹 Limpiar</button>
+<a th:href="@{/crud/pedidos}" class="btn-cancel">✖ Cancelar</a>
+</div>
+
+</form>
+
+<a th:href="@{/crud/pedidos}" class="back-to-dashboard">← Volver a Pedidos</a>
+
+</div>
+</main>
+
+</div>
+
 <script src="/js/pedidos.js"></script>
 </body>
 </html>

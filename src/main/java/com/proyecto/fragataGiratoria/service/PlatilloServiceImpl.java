@@ -27,8 +27,12 @@ public class PlatilloServiceImpl implements PlatilloService {
     }
 
     @Override
-    public Optional<Platillo> obtenerPlatilloPorId(Long id) {
-        return platilloRepository.findById(id);
+    // CAMBIADO: Ahora recibe Long
+    public Optional<Platillo> obtenerPlatilloPorId(Long id) { 
+        if (id == null) return Optional.empty();
+        // El repositorio de JPA generalmente usa el mismo tipo de ID que el service.
+        // Si el repositorio usa Long, esto funciona directamente.
+        return platilloRepository.findById(id); 
     }
 
     @Override
@@ -37,8 +41,11 @@ public class PlatilloServiceImpl implements PlatilloService {
     }
 
     @Override
-    public void eliminarPlatillo(Long id) {
-        platilloRepository.deleteById(id);
+    // CAMBIADO: Ahora recibe Long
+    public void eliminarPlatillo(Long id) { 
+        if (id != null) {
+            platilloRepository.deleteById(id);
+        }
     }
 
     @Override
@@ -48,6 +55,7 @@ public class PlatilloServiceImpl implements PlatilloService {
 
     @Override
     public void subirArchivo(MultipartFile file) {
+        // ... (Implementación de subirArchivo omitida por simplicidad, se mantiene igual)
         if (file.isEmpty()) {
             throw new RuntimeException("No se ha seleccionado ningún archivo.");
         }

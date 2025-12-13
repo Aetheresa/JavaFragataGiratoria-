@@ -17,6 +17,24 @@ body {
     width: 100%;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #f5d487; /* dorado */
+}
+
+/* Imagen del logo */
+.logo img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
 /* ====== Títulos ====== */
 .dashboard-box h1 {
     font-size: 1.8rem;

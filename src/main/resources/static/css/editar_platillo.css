@@ -27,10 +27,21 @@ body {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    color: #f5d487;
+    color: #f5d487; /* dorado */
+}
+
+/* Imagen del logo */
+.logo img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
 }
 
 .search-input {
@@ -263,18 +274,48 @@ body {
     color: black;
     box-shadow: 0 0 12px rgba(212, 175, 55, 0.8);
 }
-.form-group input,
-.form-group select {
-    padding: 0.8rem 1rem;  /* Asegura que el padding sea uniforme */
-    border-radius: 10px;
-    border: 1px solid #d4af37;  /* Asegura que el borde sea visible y acorde con el diseño */
-    background: #1a1a1a;
-    color: #f5d487;
-    font-size: 1rem;
-    width: 100%;  /* Asegura que ocupe el 100% del contenedor */
-    margin-bottom: 1.2rem; /* Espaciado inferior para separar de los otros campos */
+/* ==================================== */
+/* 1. Estilos Base del Formulario */
+/* ==================================== */
+.form-group {
+    margin-bottom: 1.5rem;
 }
 
+.form-group label {
+    display: block; /* Asegura que la etiqueta esté en su propia línea */
+    color: #ffffff; /* Color de texto para que sea legible */
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* ==================================== */
+/* 2. Estilos de Campos (Input, Select, y TEXTAREA) */
+/* ==================================== */
+
+/* Estilos para INPUT, SELECT y el nuevo TEXTAREA */
+.form-group input,
+.form-group select,
+.form-group textarea { /* 💥 TEXTAREA AÑADIDO AQUÍ 💥 */
+    padding: 0.8rem 0.1rem;
+    border-radius: 10px;
+    border: 1px solid #d4af37; /* Dorado primario */
+    background: #1a1a1a; /* Fondo oscuro */
+    color: #f5d487; /* Texto dorado claro */
+    font-size: 1rem;
+    width: 100%;
+    margin-bottom: 1.2rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Estilo específico para textarea (permite redimensionamiento vertical) */
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px; /* Altura mínima para la descripción */
+}
+
+/* El estilo original para select se mantiene si quieres un ajuste fino,
+   pero el bloque superior ya cubre las propiedades esenciales.
 .form-group select {
     padding: 0.8rem 1rem;
     border-radius: 10px;
@@ -282,11 +323,15 @@ body {
     background: #1a1a1a;
     color: #f5d487;
     font-size: 1rem;
-    width: 100%;  /* Hace que el select ocupe el 100% del espacio */
+    width: 100%;
 }
+*/
 
+/* Estilos de Foco (cuando el usuario interactúa con el campo) */
 .form-group input:focus,
-.form-group select:focus {
-    border-color: #f5d487; /* Cambia el color del borde cuando el campo está en foco */
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6); /* Da un efecto visual cuando está seleccionado */
+.form-group select:focus,
+.form-group textarea:focus { /* 💥 TEXTAREA AÑADIDO AQUÍ 💥 */
+    border-color: #f5d487;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);
+    outline: none; /* Elimina el contorno predeterminado del navegador */
 }

@@ -6,13 +6,25 @@
     <title>Editar Método de Pago - La Fragata Giratoria</title>
     <link rel="stylesheet" href="/css/pagosedit.css" />
 </head>
+
 <body>
+
+<!-- ========== LAYOUT CON SIDEBAR Y MAIN ========== -->
 <div class="layout-container">
 
+    <!-- ========== SIDEBAR ========== -->
     <aside class="sidebar">
         <div class="sidebar-top">
-            <div class="logo">La Fragata Giratoria</div>
-            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+            <!-- LOGO -->
+            <div class="logo">
+                <img th:src="@{/img/icono-fragata.jpg}" alt="Logo">
+                Fragata Giratoria
+            </div>
+
+            <!-- INPUT DE BUSQUEDA -->
+            <input type="text" class="search-input" placeholder="🔍 Busqueda">
+
+            <!-- MENU PRINCIPAL -->
             <nav class="menu">
                 <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
                 <a href="/productos" class="nav-button">Productos</a>
@@ -20,10 +32,11 @@
                 <a href="/crud/compras" class="nav-button">Compras</a>
                 <a href="/crud/pedidos" class="nav-button">Pedidos</a>
                 <a href="/crud/usuarios" class="nav-button">Usuarios</a>
-                <a href="/crud/metodosdepago" class="nav-button active">Métodos de Pago</a>
+                <a th:href="@{/crud/metodosdepago}" class="nav-button active">Métodos de Pago</a>
             </nav>
         </div>
 
+        <!-- BOTONES INFERIORES -->
         <div class="bottom-buttons">
             <a href="/admin/ajustes" class="nav-button">Ajustes</a>
             <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
@@ -31,40 +44,54 @@
         </div>
     </aside>
 
+    <!-- ========== MAIN CONTENT ========== -->
     <main class="main-content">
-
         <div class="dashboard-wrapper">
 
+            <!-- TÍTULO -->
             <div class="header-title">
                 <h1>🛠️ Editar Método de Pago</h1>
                 <p>Modifica los datos del método de pago seleccionado.</p>
             </div>
 
-            <form th:object="${metodoPago}" th:action="@{/crud/metodospago}" method="post" class="producto-form">
+            <!-- FORMULARIO -->
+            <form th:object="${metodoPago}"
+                  th:action="@{/crud/metodosdepago}"
+                  method="post"
+                  class="pedido-form">
 
                 <input type="hidden" th:field="*{idMetodoPago}" />
 
                 <div class="form-group">
                     <label for="nombreMetodo">Nombre del Método</label>
-                    <input type="text" id="nombreMetodo" name="nombreMetodo" th:field="*{nombreMetodo}" placeholder="Ej: Tarjeta Débito, Efectivo" required />
+                    <input type="text" id="nombreMetodo" th:field="*{nombreMetodo}"
+                           placeholder="Ej: Tarjeta Débito, Efectivo" required />
                 </div>
 
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" th:field="*{descripcion}"
+                              placeholder="Detalles del método de pago (ej: Aplica solo para compras mayores a $50)">
+                    </textarea>
+                </div>
+
+                <!-- BOTONES -->
                 <div class="form-buttons">
                     <button type="submit" class="btn-submit">💾 Actualizar Método de Pago</button>
                     <button type="reset" class="btn-clear">🧹 Limpiar</button>
-                    <a href="/crud/metodospago" class="btn-cancel">✖ Cancelar</a>
+                    <a th:href="@{/crud/metodosdepago}" class="btn-cancel">✖ Cancelar</a>
                 </div>
-
             </form>
 
-            <a href="/admin/dashboard" class="back-to-dashboard">← Volver al Dashboard</a>
+            <!-- BOTÓN VOLVER -->
+            <a th:href="@{/crud/metodosdepago}" class="back-to-dashboard">← Volver a Métodos de Pago</a>
 
         </div>
-
     </main>
 
 </div>
 
-<script src="/js/editarMetodoPago.js"></script>
+<script src="/js/metodoPago.js"></script>
+
 </body>
 </html>

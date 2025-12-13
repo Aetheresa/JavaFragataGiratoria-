@@ -4,19 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Crear Método de Pago - La Fragata Giratoria</title>
-    <link rel="stylesheet" href="/css/pagosedit.css" />
+    <link rel="stylesheet" href="/css/pagoscrear.css" />
 </head>
-
 <body>
+
 <div class="layout-container">
 
-    <!-- SIDEBAR -->
+    <!-- ========== SIDEBAR ========== -->
     <aside class="sidebar">
         <div class="sidebar-top">
-            <div class="logo">La Fragata Giratoria</div>
-
+            <div class="logo">
+                <img th:src="@{/img/icono-fragata.jpg}" alt="Logo">
+                <span>La Fragata Giratoria</span>
+            </div>
             <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
-
             <nav class="menu">
                 <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
                 <a href="/productos" class="nav-button">Productos</a>
@@ -24,7 +25,7 @@
                 <a href="/crud/compras" class="nav-button">Compras</a>
                 <a href="/crud/pedidos" class="nav-button">Pedidos</a>
                 <a href="/crud/usuarios" class="nav-button">Usuarios</a>
-                <a href="/crud/metodosdepago" class="nav-button active">Métodos de Pago</a>
+                <a th:href="@{/crud/metodosdepago}" class="nav-button active">Métodos de Pago</a>
             </nav>
         </div>
 
@@ -35,47 +36,56 @@
         </div>
     </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
+    <!-- ========== MAIN CONTENT ========== -->
     <main class="main-content">
         <div class="dashboard-wrapper">
 
+            <!-- Título -->
             <div class="header-title">
                 <h1>💳 Crear Método de Pago</h1>
                 <p>Registra un nuevo método de pago.</p>
             </div>
 
-            <!-- FORMULARIO REDUCIDO Y CENTRADO -->
-            <form th:object="${metodoPago}" 
-                  th:action="@{/crud/metodospago/crear}" 
-                  method="post" 
-                  class="small-form">
+            <!-- Formulario -->
+            <form th:object="${metodoPago}"
+                  th:action="@{/crud/metodosdepago}"
+                  method="post"
+                  class="metodo-form">
 
                 <div class="form-group">
                     <label for="nombreMetodo">Nombre del Método</label>
-                    <input type="text" 
-                           id="nombreMetodo" 
-                           name="nombreMetodo"
+                    <input type="text"
+                           id="nombreMetodo"
                            th:field="*{nombreMetodo}"
-                           placeholder="Ej: Efectivo, Tarjeta Débito" 
+                           placeholder="Ej: Efectivo, Tarjeta Débito"
                            required />
                 </div>
 
-                <!-- BOTONES EN EL LUGAR CORRECTO -->
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion"
+                              th:field="*{descripcion}"
+                              placeholder="Detalles del método de pago (ej: Aplica solo para compras mayores a $50)"
+                              rows="3"></textarea>
+                </div>
+
+                <!-- Botones -->
                 <div class="form-buttons">
                     <button type="submit" class="btn-submit">💾 Guardar</button>
                     <button type="reset" class="btn-clear">🧹 Limpiar</button>
-                    <a href="/crud/metodosdepago" class="btn-cancel">✖ Cancelar</a>
+                    <a th:href="@{/crud/metodosdepago}" class="btn-cancel">✖ Cancelar</a>
                 </div>
 
             </form>
 
-            <a href="/roles/admin/dashboard" class="back-to-dashboard">← Volver al Dashboard</a>
+            <a th:href="@{/crud/metodosdepago}" class="back-to-dashboard">← Volver a Métodos de Pago</a>
 
         </div>
     </main>
 
 </div>
 
-<script src="/js/crearMetodoPago.js"></script>
+<script src="/js/MetodoPago.js"></script>
+
 </body>
 </html>

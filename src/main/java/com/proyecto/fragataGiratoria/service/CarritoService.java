@@ -42,7 +42,7 @@ public class CarritoService {
     public void agregarPlatillo(Usuario usuario, HttpSession session, Platillo platillo, int cantidad) {
 
         if (usuario != null) {
-            // 🔜 TODO: carrito persistente para usuarios registrados
+            // 🔜 todo: carrito persistente para usuarios registrados
         } else {
             Map<Long, DetalleCarrito> carrito = obtenerCarrito(session);
 
@@ -63,7 +63,7 @@ public class CarritoService {
     public void quitarPlatillo(Usuario usuario, HttpSession session, Long platilloId) {
 
         if (usuario != null) {
-            // 🔜 TODO: carrito persistente
+            // 🔜 todo: carrito persistente
         } else {
             Map<Long, DetalleCarrito> carrito = obtenerCarrito(session);
             carrito.remove(platilloId);

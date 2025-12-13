@@ -4,7 +4,7 @@ import com.proyecto.fragataGiratoria.model.Rol;
 import com.proyecto.fragataGiratoria.model.Usuario;
 import com.proyecto.fragataGiratoria.repository.RolRepository;
 import com.proyecto.fragataGiratoria.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +15,38 @@ import java.util.Optional;
 @Service
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    /* ======================================================
+       DEPENDENCIAS (inyección por constructor – buena práctica)
+       ====================================================== */
+    private final UsuarioRepository usuarioRepository;
+    private final RolRepository rolRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private RolRepository rolRepository;
+    public UsuarioService(
+            UsuarioRepository usuarioRepository,
+            RolRepository rolRepository,
+            PasswordEncoder passwordEncoder
+    ) {
+        this.usuarioRepository = usuarioRepository;
+        this.rolRepository = rolRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    /* ======================================================
+       CRUD GENERAL
+       ====================================================== */
 
-    // ---------------------------------------------------------
-    //  🔹 CRUD GENERAL
-    // ---------------------------------------------------------
+    /**
+     * Alias usado por controllers (PedidoController).
+     * Evita errores sin romper código existente.
+     */
+    public List<Usuario> listarTodos() {
+        return usuarioRepository.findAll();
+    }
 
+    /**
+     * Método original mantenido por compatibilidad.
+     */
     public List<Usuario> listar() {
         return usuarioRepository.findAll();
     }
@@ -44,27 +63,30 @@ public class UsuarioService {
         usuarioRepository.deleteById(idUsuario);
     }
 
-    // ---------------------------------------------------------
-    //  🔹 REGISTRO DE CLIENTES
-    // ---------------------------------------------------------
+    /* ======================================================
+       REGISTRO DE USUARIOS / CLIENTES
+       ====================================================== */
 
     public Usuario registrarNuevoUsuario(Usuario usuario) {
 
         if (usuarioRepository.findByEmail(usuario.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Ya existe una cuenta con este correo electrónico.");
+            throw new IllegalArgumentException(
+                    "Ya existe una cuenta con este correo electrónico."
+            );
         }
 
         Rol rolCliente = rolRepository.findByNombreRol("CLIENTE")
-                .orElseThrow(() -> new IllegalArgumentException("No existe el rol CLIENTE en la base de datos."));
+                .orElseThrow(() ->
+                        new IllegalArgumentException("No existe el rol CLIENTE en la base de datos.")
+                );
 
         usuario.setRol(rolCliente);
 
-        // Si en tu entidad la contraseña se almacena en passwordHash, ajusta aquí.
-        String rawPassword = usuario.getPasswordHash(); // <-- conserva tu convención actual
+        // Mantiene tu convención actual
+        String rawPassword = usuario.getPasswordHash();
         validarContrasenaSegura(rawPassword);
 
         usuario.setPasswordHash(passwordEncoder.encode(rawPassword));
-
         usuario.setEstado(Usuario.EstadoUsuario.ACTIVO);
         usuario.setFechaCreacion(LocalDateTime.now());
 
@@ -72,22 +94,21 @@ public class UsuarioService {
     }
 
     private void validarContrasenaSegura(String password) {
-        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$";
+        String regex =
+                "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).{8,}$";
 
         if (password == null || !password.matches(regex)) {
             throw new IllegalArgumentException(
-                    "La contraseña debe incluir: mínimo 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial."
+                    "La contraseña debe incluir mínimo 8 caracteres, " +
+                    "una mayúscula, una minúscula, un número y un carácter especial."
             );
         }
     }
 
-    // ---------------------------------------------------------
-    //  🔹 MÉTODOS NECESARIOS PARA LOGIN Y CLIENTE
-    // ---------------------------------------------------------
+    /* ======================================================
+       MÉTODOS PARA LOGIN / AUTH
+       ====================================================== */
 
-    /**
-     * Devuelve Optional para mayor seguridad frente a null.
-     */
     public Optional<Usuario> obtenerPorEmailOptional(String email) {
         return usuarioRepository.findByEmail(email);
     }
@@ -96,19 +117,11 @@ public class UsuarioService {
         return usuarioRepository.findByEmail(email).orElse(null);
     }
 
-    /**
-     * Buscar por nombreUsuario (username) — devuelve Optional.
-     */
     public Optional<Usuario> buscarPorNombreUsuario(String nombreUsuario) {
-        // Se asume que en UsuarioRepository existe un método findByNombreUsuario returning Optional<Usuario>
         try {
             return usuarioRepository.findByNombreUsuario(nombreUsuario);
         } catch (Exception e) {
-            // Si tu repo tiene un método distinto (por ejemplo devuelve Usuario o se llama findByUsername),
-            // captura y maneja aquí—por ahora devolvemos Optional.empty()
             return Optional.empty();
         }
     }
 }
-
-

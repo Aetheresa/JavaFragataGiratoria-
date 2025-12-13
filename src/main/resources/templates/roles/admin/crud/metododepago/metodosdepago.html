@@ -11,31 +11,35 @@
 
 <div class="layout-container">
 
+    <!-- ========== SIDEBAR ========== -->
     <aside class="sidebar">
         <div class="sidebar-top">
-            <div class="logo">La Fragata Giratoria</div>
-
-            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
-
-            <nav class="menu">
-                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
-                <a href="/productos" class="nav-button">Productos</a>
-                <a href="/crud/platillos" class="nav-button">Platillos</a>
-                <a href="/crud/compras" class="nav-button">Compras</a>
-                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
-                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
-                <a th:href="@{/crud/metodosdepago}" class="nav-button active">Métodos de Pago</a>
-            </nav>
+            <div class="sidebar-top">
+                <div class="logo">
+                    <img th:src="@{/img/icono-fragata.jpg}" alt="Logo">
+                    <span>La Fragata Giratoria</span>
+                </div>
+                <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+                <nav class="menu">
+                    <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                    <a href="/productos" class="nav-button">Productos</a>
+                    <a href="/crud/platillos" class="nav-button">Platillos</a>
+                    <a href="/crud/compras" class="nav-button">Compras</a>
+                    <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                    <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                    <a th:href="@{/crud/metodosdepago}" class="nav-button active">Métodos de Pago</a>
+                </nav>
+            </div>
         </div>
 
         <div class="bottom-buttons">
-            <a href="/admin/ajustes" class="nav-button bottom-nav-button">Ajustes</a>
-            <a href="/roles/admin/ayuda" class="nav-button bottom-nav-button">Ayuda</a>
-            <a href="/logout" class="nav-button bottom-nav-button">Salir</a>
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
         </div>
     </aside>
 
-
+    <!-- ========== CONTENIDO PRINCIPAL ========== -->
     <main class="main-content">
 
         <div class="dashboard-wrapper">
@@ -45,6 +49,7 @@
                 <p>Administra los métodos de pago disponibles en el sistema.</p>
             </div>
 
+            <!-- Mensajes -->
             <div th:if="${success}" class="alert alert-success">
                 <p th:text="${success}"></p>
             </div>
@@ -52,22 +57,26 @@
                 <p th:text="${error}"></p>
             </div>
 
+            <!-- Top de tabla -->
             <div class="table-top-bar">
                 <h3>Lista de Métodos de Pago</h3>
 
                 <div class="right-actions">
-                    <a th:href="@{/crud/metodosdepago/nuevo}" class="btn-new-product">➕ Crear Nuevo Método de Pago</a>
-                    <a th:href="@{/crud/metodosdepago/export/excel}" class="btn-export excel">📗 Exportar a Excel</a>
+                    <a th:href="@{/crud/metodosdepago/nuevo}" class="btn-new-product">➕ Crear Nuevo Método</a>
                     <a th:href="@{/crud/metodosdepago/export/pdf}" class="btn-export pdf">📄 Exportar a PDF</a>
+                    <a th:href="@{/crud/metodosdepago/export/excel}" class="btn-export excel">📗 Exportar a Excel</a>
                 </div>
             </div>
 
+            <!-- Tabla -->
             <div class="products-table-container">
+
                 <table class="products-table">
                     <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre del Método</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
                     </thead>
@@ -76,10 +85,16 @@
                     <tr th:each="metodo : ${metodosPago}">
                         <td th:text="${metodo.idMetodoPago}">1</td>
                         <td th:text="${metodo.nombreMetodo}">Tarjeta de Crédito</td>
+                        <td th:text="${metodo.descripcion}">Aplica solo para compras mayores a $50</td>
                         <td class="action-buttons">
-                            <a th:href="@{/crud/metodosdepago/editar/{id}(id=${metodo.idMetodoPago})}" class="btn-action btn-edit">Editar</a>
-                            <a th:href="@{/crud/metodosdepago/eliminar/{id}(id=${metodo.idMetodoPago})}" class="btn-action btn-delete"
-                               onclick="return confirm('¿Está seguro de que desea eliminar este método de pago?');">Eliminar</a>
+                            <a th:href="@{/crud/metodosdepago/editar/{id}(id=${metodo.idMetodoPago})}" class="btn-action btn-edit">
+                                Editar
+                            </a>
+                            <a th:href="@{/crud/metodosdepago/eliminar/{id}(id=${metodo.idMetodoPago})}"
+                               class="btn-action btn-delete"
+                               onclick="return confirm('¿Está seguro de que desea eliminar este método de pago?');">
+                                Eliminar
+                            </a>
                         </td>
                     </tr>
                     </tbody>
@@ -100,7 +115,7 @@
 
 </div>
 
-<script src="/js/pedidos.js"></script>
+<script src="/js/metodoPago.js"></script>
 
 </body>
 </html>
