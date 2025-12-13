@@ -1,46 +1,75 @@
-# 🍽️ La Fragata Giratoria – Sistema de Gestión y Ventas
+# 🍽️ La Fragata Giratoria  
+### Sistema de Gestión y Ventas para Restaurante
 
-## Descripción
+---
 
-**La Fragata Giratoria** es un software de gestión y ventas desarrollado para optimizar la administración de pedidos, inventario e insumos de un restaurante. El sistema permite un control eficiente de los platillos y la disponibilidad de ingredientes en tiempo real, reduciendo desperdicios y mejorando el servicio al cliente.
+## 📌 Descripción
 
-Este proyecto surge como solución a las dificultades en el control de inventario y la planificación de compras del restaurante *La Fragata Giratoria*.
+Sistema de gestión y ventas desarrollado para el restaurante **La Fragata Giratoria**, enfocado en mejorar el control de inventario, pedidos e insumos en tiempo real, reduciendo desperdicios y optimizando el servicio al cliente.
 
-## Objetivo
+---
+
+## 🎯 Objetivo
 
 Diseñar e implementar un sistema que optimice la gestión de pedidos y el control de insumos del restaurante, mejorando la eficiencia operativa y la experiencia del cliente.
 
-## Funcionalidades Principales
+---
 
-- Gestión de inventario en tiempo real  
-- Registro y control de pedidos  
-- Menú digital para clientes (QR)  
-- Roles de usuario: administrador, mesero, cocina y cliente  
+## ⚙️ Funcionalidades Principales
 
-## Tecnologías Utilizadas
+- 📦 Gestión de inventario en tiempo real  
+- 🧾 Registro y control de pedidos  
+- 📱 Menú digital para clientes mediante QR  
+- 👥 Roles de usuario:
+  - Administrador  
+  - Mesero  
+  - Cocina  
+  - Cliente  
 
-- Java  
-- Spring Boot  
-- Maven  
-- HTML, CSS, JavaScript  
-- MySQL  
+---
 
-## Ejecución del Proyecto
+## 🛠️ Tecnologías Utilizadas
 
+- ☕ Java  
+- 🌱 Spring Boot  
+- 📦 Maven  
+- 🎨 HTML, CSS, JavaScript  
+- 🗄️ MySQL  
+
+---
+
+## 🚀 Ejecución del Proyecto
+
+1️⃣ Clonar el repositorio  
 ```bash
 git clone https://github.com/Aetheresa/JavaFragataGiratoria-
+````
+
+2️⃣ Acceder al proyecto
+
+```bash
 cd JavaFragataGiratoria-
+```
+
+3️⃣ Ejecutar la aplicación
+
+```bash
 mvn spring-boot:run
+```
 
+📍 Acceso desde el navegador:
 
-Acceso desde el navegador:
-
+```text
 http://localhost:8080
+```
 
-Integrantes
+---
 
-SCRUM N° 1
+## 👥 Integrantes
 
-Arleidis Beatriz Coronado
+**GAES N° 1**
 
-Nicolas Losada Mendez
+* Arleidis Beatriz Coronado
+* Nicolas Losada Mendez
+
+---
