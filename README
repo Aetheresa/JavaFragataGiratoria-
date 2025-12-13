@@ -1,75 +1,130 @@
-# 🍽️ La Fragata Giratoria  
-### Sistema de Gestión y Ventas para Restaurante
+🍽️ La Fragata Giratoria
+Sistema de Gestión y Ventas para Restaurante
+📌 Descripción
 
----
+La Fragata Giratoria es un sistema de gestión y ventas desarrollado para un restaurante, cuyo propósito es centralizar y optimizar los procesos operativos diarios como el control de inventario, la gestión de pedidos y la atención al cliente.
 
-## 📌 Descripción
+El sistema permite trabajar en tiempo real, reduciendo errores humanos, minimizando desperdicios de insumos y mejorando significativamente la eficiencia del servicio.
 
-Sistema de gestión y ventas desarrollado para el restaurante **La Fragata Giratoria**, enfocado en mejorar el control de inventario, pedidos e insumos en tiempo real, reduciendo desperdicios y optimizando el servicio al cliente.
+🎯 Objetivo General
 
----
+Diseñar e implementar un sistema integral que optimice la gestión de pedidos, inventarios e insumos del restaurante La Fragata Giratoria, mejorando la eficiencia operativa, el control administrativo y la experiencia del cliente.
 
-## 🎯 Objetivo
+Objetivos Específicos
 
-Diseñar e implementar un sistema que optimice la gestión de pedidos y el control de insumos del restaurante, mejorando la eficiencia operativa y la experiencia del cliente.
+Automatizar el registro y seguimiento de pedidos.
 
----
+Llevar un control preciso del inventario.
 
-## ⚙️ Funcionalidades Principales
+Reducir tiempos de atención al cliente.
 
-- 📦 Gestión de inventario en tiempo real  
-- 🧾 Registro y control de pedidos  
-- 📱 Menú digital para clientes mediante QR  
-- 👥 Roles de usuario:
-  - Administrador  
-  - Mesero  
-  - Cocina  
-  - Cliente  
+Facilitar la toma de decisiones administrativas mediante información centralizada.
 
----
+⚙️ Funcionalidades Principales
 
-## 🛠️ Tecnologías Utilizadas
+📦 Gestión de inventario en tiempo real
+Control de insumos, actualización automática por ventas y alertas de stock.
 
-- ☕ Java  
-- 🌱 Spring Boot  
-- 📦 Maven  
-- 🎨 HTML, CSS, JavaScript  
-- 🗄️ MySQL  
+🧾 Registro y control de pedidos
+Gestión completa del ciclo del pedido desde su creación hasta su entrega.
 
----
+📱 Menú digital mediante código QR
+Permite a los clientes visualizar el menú desde su dispositivo móvil.
 
-## 🚀 Ejecución del Proyecto
+👥 Gestión de roles de usuario
+Accesos diferenciados según el perfil:
 
-1️⃣ Clonar el repositorio  
-```bash
+👨‍💼 Administrador
+
+🧑‍🍳 Cocina
+
+🧑‍💼 Mesero
+
+👤 Cliente
+
+📊 Panel administrativo
+Visualización y control general del sistema.
+
+🛠️ Tecnologías Utilizadas
+Backend
+
+☕ Java
+
+🌱 Spring Boot
+
+📦 Maven
+
+Frontend
+
+🎨 HTML5
+
+🎨 CSS3
+
+⚙️ JavaScript
+
+Base de Datos
+
+🗄️ MySQL
+
+🏗️ Arquitectura
+
+El proyecto sigue una arquitectura en capas:
+
+Controladores: Gestión de rutas y peticiones HTTP
+
+Servicios: Lógica de negocio
+
+Repositorios: Acceso a datos (JPA / Hibernate)
+
+Modelos: Entidades del sistema
+
+🚀 Ejecución del Proyecto
+1️⃣ Clonar el repositorio
 git clone https://github.com/Aetheresa/JavaFragataGiratoria-
-````
-
 2️⃣ Acceder al proyecto
-
-```bash
 cd JavaFragataGiratoria-
-```
+3️⃣ Configurar la base de datos
 
-3️⃣ Ejecutar la aplicación
+Crear una base de datos en MySQL
 
-```bash
+Configurar las credenciales en application.properties
+
+spring.datasource.url=jdbc:mysql://localhost:3306/fragata_giratoria
+spring.datasource.username=usuario
+spring.datasource.password=contraseña
+4️⃣ Ejecutar la aplicación
 mvn spring-boot:run
-```
+🌐 Acceso a la Aplicación
 
-📍 Acceso desde el navegador:
+Desde el navegador:
 
-```text
 http://localhost:8080
-```
+📱 Extensiones del Proyecto
 
----
+El sistema puede integrarse con:
 
-## 👥 Integrantes
+Aplicación móvil (Flutter)
 
-**GAES N° 1**
+Menú QR para clientes
 
-* Arleidis Beatriz Coronado
-* Nicolas Losada Mendez
+Futuro despliegue en la nube
 
----
+👥 Integrantes del Proyecto
+
+GAES N° 1
+
+👩‍💻 Arleidis Beatriz Coronado
+
+👨‍💻 Nicolas Losada Méndez
+
+📄 Licencia
+
+Este proyecto fue desarrollado con fines académicos y de aprendizaje.
+
+📬 Soporte
+
+Para dudas, mejoras o nuevas funcionalidades, se recomienda abrir un issue en el repositorio.
+
+✨ La Fragata Giratoria – Tecnología al servicio del buen sabor ✨
+
+
