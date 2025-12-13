@@ -1,130 +1,161 @@
-🍽️ La Fragata Giratoria
-Sistema de Gestión y Ventas para Restaurante
-📌 Descripción
+<h1 align="center">🍽️ La Fragata Giratoria</h1>
+<p align="center"><b>Sistema de Gestión y Ventas para Restaurante</b></p>
+<p align="center">
+  <img src="https://img.shields.io/badge/Backend-Spring%20Boot-brightgreen" />
+  <img src="https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JS-blue" />
+    <img src="https://img.shields.io/badge/Database-MySQL-orange" />
+</p>
 
-La Fragata Giratoria es un sistema de gestión y ventas desarrollado para un restaurante, cuyo propósito es centralizar y optimizar los procesos operativos diarios como el control de inventario, la gestión de pedidos y la atención al cliente.
+---
 
-El sistema permite trabajar en tiempo real, reduciendo errores humanos, minimizando desperdicios de insumos y mejorando significativamente la eficiencia del servicio.
+## 📌 Descripción
 
-🎯 Objetivo General
+**La Fragata Giratoria** es un sistema de gestión y ventas desarrollado para restaurantes, diseñado para centralizar y optimizar los procesos operativos diarios como el control de inventario, la gestión de pedidos y la atención al cliente.
 
-Diseñar e implementar un sistema integral que optimice la gestión de pedidos, inventarios e insumos del restaurante La Fragata Giratoria, mejorando la eficiencia operativa, el control administrativo y la experiencia del cliente.
+El sistema opera en **tiempo real**, reduciendo errores humanos, minimizando desperdicios y mejorando la eficiencia del servicio.
 
-Objetivos Específicos
+---
 
-Automatizar el registro y seguimiento de pedidos.
+## 🎯 Objetivo General
 
-Llevar un control preciso del inventario.
+Diseñar e implementar un sistema integral que optimice la gestión de pedidos, inventarios e insumos del restaurante **La Fragata Giratoria**, fortaleciendo el control administrativo y la experiencia del cliente.
 
-Reducir tiempos de atención al cliente.
+### Objetivos Específicos
 
-Facilitar la toma de decisiones administrativas mediante información centralizada.
+* Automatizar el registro y seguimiento de pedidos
+* Controlar el inventario de forma precisa
+* Reducir tiempos de atención
+* Facilitar la toma de decisiones administrativas
 
-⚙️ Funcionalidades Principales
+---
 
-📦 Gestión de inventario en tiempo real
-Control de insumos, actualización automática por ventas y alertas de stock.
+## ⚙️ Funcionalidades Principales
 
-🧾 Registro y control de pedidos
-Gestión completa del ciclo del pedido desde su creación hasta su entrega.
+* 📦 **Gestión de inventario en tiempo real**
+  Control de insumos, actualización automática por ventas y alertas de stock.
 
-📱 Menú digital mediante código QR
-Permite a los clientes visualizar el menú desde su dispositivo móvil.
+* 🧾 **Registro y control de pedidos**
+  Gestión completa del ciclo del pedido.
 
-👥 Gestión de roles de usuario
-Accesos diferenciados según el perfil:
+* 📱 **Menú digital mediante código QR**
+  Acceso al menú desde dispositivos móviles.
 
-👨‍💼 Administrador
+* 👥 **Gestión de roles de usuario**
 
-🧑‍🍳 Cocina
+  * 👨‍💼 Administrador
+  * 🧑‍🍳 Cocina
+  * 🧑‍💼 Mesero
+  * 👤 Cliente
 
-🧑‍💼 Mesero
+* 📊 **Panel administrativo**
+  Control general del sistema.
 
-👤 Cliente
+---
 
-📊 Panel administrativo
-Visualización y control general del sistema.
+## 🛠️ Tecnologías Utilizadas
 
-🛠️ Tecnologías Utilizadas
-Backend
+### Backend
 
-☕ Java
+* ☕ Java
+* 🌱 Spring Boot
+* 📦 Maven
 
-🌱 Spring Boot
+### Frontend
 
-📦 Maven
+* 🎨 HTML5
+* 🎨 CSS3
+* ⚙️ JavaScript
 
-Frontend
+### Base de Datos
 
-🎨 HTML5
+* 🗄️ MySQL
 
-🎨 CSS3
+## 🏗️ Arquitectura
 
-⚙️ JavaScript
+Arquitectura en capas:
 
-Base de Datos
+* **Controladores** – Rutas y peticiones HTTP
+* **Servicios** – Lógica de negocio
+* **Repositorios** – Acceso a datos (JPA / Hibernate)
+* **Modelos** – Entidades
 
-🗄️ MySQL
+---
 
-🏗️ Arquitectura
+## 🚀 Ejecución del Proyecto (Backend)
 
-El proyecto sigue una arquitectura en capas:
-
-Controladores: Gestión de rutas y peticiones HTTP
-
-Servicios: Lógica de negocio
-
-Repositorios: Acceso a datos (JPA / Hibernate)
-
-Modelos: Entidades del sistema
-
-🚀 Ejecución del Proyecto
-1️⃣ Clonar el repositorio
+```bash
 git clone https://github.com/Aetheresa/JavaFragataGiratoria-
-2️⃣ Acceder al proyecto
 cd JavaFragataGiratoria-
-3️⃣ Configurar la base de datos
-
-Crear una base de datos en MySQL
-
-Configurar las credenciales en application.properties
-
-spring.datasource.url=jdbc:mysql://localhost:3306/fragata_giratoria
-spring.datasource.username=usuario
-spring.datasource.password=contraseña
-4️⃣ Ejecutar la aplicación
 mvn spring-boot:run
-🌐 Acceso a la Aplicación
+```
 
-Desde el navegador:
+🌐 Acceso:
 
+```text
 http://localhost:8080
-📱 Extensiones del Proyecto
+```
 
-El sistema puede integrarse con:
+---
 
-Aplicación móvil (Flutter)
+## 📱 Aplicación Móvil – Flutter (APK)
 
-Menú QR para clientes
+### Generar APK
 
-Futuro despliegue en la nube
+```bash
+flutter build apk
+```
 
-👥 Integrantes del Proyecto
+📍 Ubicación:
 
-GAES N° 1
+```text
+build/app/outputs/flutter-apk/app-release.apk
+```
 
-👩‍💻 Arleidis Beatriz Coronado
+### Instalar en dispositivo Android
 
-👨‍💻 Nicolas Losada Méndez
+```bash
+flutter devices
+flutter install
+```
 
-📄 Licencia
+### Generar AAB (Play Store)
 
-Este proyecto fue desarrollado con fines académicos y de aprendizaje.
+```bash
+flutter build appbundle
+```
 
-📬 Soporte
+---
 
-Para dudas, mejoras o nuevas funcionalidades, se recomienda abrir un issue en el repositorio.
+## ✔️ Resultado Final
 
-✨ La Fragata Giratoria – Tecnología al servicio del buen sabor ✨
+* Sistema web funcional
+* Aplicación móvil instalada en dispositivo real
+* Gestión completa de pedidos e inventario
+
+---
+
+## 👥 Integrantes
+
+**GAES N° 1**
+
+* 👩‍💻 Arleidis Beatriz Coronado
+* 👨‍💻 Nicolas Losada Méndez
+
+---
+
+## 📄 Licencia
+
+Proyecto desarrollado con fines académicos y de aprendizaje.
+
+---
+
+## 📬 Soporte
+
+Para sugerencias o mejoras, abre un *issue* en el repositorio.
+
+---
+
+<p align="center">✨ <b>La Fragata Giratoria – Tecnología al servicio del buen sabor</b> ✨</p>
+
 
 
