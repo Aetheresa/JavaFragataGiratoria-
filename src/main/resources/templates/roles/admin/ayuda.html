@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Fragata Giratoria - Centro de Ayuda</title>
+    <link rel="stylesheet" href="/css/ayuda.css" />
+</head>
+
+<body>
+
+<div class="layout-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <!-- BOTONES INFERIORES -->
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button active">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="ayuda-container">
+        <div class="ayuda-content">
+
+            <!-- HEADER -->
+            <header class="ayuda-header">
+                <h1 class="ayuda-title">Centro de Ayuda</h1>
+                <p class="ayuda-subtitle">
+                    Encuentra respuestas rápidas a tus preguntas sobre el dashboard de administrador
+                </p>
+
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="Buscar en la ayuda..." id="searchHelp" />
+                </div>
+            </header>
+
+            <!-- CATEGORÍAS -->
+            <section class="categories-grid">
+
+                <article class="category-card" onclick="scrollToSection('usuarios')">
+                    <div class="category-icon">👥</div>
+                    <h3 class="category-title">Gestión de Usuarios</h3>
+                    <p class="category-description">
+                        Aprende a administrar usuarios, permisos y roles en el sistema.
+                    </p>
+                </article>
+
+                <article class="category-card" onclick="scrollToSection('reportes')">
+                    <div class="category-icon">📊</div>
+                    <h3 class="category-title">Reportes y Analytics</h3>
+                    <p class="category-description">
+                        Genera reportes personalizados y analiza datos del sistema.
+                    </p>
+                </article>
+
+                <article class="category-card" onclick="scrollToSection('configuracion')">
+                    <div class="category-icon">⚙️</div>
+                    <h3 class="category-title">Configuración</h3>
+                    <p class="category-description">
+                        Configura preferencias del sistema y personaliza tu dashboard.
+                    </p>
+                </article>
+
+            </section>
+
+            <!-- FAQ -->
+            <section class="faq-section">
+
+                <div class="faq-item" id="usuarios">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        ¿Cómo crear un nuevo usuario?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <ol>
+                            <li>Ve a la sección "Usuarios" en el menú lateral</li>
+                            <li>Haz clic en "Nuevo Usuario"</li>
+                            <li>Completa la información requerida (nombre, email, rol)</li>
+                            <li>Asigna los permisos correspondientes</li>
+                            <li>Guarda los cambios</li>
+                        </ol>
+                        <p>El usuario recibirá un email con instrucciones para activar su cuenta.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        ¿Cómo resetear una contraseña?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <ol>
+                            <li>En la lista de usuarios, encuentra el usuario deseado</li>
+                            <li>Haz clic en "Resetear Contraseña"</li>
+                            <li>Confirma la acción</li>
+                            <li>El usuario recibirá un email con un enlace para crear una nueva contraseña</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="faq-item" id="reportes">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        ¿Cómo generar reportes personalizados?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <ol>
+                            <li>Ve a "Reportes" → "Crear Reporte"</li>
+                            <li>Selecciona los datos que quieres incluir</li>
+                            <li>Aplica filtros según tus necesidades</li>
+                            <li>Elige el formato de exportación</li>
+                            <li>Descarga el reporte</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="faq-item" id="configuracion">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        ¿Cómo personalizar el dashboard?
+                        <span class="chevron">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <ul>
+                            <li><strong>Widgets:</strong> Arrastra y suelta para reorganizar.</li>
+                            <li><strong>Tema:</strong> Cambia entre claro y oscuro.</li>
+                            <li><strong>Métricas:</strong> Selecciona qué estadísticas mostrar.</li>
+                            <li><strong>Layout:</strong> Configura columnas o diseño general.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- CONTACTO -->
+            <section class="contact-section">
+                <h3 class="contact-title">¿No encontraste lo que buscabas?</h3>
+                <p>Nuestro equipo de soporte está disponible para ayudarte</p>
+
+                <div class="contact-buttons">
+                    <button class="contact-button" onclick="openChat()">Chat en Vivo</button>
+                    <button class="contact-button" onclick="openEmail()">Enviar Email</button>
+                    <button class="contact-button" onclick="openDocs()">Documentación</button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+</div>
+
+<script src="/js/ayuda.js"></script>
+</body>
+</html>

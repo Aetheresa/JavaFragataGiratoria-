@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo mensaje de contacto</title>
+</head>
+<body>
+    <h1>Nuevo mensaje de contacto</h1>
+
+    <p><strong>Nombre:</strong> <span th:text="${contactForm.nombre}">Nombre</span></p>
+    <p><strong>Email:</strong> <span th:text="${contactForm.email}">Email</span></p>
+    <p><strong>Asunto:</strong> <span th:text="${contactForm.asunto}">Asunto</span></p>
+    <p><strong>Mensaje:</strong></p>
+    <p th:text="${contactForm.mensaje}">Mensaje</p>
+</body>
+</html>

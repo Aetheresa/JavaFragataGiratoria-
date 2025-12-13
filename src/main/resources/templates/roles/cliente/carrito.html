@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito - La Fragata Giratoria</title>
+    <link rel="stylesheet" href="/css/carrito.css">
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-contenedor">
+        <img src="/img/icono-fragata.jpg" alt="logo" class="logo-img">
+        <span class="nombre-logo">La Fragata Giratoria</span>
+    </div>
+
+    <!-- USUARIO -->
+    <div class="usuario-box" onclick="toggleDropdown()">
+
+        <!-- CUANDO HAY USUARIO -->
+        <span th:if="${usuario != null}"
+              th:text="${usuario.nombreUsuario}">
+        </span>
+
+        <!-- CUANDO NO HAY USUARIO -->
+        <span th:unless="${usuario != null}">
+            Usuario
+        </span>
+
+        <!-- DROPDOWN SOLO SI HAY USUARIO -->
+        <div class="dropdown" id="dropdownMenu" th:if="${usuario != null}">
+            <p>
+                <strong>Nombre:</strong>
+                <span th:text="${usuario.nombreUsuario}">Nombre</span>
+            </p>
+            <p>
+                <strong>Correo:</strong>
+                <span th:text="${usuario.email}">correo@email.com</span>
+            </p>
+
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Cerrar sesión</button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<div class="carrito-contenedor">
+
+    <h1>Carrito de Compras</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Platillo</th>
+            <th>Descripción</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="item : ${itemsCarrito}">
+            <td th:text="${item.platillo.nombre}">Nombre</td>
+            <td th:text="${item.platillo.descripcion}">Descripción</td>
+            <td th:text="'$ ' + ${#numbers.formatDecimal(item.platillo.precio, 0, 'COMMA', 0, 'POINT')}">$0</td>
+            <td th:text="${item.cantidad}">1</td>
+            <td th:text="'$ ' + ${#numbers.formatDecimal(item.subtotal, 0, 'COMMA', 0, 'POINT')}">$0</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="total-compra">
+        Total:
+        <span th:text="'$ ' + ${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}">$0</span>
+    </div>
+
+    <!-- FORMULARIO -->
+    <form th:action="@{/roles/cliente/carrito/registrar}" method="post"
+          id="formPedido" class="form-envio">
+
+        <!-- MÉTODOS DE PAGO -->
+        <div class="metodo-pago-box">
+            <div class="metodo-pago-titulo">Método de Pago</div>
+
+            <div class="metodo-grid">
+
+                <label class="metodo-item">
+                    <input type="radio" name="idMetodoPago" value="1" required>
+                    <img src="/img/efectivo.png" alt="Efectivo">
+                    <span>Efectivo</span>
+                </label>
+
+                <label class="metodo-item">
+                    <input type="radio" name="idMetodoPago" value="2">
+                    <img src="/img/datafono.png" alt="Datáfono">
+                    <span>Datáfono</span>
+                </label>
+
+                <label class="metodo-item">
+                    <input type="radio" name="idMetodoPago" value="3">
+                    <img src="/img/tarjeta.png" alt="Tarjeta">
+                    <span>Tarjeta débito / crédito</span>
+                </label>
+
+                <label class="metodo-item">
+                    <input type="radio" name="idMetodoPago" value="4">
+                    <img src="/img/nequi.png" alt="Nequi">
+                    <span>Nequi</span>
+                </label>
+
+                <label class="metodo-item">
+                    <input type="radio" name="idMetodoPago" value="5">
+                    <img src="/img/daviplata.png" alt="Daviplata">
+                    <span>Daviplata</span>
+                </label>
+
+            </div>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="botones-acciones">
+            <a th:href="@{/roles/cliente/menu}" class="btn btn-seguir">
+                Seguir comprando
+            </a>
+            <button type="submit" class="btn btn-pago">
+                Enviar Pedido
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<!-- ALERTA ÉXITO -->
+<div th:if="${pedidoExitoso}">
+    <script>
+        Swal.fire({
+            title: "¡Pedido enviado!",
+            text: "Tu pedido ha sido registrado exitosamente.",
+            icon: "success",
+            confirmButtonText: "OK"
+        });
+    </script>
+</div>
+
+<!-- ALERTA ERROR -->
+<div th:if="${error}">
+    <script>
+        Swal.fire({
+            title: "Carrito vacío",
+            text: "No puedes enviar un pedido vacío.",
+            icon: "error",
+            confirmButtonText: "Entendido"
+        });
+    </script>
+</div>
+
+<script>
+    document.querySelectorAll('.metodo-item input').forEach(input => {
+        input.addEventListener('change', () => {
+            document.querySelectorAll('.metodo-item')
+                .forEach(label => label.classList.remove('metodo-active'));
+
+            input.parentElement.classList.add('metodo-active');
+        });
+    });
+
+    document.getElementById("formPedido").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        Swal.fire({
+            title: "¿Enviar pedido?",
+            text: "Una vez enviado no podrás modificarlo.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Sí, enviar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                e.target.submit();
+            }
+        });
+    });
+
+    function toggleDropdown() {
+        const menu = document.getElementById("dropdownMenu");
+        if (menu) {
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+    }
+
+    document.addEventListener("click", function (e) {
+        const box = document.querySelector(".usuario-box");
+        const menu = document.getElementById("dropdownMenu");
+
+        if (menu && !box.contains(e.target)) {
+            menu.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

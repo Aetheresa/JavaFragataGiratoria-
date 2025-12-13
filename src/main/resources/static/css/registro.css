@@ -1,0 +1,176 @@
+/* Fondo*/
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+  background: url('/img/BGInicio.jpg') no-repeat center center/cover;
+}
+
+/* ================= HEADER ================= */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2rem;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+header .logo-contenedor {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+header .logo-img {
+    height: 60px;
+    width: auto;
+}
+
+.nombre-logo {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+    font-family: 'Georgia', serif;
+}
+
+/* Fondo oscuro y estilo base */
+body {
+    background-color: #1A1A1A;
+    color: #E0E0E0;
+    font-family: 'Roboto', 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+nav a {
+    color: #E0E0E0;
+    margin-left: 25px;
+    font-size: 1.5em;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #c89f4c;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #c89f4c;
+    transition: width 0.3s ease-in-out;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.contenido {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+  padding-top: 80px;
+}
+
+/*subfondo*/
+.tarjeta {
+  background-color:#fff;
+  background-size: cover;
+  border-radius: 20px;
+  min-height: 800px;
+  padding: 2.5rem 8rem;
+  width: 100%;
+  max-width: 100rem;
+  color: #08131F;
+  text-align: left;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+/*titulo*/
+.tarjeta h2 {
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+  font-family: 'Georgia', serif;
+
+}
+
+.tarjeta label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.1rem;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+
+.tarjeta input,
+.tarjeta select {
+  background-color: #ffffff48;
+  color: black;
+  font-size: 1rem;
+  font-weight: 200;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #1A2A3B;
+  box-sizing: border-box;
+}
+
+.tarjeta input::placeholder,
+.tarjeta select::placeholder {
+  font-size: 1.2rem;
+  color: #666;
+  padding: 1rem;
+}
+
+.tarjeta select {
+  font-size: 1.2rem;
+}
+
+.tarjeta select option {
+  font-size: 1.2rem;
+  font-style: normal;
+  color:black;
+}
+
+.registrarse {
+  background-color: #c89f4c;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  padding: 1rem;
+  margin-top: 5.5rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.cancelar {
+  background-color: transparent;
+  color: #333;
+  text-decoration: underline;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.mensaje-error {
+    font-weight: bold;
+    color: red;
+    margin-top: 10px;
+}

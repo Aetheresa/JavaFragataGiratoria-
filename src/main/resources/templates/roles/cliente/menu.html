@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Menú - La Fragata Giratoria</title>
+
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-contenedor">
+        <img th:src="@{/img/icono-fragata.jpg}" class="logo-img">
+        <span class="nombre-logo">La Fragata Giratoria</span>
+    </div>
+
+    <nav>
+        <a th:href="@{/roles/cliente/inicio}">Inicio</a>
+        <a th:href="@{/roles/cliente/menu}">Menú</a>
+
+        <a th:href="@{/roles/cliente/carrito}" class="icono-carrito">
+            <img th:src="@{/img/carrito.png}">
+        </a>
+
+        <div class="usuario-box" onclick="toggleDropdown()">
+            <span th:text="${usuario.nombreUsuario}">Usuario</span>
+
+            <div class="dropdown" id="dropdownMenu">
+                <p><strong>Nombre:</strong> <span th:text="${usuario.nombreUsuario}"></span></p>
+                <p><strong>Correo:</strong> <span th:text="${usuario.email}"></span></p>
+
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<h1 class="title">Menú</h1>
+
+<!-- ENTRADAS -->
+<h2 class="titulo-seccion">Entradas 🥂</h2>
+<div class="menu-container">
+    <th:block th:each="platillo : ${platillos}">
+        <article class="menu-item" th:if="${platillo.categoria == 'Entradas'}">
+            <div th:replace="~{roles/cliente/menuItem :: item(${platillo})}"></div>
+        </article>
+    </th:block>
+</div>
+
+<!-- PRINCIPALES -->
+<h2 class="titulo-seccion">Platos Principales 🍴</h2>
+<div class="menu-container">
+    <th:block th:each="platillo : ${platillos}">
+        <article class="menu-item" th:if="${platillo.categoria == 'Platos Principales'}">
+            <div th:replace="~{roles/cliente/menuItem :: item(${platillo})}"></div>
+        </article>
+    </th:block>
+</div>
+
+<!-- ADICIONES -->
+<h2 class="titulo-seccion">Adiciones ⚓️</h2>
+<div class="menu-container">
+    <th:block th:each="platillo : ${platillos}">
+        <article class="menu-item" th:if="${platillo.categoria == 'Adiciones'}">
+            <div th:replace="~{roles/cliente/menuItem :: item(${platillo})}"></div>
+        </article>
+    </th:block>
+</div>
+
+<!-- BEBIDAS -->
+<h2 class="titulo-seccion">Bebidas 🍹</h2>
+<div class="menu-container">
+    <th:block th:each="platillo : ${platillos}">
+        <article class="menu-item" th:if="${platillo.categoria == 'Bebidas'}">
+            <div th:replace="~{roles/cliente/menuItem :: item(${platillo})}"></div>
+        </article>
+    </th:block>
+</div>
+
+<script>
+    function toggleDropdown() {
+        const menu = document.getElementById("dropdownMenu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener("click", e => {
+        const box = document.querySelector(".usuario-box");
+        const menu = document.getElementById("dropdownMenu");
+        if (!box.contains(e.target)) {
+            menu.style.display = "none";
+        }
+    });
+</script>
+
+<th:block th:if="${agregado}" th:inline="javascript">
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '¡Agregado!',
+            text: 'Se agregó al carrito: [[${nombrePlatillo}]]',
+            timer: 2400,
+            showConfirmButton: false,
+            toast: true,
+            position: 'top-end'
+        });
+    </script>
+</th:block>
+
+</body>
+</html>

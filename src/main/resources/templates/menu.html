@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú - La Fragata Giratoria</title>
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+</head>
+<body>
+
+<header>
+    <div class="logo-contenedor">
+        <img th:src="@{/img/icono-fragata.jpg}" alt="Icono Fragata" class="logo-img" />
+        <span class="nombre-logo">La Fragata Giratoria</span>
+    </div>
+
+    <nav>
+      <a th:href="@{/menu}">Menú</a>
+      <a th:href="@{/inicio}">Inicio</a>
+      <a th:href="@{/login}">Iniciar Sesión</a>
+      <a th:href="@{/registro}">Registrarse</a>
+      <a th:href="@{/contactanos}">Contáctanos</a>
+    </nav>
+</header>
+
+<h1 class="title">Menú</h1>
+
+<!-- ===== ENTRADAS ===== -->
+<h2 class="titulo-seccion">Entradas</h2>
+<div class="menu-container">
+
+    <!-- Ceviche Clásico -->
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Ceviche Clásico</div>
+            <div class="menu-desc">Pescado fresco marinado en jugo de limón, cebolla morada y cilantro.</div>
+            <div class="menu-icons">🐠🍋‍🟩</div>
+            <div class="menu-price">$ 20,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Ceviche Clásico">
+                <input type="hidden" name="precio" value="20000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Ceviche-Clásico.avif}" alt="Ceviche Clásico" class="menu-img">
+    </article>
+
+    <!-- Tacos de Camarón -->
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Tacos de Camarón</div>
+            <div class="menu-desc">Tortillas de maíz rellenas de camarones a la parrilla, salsa de mango y aguacate.</div>
+            <div class="menu-icons">🦐🥭🥑🌽</div>
+            <div class="menu-price">$ 30,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Tacos de Camarón">
+                <input type="hidden" name="precio" value="30000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Tacos de Camarón.avif}" alt="Tacos de Camarón" class="menu-img">
+    </article>
+
+    <!-- Pulpo a la Parrilla -->
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Pulpo a la Parrilla</div>
+            <div class="menu-desc">Pulpo tierno asado a la parrilla, servido con salsa de ajo y pimientos.</div>
+            <div class="menu-icons">🐙🧄🫑</div>
+            <div class="menu-price">$ 50,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Pulpo a la Parrilla">
+                <input type="hidden" name="precio" value="50000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/PulpoParrilla.avif}" alt="Pulpo a la Parrilla" class="menu-img">
+    </article>
+
+    <!-- Sopa de Mariscos -->
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Sopa de Mariscos</div>
+            <div class="menu-desc">Camarones, almejas y calamares en un fondo aromatizado con especias.</div>
+            <div class="menu-icons">🐠🍋🌿</div>
+            <div class="menu-price">$ 25,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Sopa de Mariscos">
+                <input type="hidden" name="precio" value="25000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/SopaMariscos.avif}" alt="Sopa de Mariscos" class="menu-img">
+    </article>
+
+</div>
+
+<!-- ===== PLATOS PRINCIPALES ===== -->
+<h2 class="titulo-seccion">Platos Principales</h2>
+<div class="menu-container">
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Paella de Mariscos</div>
+            <div class="menu-desc">Arroz con una mezcla de mariscos frescos, azafrán y verduras.</div>
+            <div class="menu-icons">🐠🌿</div>
+            <div class="menu-price">$ 80,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Paella de Mariscos">
+                <input type="hidden" name="precio" value="80000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/PaellaMariscos.avif}" alt="Paella de Mariscos" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Filete de Salmón</div>
+            <div class="menu-desc">Salmón a la plancha con salsa de limón y hierbas, acompañado de espárragos.</div>
+            <div class="menu-icons">🐠🍋🌿</div>
+            <div class="menu-price">$ 90,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Filete de Salmón">
+                <input type="hidden" name="precio" value="90000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Filete de Salmón.avif}" alt="Filete de Salmón" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Langosta al Horno</div>
+            <div class="menu-desc">Langosta horneada con mantequilla de ajo y hierbas, servida con puré de papas.</div>
+            <div class="menu-icons">🦞🧄🌿</div>
+            <div class="menu-price">$ 110,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Langosta al Horno">
+                <input type="hidden" name="precio" value="110000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Langosta al Horno.avif}" alt="Langosta al Horno" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Filete de Pescado en Salsa de Coco</div>
+            <div class="menu-desc">Filete de pescado blanco a la plancha, bañado en una suave salsa cremosa de coco con un toque de jengibre y limón, servido con vegetales salteados.</div>
+            <div class="menu-icons">🐠🍋🥥</div>
+            <div class="menu-price">$ 80,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Filete de Pescado en Salsa de Coco">
+                <input type="hidden" name="precio" value="80000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Filete de Pescado en Salsa de Coco.avif}" alt="Filete de Pescado en Salsa de Coco" class="menu-img">
+    </article>
+</div>
+
+<!-- ================== ADICIONES ================== -->
+<h2 class="titulo-seccion">Adiciones</h2>
+<div class="menu-container">
+    <!-- Todas las adiciones siguen el mismo patrón -->
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Camarones</div>
+            <div class="menu-desc">Porción de camarones frescos, salteados en aceite de oliva con ajo picado y un toque de perejil.</div>
+            <div class="menu-icons">🦐🌿</div>
+            <div class="menu-price">$ 15,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Camarones">
+                <input type="hidden" name="precio" value="15000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/camarones.avif}" alt="Camarones" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Porción de arroz con coco</div>
+            <div class="menu-desc">Arroz blanco cocido lentamente en leche de coco, con un toque dulce y salado. Acompañamiento tradicional del Caribe colombiano.</div>
+            <div class="menu-icons">🥥🍚</div>
+            <div class="menu-price">$ 6,500</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Porción de arroz con coco">
+                <input type="hidden" name="precio" value="6500">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Porción de arroz con coco.avif}" alt="Porción de arroz con coco" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Patacones crocantes</div>
+            <div class="menu-desc">Rodajas de plátano verde fritas, acompañadas con suero costeño artesanal.</div>
+            <div class="menu-icons">🧂</div>
+            <div class="menu-price">$ 6,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Patacones crocantes">
+                <input type="hidden" name="precio" value="6000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Patacones crocantes.avif}" alt="Patacones crocantes" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Vegetales salteados</div>
+            <div class="menu-desc">Combinación de zanahoria, brócoli, pimentón y cebolla, salteados en mantequilla con un toque de pimienta negra y orégano.</div>
+            <div class="menu-icons">🧈🥕🫑🧅</div>
+            <div class="menu-price">$ 6,500</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Vegetales salteados">
+                <input type="hidden" name="precio" value="6500">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Vegetales salteados.avif}" alt="Vegetales salteados" class="menu-img">
+    </article>
+</div>
+
+<!-- ===== BEBIDAS ===== -->
+<h2 class="titulo-seccion">Bebidas</h2>
+<div class="menu-container">
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Coctel frutos rojos</div>
+            <div class="menu-desc">Un coctel refrescante con hielo, con frutos rojos, jugo de limón con su rodaja.</div>
+            <div class="menu-icons">🍒🧊</div>
+            <div class="menu-price">$ 25,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Coctel frutos rojos">
+                <input type="hidden" name="precio" value="25000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Coctel frutos rojos.avif}" alt="Coctel frutos rojos" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Jugo tropical</div>
+            <div class="menu-desc">Un jugo fresco y delicioso con mezclas de frutas tropicales y hielo para el gusto.</div>
+            <div class="menu-icons">🥭🧊</div>
+            <div class="menu-price">$ 15,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Jugo tropical">
+                <input type="hidden" name="precio" value="15000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Jugo tropical.avif}" alt="Jugo tropical" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Vino intenso</div>
+            <div class="menu-desc">Vino de color tinto intenso con notas de frutas negras y maduras.</div>
+            <div class="menu-icons">🍇🧊</div>
+            <div class="menu-price">$ 42,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Vino intenso">
+                <input type="hidden" name="precio" value="42000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Vino intenso.avif}" alt="Vino intenso" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Whisky</div>
+            <div class="menu-desc">Destilado añejado en barricas de madera, con sabores que van desde lo ahumado y especiado hasta lo dulce y afrutado.</div>
+            <div class="menu-icons">🍯🪵🧊</div>
+            <div class="menu-price">$ 35,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Whisky">
+                <input type="hidden" name="precio" value="35000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Whisky.avif}" alt="Whisky" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Sauvignon Blanc</div>
+            <div class="menu-desc">Refrescante y herbal, con frutas tropicales y acidez vibrante.</div>
+            <div class="menu-icons">🍷🧊</div>
+            <div class="menu-price">$ 34,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Sauvignon Blanc">
+                <input type="hidden" name="precio" value="34000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Sauvignon Blanc.avif}" alt="Sauvignon Blanc" class="menu-img">
+    </article>
+
+    <article class="menu-item">
+        <div class="menu-info">
+            <div class="menu-title">Vermentino</div>
+            <div class="menu-desc">Vino blanco fresco con notas cítricas, manzana verde y un sutil toque salino.</div>
+            <div class="menu-icons">🍋🧊</div>
+            <div class="menu-price">$ 32,000</div>
+            <form th:action="@{/carrito/agregar}" method="post">
+                <input type="hidden" name="nombre" value="Vermentino">
+                <input type="hidden" name="precio" value="32000">
+                <button type="submit" class="btn-agregar">Agregar</button>
+            </form>
+        </div>
+        <img th:src="@{/img/menu/Vermentino.avif}" alt="Vermentino" class="menu-img">
+    </article>
+</div>
+
+</body>
+</html>

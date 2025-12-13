@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gestión de Pedidos - La Fragata Giratoria</title>
+    <link rel="stylesheet" href="/css/pedidos.css" />
+</head>
+<body>
+
+<div class="layout-container">
+
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button active">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="dashboard-wrapper">
+
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3>Total Pedidos</h3>
+                    <p th:text="${#lists.size(pedidos)}">0</p> 
+                </div>
+                <div class="stat-item">
+                    <h3>Monto Pendiente</h3>
+                    <p>N/D</p> 
+                </div>
+                <div class="stat-item">
+                    <h3>Pedidos Hoy</h3>
+                    <p>N/D</p> 
+                </div>
+            </div>
+
+            <div class="header-title">
+                <h1>Gestión de Pedidos</h1>
+                <p>Administra todos los pedidos de los clientes.</p>
+            </div>
+
+            <div class="table-container">
+                <div class="table-top-bar">
+                    <h3>Lista de Pedidos</h3>
+
+                    <div class="right-actions">
+                        <input type="text" class="table-search" placeholder="🔍 Buscar pedido...">
+                        <a th:href="@{/crud/pedidos/nuevo}" class="btn-new-product">+ Nuevo Pedido</a>
+                        <a th:href="@{/crud/pedidos/export/pdf}" class="btn-export pdf">📄 PDF</a>
+                        <a th:href="@{/crud/pedidos/export/excel}" class="btn-export excel">📗 Excel</a>
+                    </div>
+                </div>
+
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Platillo</th>
+                            <th>Cantidad</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pedido : ${pedidos}">
+                            <td th:text="${pedido.id}">1</td>
+                            <td th:text="${pedido.fecha}">2025-12-05</td>
+                            <td th:text="${pedido.idPlatillo}">101</td> <td th:text="${pedido.cantidad}">2</td>
+                            <td th:text="${pedido.total}">150.00</td>
+                            <td th:text="${pedido.estado}">Pendiente</td> 
+                            <td>
+                                <a th:href="@{/crud/pedidos/editar/{id}(id=${pedido.id})}" class="btn-edit">✏️ Editar</a>
+                                <a th:href="@{/crud/pedidos/eliminar/{id}(id=${pedido.id})}" 
+                                   class="btn-delete"
+                                   onclick="return confirm('¿Estás seguro de eliminar este pedido?');">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+
+                        <tr th:if="${#lists.isEmpty(pedidos)}">
+                            <td colspan="7" class="no-pedido">No hay pedidos registrados.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <a href="/roles/admin/dashboard" class="back-to-dashboard">← Volver al Dashboard</a>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/js/pedidos.js"></script>
+</body>
+</html>

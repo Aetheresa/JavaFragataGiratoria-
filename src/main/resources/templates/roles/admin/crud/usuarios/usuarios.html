@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Gestión de Usuarios</title>
+    <link rel="stylesheet" href="/css/pedidos.css" />
+</head>
+<body>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="logo">La Fragata Giratoria</div>
+
+                <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+
+                <nav class="menu">
+                    <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                    <a href="/productos" class="nav-button">Productos</a>
+                    <a href="/crud/platillos" class="nav-button">Platillos</a>
+                    <a href="/crud/compras" class="nav-button">Compras</a>
+                    <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                    <a href="/crud/usuarios" class="nav-button active">Usuarios</a>
+                    <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+                </nav>
+            </div>
+
+            <div class="bottom-buttons">
+                <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+                <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+                <a href="/logout" class="nav-button">Salir</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="dashboard-wrapper">
+                <div class="header-title">
+                    <h1>Gestión de Usuarios</h1>
+                    <p>Administra todos los usuarios registrados en el sistema.</p>
+                </div>
+
+                <!-- Mensajes de éxito o error -->
+                <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+                <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+                <div class="table-top-bar">
+                    <h3>Lista de Usuarios</h3>
+                    <div class="right-actions">
+                        <input type="text" class="table-search" placeholder="🔍 Buscar usuario...">
+                        <a th:href="@{/crud/usuarios/nuevo}" class="btn-new-product">+ Crear Nuevo Usuario</a>
+                        <a th:href="@{/crud/usuarios/export/pdf}" class="btn-export pdf">📄 PDF</a>
+                        <a th:href="@{/crud/usuarios/export/excel}" class="btn-export excel">📗 Excel</a>
+                    </div>
+                </div>
+
+                <!-- Tabla de Usuarios -->
+                <div class="products-table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Fecha Creación</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="usuario : ${usuarios}">
+                                <td th:text="${usuario.idUsuario}">1</td>
+                                <td th:text="${usuario.nombreUsuario}">Admin</td>
+                                <td th:text="${usuario.email}">admin@ejemplo.com</td>
+                                <td th:text="${usuario.rol.nombreRol}">Administrador</td>
+                                <td th:text="${usuario.estado}">ACTIVO</td>
+                                <td th:text="${#temporals.format(usuario.fechaCreacion, 'dd-MM-yyyy HH:mm')}">2025-01-01</td>
+                                <td>
+                                    <a th:href="@{/crud/usuarios/editar/{id}(id=${usuario.idUsuario})}" class="btn-edit">✏️ Editar</a>
+                                    <a th:href="@{/crud/usuarios/eliminar/{id}(id=${usuario.idUsuario})}" class="btn-delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">🗑️ Eliminar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/pedidos.js"></script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Fragata Giratoria - Productos</title>
+    <link rel="stylesheet" href="/css/productocrud.css" />
+</head>
+
+<body>
+
+<div class="layout-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button active">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="main-content">
+
+        <div class="dashboard-wrapper">
+
+            <!-- TITULO -->
+            <div class="header-title">
+                <h1>Gestión de Productos</h1>
+                <p>Administra el inventario de productos, stocks del restaurante.</p>
+            </div>
+
+            <!-- ESTADÍSTICAS -->
+            <div class="stats-preview">
+                <div class="stat-card">
+                    <h2 th:text="${totalProductos}">0</h2>
+                    <span>Total Productos</span>
+                </div>
+
+                <div class="stat-card">
+                    <h2 th:text="${productosBajoStock}">0</h2>
+                    <span>Bajo Stock</span>
+                </div>
+
+                <div class="stat-card">
+                    <h2 th:text="${totalProveedores}">0</h2>
+                    <span>Proveedores</span>
+                </div>
+            </div>
+
+            <!-- TABLA + FILTRO -->
+            <div class="products-table-container">
+
+                <div class="table-top-bar">
+                    <h3>Lista de Productos</h3>
+
+                    <div class="right-actions">
+                        <!-- Filtro búsqueda -->
+                        <input type="text" class="table-search" placeholder="🔍 Buscar producto...">
+
+                        <!-- Botones -->
+                        <a th:href="@{/productos/crear}" class="btn-new-product">✚ Nuevo Producto</a>
+                        <a th:href="@{/productos/export/pdf}" class="btn-export pdf">📄 PDF</a>
+                        <a th:href="@{/productos/export/excel}" class="btn-export excel">📗 Excel</a>
+                    </div>
+                </div>
+
+                <table class="products-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>fecha de vencimiento</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Stock Mínimo</th>
+                        <th>Stock Actual</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="producto : ${productos}" th:if="${producto != null}">
+                        <td th:text="${producto.idProducto}"></td>
+                        <td th:text="${producto.nombre}"></td>
+                        <td th:text="${producto.fechaVencimiento}"></td>
+                        <td th:text="${producto.precioUnitario}"></td>
+                        <td th:text="${producto.stockActual}"></td>
+                        <td th:text="${producto.stockMinimo}"></td>
+                        <td th:text="${producto.unidadMedida}"></td>
+                        <td class="action-buttons">
+                            <a th:href="@{/productos/editar/{id}(id=${producto.idProducto})}" class="btn-action btn-edit">Editar</a>
+                            <a th:href="@{/productos/eliminar/{id}(id=${producto.idProducto})}" 
+                               class="btn-action btn-delete"
+                               onclick="return confirm('¿Eliminar este producto?')">Eliminar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div class="no-products" th:if="${productos.size() == 0}">
+                    No hay productos registrados.
+                    <a th:href="@{/productos/crear}">Crear primer producto</a>
+                </div>
+
+            </div>
+
+            <a href="/admin/dashboard" class="back-to-dashboard">← Volver al Dashboard</a>
+
+        </div>
+
+    </main>
+
+</div>
+<script src="/js/productocrud.js"></script>
+</body>
+</html>

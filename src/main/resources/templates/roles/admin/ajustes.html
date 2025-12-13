@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustes - La Fragata Giratoria</title>
+    <link rel="stylesheet" href="/css/ajustes.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout-container">
+        
+        <!-- ======= SIDEBAR ======= -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <div class="logo">La Fragata Giratoria</div>
+                
+                <input class="search-input" type="search" placeholder="🔍 Búsqueda">
+                
+                <nav class="menu">
+                    <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                     <a href="/productos" class="nav-button">Productos</a>
+                     <a href="/crud/platillos" class="nav-button">Platillos</a>
+                     <a href="/crud/compras" class="nav-button">Compras</a>
+                     <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                     <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                     <a th:href="@{/crud/metodosdepago}" class="nav-button">Métodos de Pago</a>
+                </nav>
+            </div>
+
+            <div class="bottom-buttons">
+                <a href="/admin/ajustes" class="nav-button bottom-nav-button active">Ajustes</a>
+                <a href="/roles/admin/ayuda" class="nav-button bottom-nav-button">Ayuda</a>
+                 <a href="/logout" class="nav-button bottom-nav-button">Salir</a>
+            </div>
+        </aside>
+
+        <!-- ======= CONTENIDO PRINCIPAL ======= -->
+        <main class="main-content">
+
+            <div class="settings-wrapper">
+                <div class="settings-container">
+
+                    <h1>Ajustes del Sistema</h1>
+                    <p>Personaliza tu experiencia dentro de La Fragata Giratoria.</p>
+
+                    <!-- ===== FORMULARIO DE AJUSTES ===== -->
+                    <form id="settings-form" class="settings-form">
+
+                        <!-- === APARIENCIA === -->
+                        <div class="setting-section">
+                            <h2>Apariencia</h2>
+
+                            <div class="setting-group">
+                                <label for="theme-select">Tema de la interfaz:</label>
+                                <select id="theme-select" class="setting-input">
+                                    <option value="dark">Oscuro (predeterminado)</option>
+                                    <option value="light">Claro</option>
+                                    <option value="gold">Dorado Premium</option>
+                                </select>
+                            </div>
+
+                            <div class="setting-group">
+                                <label for="font-size-select">Tamaño de fuente:</label>
+                                <select id="font-size-select" class="setting-input">
+                                    <option value="small">Pequeño</option>
+                                    <option value="medium" selected>Mediano</option>
+                                    <option value="large">Grande</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- === NOTIFICACIONES === -->
+                        <div class="setting-section">
+                            <h2>Notificaciones y Privacidad</h2>
+
+                            <div class="setting-group">
+                                <label for="notifications-toggle">Activar notificaciones:</label>
+                                <input type="checkbox" id="notifications-toggle" class="setting-toggle" checked>
+                            </div>
+
+                            <div class="setting-group">
+                                <label for="email-updates-toggle">Actualizaciones por email:</label>
+                                <input type="checkbox" id="email-updates-toggle" class="setting-toggle">
+                            </div>
+
+                            <div class="setting-group">
+                                <label for="data-sharing-toggle">Compartir datos anónimos:</label>
+                                <input type="checkbox" id="data-sharing-toggle" class="setting-toggle">
+                            </div>
+                        </div>
+
+                        <!-- === IDIOMA === -->
+                        <div class="setting-section">
+                            <h2>Idioma y Región</h2>
+
+                            <div class="setting-group">
+                                <label for="language-select">Idioma:</label>
+                                <select id="language-select" class="setting-input">
+                                    <option value="es" selected>Español</option>
+                                    <option value="en">Inglés</option>
+                                    <option value="fr">Francés</option>
+                                </select>
+                            </div>
+
+                            <div class="setting-group">
+                                <label for="timezone-select">Zona horaria:</label>
+                                <select id="timezone-select" class="setting-input">
+                                    <option value="utc-5" selected>UTC-5 (Colombia)</option>
+                                    <option value="utc-6">UTC-6 (México)</option>
+                                    <option value="utc+1">UTC+1 (Europa)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- === AVANZADO === -->
+                        <div class="setting-section">
+                            <h2>Avanzado</h2>
+
+                            <div class="setting-group">
+                                <label for="auto-save-toggle">Guardado automático:</label>
+                                <input type="checkbox" id="auto-save-toggle" class="setting-toggle">
+                            </div>
+
+                            <div class="setting-group">
+                                <label for="reset-btn">Restablecer configuraciones:</label>
+                                <button type="button" id="reset-btn" class="reset-btn">Restablecer</button>
+                            </div>
+                        </div>
+
+                        <!-- === BOTÓN GUARDAR === -->
+                        <button type="submit" class="save-btn">Guardar Cambios</button>
+
+                    </form>
+
+                    <!-- Mensaje de estado -->
+                    <div id="status-message" class="status-message"></div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Toggle del sidebar -->
+    <button id="sidebar-toggle" class="sidebar-toggle">☰</button>
+
+    <script src="ajustes.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Editar Pedido - La Fragata Giratoria</title>
+    <link rel="stylesheet" href="/css/pedidosedit.css" />
+</head>
+<body>
+
+<div class="layout-container">
+
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button active">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <div class="dashboard-wrapper">
+            
+            <div class="header-title">
+                <h1>Editar Pedido Existente</h1>
+                <p>Modifica los campos del pedido con ID: <span th:text="${pedido.id}"></span></p>
+            </div>
+            
+            <form th:action="@{/crud/pedidos}" th:object="${pedido}" method="post" class="pedido-form">
+
+                <input type="hidden" th:field="*{id}" /> 
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fecha">Fecha del Pedido</label>
+                        <input type="date" id="fecha" name="fecha" th:field="*{fecha}" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" id="cantidad" name="cantidad" th:field="*{cantidad}" placeholder="1" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="precioUnitario">Precio Unitario</label>
+                        <input type="number" id="precioUnitario" name="precioUnitario" th:field="*{precioUnitario}" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subtotal">Subtotal</label>
+                        <input type="number" id="subtotal" name="subtotal" th:field="*{subtotal}" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="total">Total</label>
+                    <input type="number" id="total" name="total" th:field="*{total}" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="estado">Estado del Pedido</label>
+                    <input type="text" id="estado" name="estado" th:field="*{estado}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="observaciones">Observaciones</label>
+                    <textarea id="observaciones" name="observaciones" th:field="*{observaciones}" rows="3"></textarea>
+                </div>
+                
+                <h3>Asignación de IDs (Relaciones)</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="idCliente">ID Cliente</label>
+                        <input type="number" id="idCliente" name="idCliente" th:field="*{idCliente}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="idPlatillo">ID Platillo</label>
+                        <input type="number" id="idPlatillo" name="idPlatillo" th:field="*{idPlatillo}" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="idUsuario">ID Usuario (Mesero/Sistema)</label>
+                        <input type="number" id="idUsuario" name="idUsuario" th:field="*{idUsuario}" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="idAdicional">ID Adicional</label>
+                        <input type="number" id="idAdicional" name="idAdicional" th:field="*{idAdicional}">
+                    </div>
+                </div>
+                
+                <div class="form-buttons">
+                    <button type="submit" class="btn-submit">💾 Actualizar Pedido</button>
+                    <a th:href="@{/crud/pedidos}" class="btn-cancel">✖ Cancelar</a>
+                </div>
+
+            </form>
+            
+            <a th:href="@{/crud/pedidos}" class="back-to-dashboard">← Volver a Pedidos</a>
+        </div>
+    </main>
+</div>
+
+<script src="/js/pedidos.js"></script>
+</body>
+</html>

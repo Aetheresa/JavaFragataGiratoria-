@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesero</title>
+    <link rel="stylesheet" th:href="@{/css/mesero.css}">
+</head>
+
+<body>
+
+<!-- BOTÓN DE CERRAR SESIÓN -->
+<form th:action="@{/logout}" method="post">
+    <button class="logout-btn" type="submit">Cerrar Sesión</button>
+</form>
+
+<h2>Pedidos para Entregar</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID Pedido</th>
+            <th>Platillos</th>
+            <th>Cantidades</th>
+            <th>Estado Cocina</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="pedido : ${pedidos}">
+            <td th:text="${pedido.id}"></td>
+
+            <td>
+                <ul>
+                    <li th:each="det : ${pedido.detalles}">
+                        <span th:text="${det.platillo.nombre}"></span>
+                    </li>
+                </ul>
+            </td>
+
+            <td>
+                <ul>
+                    <li th:each="det : ${pedido.detalles}">
+                        <span th:text="${det.cantidad}"></span>
+                    </li>
+                </ul>
+            </td>
+
+            <td th:text="${pedido.estadoCocina}"></td>
+
+            <td>
+                <form th:action="@{/roles/mesero/entregar/{id}(id=${pedido.id})}" method="post">
+                    <button type="submit">Entregar</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

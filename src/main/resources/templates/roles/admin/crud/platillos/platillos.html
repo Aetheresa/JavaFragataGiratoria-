@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Fragata Giratoria - Gestión de Platillos</title>
+    <link rel="stylesheet" href="/css/platillos.css" />
+</head>
+<body>
+
+<div class="layout-container">
+
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button active">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="dashboard-wrapper">
+
+            <div class="header-title">
+                <h1>Gestión de Platillos</h1>
+                <p>Administra todos los platillos disponibles en el restaurante.</p>
+            </div>
+
+            <!-- TARJETAS DE ESTADÍSTICAS -->
+            <div class="stats-preview">
+                <div class="stat-card">
+                    <h2 th:text="${totalPlatillos}">0</h2>
+                    <span>Total Platillos</span>
+                </div>
+
+                <div class="stat-card">
+                    <h2 th:text="${platillosDestacados}">0</h2>
+                    <span>Platillos Destacados</span>
+                </div>
+
+                <div class="stat-card">
+                    <h2 th:text="${totalCategorias}">0</h2>
+                    <span>Categorías</span>
+                </div>
+            </div>
+
+            <!-- TABLA DE PLATILLOS -->
+            <div class="products-table-container">
+
+                <div class="table-top-bar">
+                    <h3>Lista de Platillos</h3>
+
+                    <div class="right-actions">
+                        <input type="text" class="table-search" placeholder="🔍 Buscar platillo..." />
+                        <a th:href="@{/crud/platillos/nuevo}" class="btn-new-product">✚ Nuevo Platillo</a>
+                        <a th:href="@{/crud/platillos/export/pdf}" class="btn-export pdf">📄 PDF</a>
+                        <a th:href="@{/crud/platillos/export/excel}" class="btn-export excel">📗 Excel</a>
+                    </div>
+                </div>
+
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Categoría</th>
+                            <th>Imagen URL</th>
+                            <th>Emojis</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="platillo : ${platillos}">
+                            <td th:text="${platillo.idPlatillo}"></td>
+                            <td th:text="${platillo.nombre}"></td>
+                            <td th:text="${platillo.precio}"></td>
+                            <td th:text="${platillo.categoria}"></td>
+                            <td>
+                                <a th:href="${platillo.imagenUrl}" target="_blank">Ver Imagen</a>
+                            </td>
+                            <td th:text="${platillo.emojis}"></td>
+                            <td class="action-buttons">
+                                <a th:href="@{/crud/platillos/editar/{id}(id=${platillo.idPlatillo})}" class="btn-action btn-edit">✏️ Editar</a>
+                                <a th:href="@{/crud/platillos/eliminar/{id}(id=${platillo.idPlatillo})}" 
+                                   class="btn-action btn-delete"
+                                   onclick="return confirm('¿Eliminar este platillo?')">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+
+                        <tr th:if="${#lists.isEmpty(platillos)}">
+                            <td colspan="7" class="no-products">No hay platillos registrados.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <a href="/admin/dashboard" class="back-to-dashboard">← Volver al Dashboard</a>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/js/platillo.js"></script>
+</body>
+</html>

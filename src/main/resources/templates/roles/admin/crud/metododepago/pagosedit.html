@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Editar Método de Pago - La Fragata Giratoria</title>
+    <link rel="stylesheet" href="/css/pagosedit.css" />
+</head>
+<body>
+<div class="layout-container">
+
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button active">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <div class="dashboard-wrapper">
+
+            <div class="header-title">
+                <h1>🛠️ Editar Método de Pago</h1>
+                <p>Modifica los datos del método de pago seleccionado.</p>
+            </div>
+
+            <form th:object="${metodoPago}" th:action="@{/crud/metodospago}" method="post" class="producto-form">
+
+                <input type="hidden" th:field="*{idMetodoPago}" />
+
+                <div class="form-group">
+                    <label for="nombreMetodo">Nombre del Método</label>
+                    <input type="text" id="nombreMetodo" name="nombreMetodo" th:field="*{nombreMetodo}" placeholder="Ej: Tarjeta Débito, Efectivo" required />
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn-submit">💾 Actualizar Método de Pago</button>
+                    <button type="reset" class="btn-clear">🧹 Limpiar</button>
+                    <a href="/crud/metodospago" class="btn-cancel">✖ Cancelar</a>
+                </div>
+
+            </form>
+
+            <a href="/admin/dashboard" class="back-to-dashboard">← Volver al Dashboard</a>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/js/editarMetodoPago.js"></script>
+</body>
+</html>

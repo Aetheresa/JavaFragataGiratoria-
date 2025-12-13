@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gestión de Compras - La Fragata Giratoria</title>
+    <link rel="stylesheet" href="/css/compras.css" />
+</head>
+<body>
+
+<div class="layout-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button active">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a href="/crud/metodosdepago" class="nav-button">Métodos de Pago</a>
+            </nav>
+        </div>
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button">Salir</a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <div class="dashboard-wrapper">
+
+            <!-- Stats Container -->
+            <div class="stats-container">
+                <div class="stat-item">
+                    <h3>Total Compras</h3>
+                    <p th:text="${#lists.size(compras)}">0</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Monto Total</h3>
+                    <p th:text="${montoTotal}">N/D</p> 
+                </div>
+            </div>
+
+            <!-- Header Title -->
+            <div class="header-title">
+                <h1>Gestión de Compras</h1>
+                <p>Administra todas las compras realizadas en el sistema.</p>
+            </div>
+
+            <!-- Table Container -->
+            <div class="table-container">
+                <div class="table-top-bar">
+                    <h3>Lista de Compras</h3>
+                    <div class="right-actions">
+                        <input type="text" class="table-search" placeholder="🔍 Buscar compra...">
+                        <a th:href="@{/crud/compras/nuevo}" class="btn-new-product">+ Nueva Compra</a>
+                        <a th:href="@{/crud/compras/export/pdf}" class="btn-export pdf">📄 PDF</a>
+                        <a th:href="@{/crud/compras/export/excel}" class="btn-export excel">📗 Excel</a>
+                    </div>
+                </div>
+
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Descripción</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Iterar sobre las compras -->
+                        <tr th:each="compra : ${compras}">
+                            <td th:text="${compra.id}">1</td>
+                            <td th:text="${compra.descripcion}">Compra de Arroz</td>
+                            <td th:text="${compra.fecha}">2025-12-05</td>
+                            <td th:text="${compra.total}">1500</td>
+                            <td>
+                                <a th:href="@{/crud/compras/editar/{id}(id=${compra.id})}" class="btn-edit">✏️ Editar</a>
+                                <a th:href="@{/crud/compras/eliminar/{id}(id=${compra.id})}" 
+                                   class="btn-delete"
+                                   onclick="return confirm('¿Estás seguro de eliminar esta compra?');">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+
+                        <!-- Mensaje si no hay compras -->
+                        <tr th:if="${#lists.isEmpty(compras)}">
+                            <td colspan="5" class="no-compra">No hay compras registradas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Back Button -->
+            <a href="/roles/admin/dashboard" class="back-to-dashboard">← Volver al Dashboard</a>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/js/compras.js"></script>
+</body>
+</html>

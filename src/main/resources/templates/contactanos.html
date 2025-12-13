@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contáctanos - La Fragata Giratoria</title>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" th:href="@{/css/contacto.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <div class="logo-contenedor">
+      <!-- Logo -->
+      <img th:src="@{/img/icono-fragata.jpg}" alt="Icono Fragata" class="logo-img" />
+      <span class="nombre-logo">La Fragata Giratoria</span>
+    </div>
+    <nav>
+      <a th:href="@{/menu}">Menú</a>
+      <a th:href="@{/}">Inicio</a>
+      <a th:href="@{/login}">Iniciar Sesión</a>
+      <a th:href="@{/registro}">Registrarse</a>
+      <a th:href="@{/contactanos}">Contáctanos</a>
+      <a th:href="@{/carrito}" class="icono-carrito" aria-label="Carrito">
+        <img th:src="@{/img/carrito.png}" alt="Carrito de compras" />
+      </a>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <div class="formulario tarjeta">
+
+      <!-- Mensaje de éxito -->
+      <div th:if="${success}" class="alerta-exito auto-hide">
+        <i class="fa fa-check-circle"></i>
+        <span th:text="${success}">¡Mensaje enviado correctamente!</span>
+      </div>
+
+      <!-- Mensajes de error -->
+      <div th:if="${#fields.hasErrors()}" class="alerta-error auto-hide">
+        <i class="fa fa-exclamation-triangle"></i> Corrige lo siguiente:
+        <ul>
+          <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+        </ul>
+      </div>
+
+      <!-- Formulario -->
+      <form th:action="@{/contactanos/enviar}" method="post" th:object="${contactForm}">
+        <h2>Contáctanos</h2>
+
+        <div class="input-con-icono">
+          <i class="fa fa-user"></i>
+          <input type="text" th:field="*{nombre}" placeholder="Nombre completo" required />
+        </div>
+
+        <div class="input-con-icono">
+          <i class="fa fa-envelope"></i>
+          <input type="email" th:field="*{email}" placeholder="Correo electrónico" required />
+        </div>
+
+        <div class="input-con-icono">
+          <i class="fa fa-pen"></i>
+          <input type="text" th:field="*{asunto}" placeholder="Asunto" required />
+        </div>
+
+        <div class="input-sin-icono">
+          <textarea th:field="*{mensaje}" placeholder="Mensaje" required></textarea>
+        </div>
+
+        <button type="submit" class="ingresar">Enviar</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Script para ocultar alertas automáticamente -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const alerts = document.querySelectorAll(".auto-hide");
+      alerts.forEach(alert => {
+        setTimeout(() => {
+          alert.style.opacity = "0";
+          alert.style.transition = "opacity 0.9s ease";
+          setTimeout(() => alert.remove(), 500);
+        }, 8000);
+      });
+    });
+  </script>
+
+  <!-- Footer -->
+  <div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+</html>

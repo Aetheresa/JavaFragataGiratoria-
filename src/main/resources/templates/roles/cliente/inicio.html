@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Cliente - La Fragata Giratoria</title>
+
+    <link rel="stylesheet" th:href="@{/css/inicioCliente.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo-contenedor">
+        <img th:src="@{/img/icono-fragata.jpg}" alt="Icono Fragata" class="logo-img">
+        <span class="nombre-logo">La Fragata Giratoria</span>
+    </div>
+
+    <nav>
+        <a th:href="@{/roles/cliente/inicio}">Inicio</a>
+        <a th:href="@{/roles/cliente/menu}">Menú</a>
+
+        <!-- Carrito -->
+        <a th:href="@{/roles/cliente/carrito}" class="icono-carrito">
+            <img th:src="@{/img/carrito.png}" alt="Carrito">
+        </a>
+
+        <!-- Usuario -->
+        <div class="usuario-box" onclick="toggleDropdown()">
+            <span th:text="${usuario.nombreUsuario}">Usuario</span>
+
+            <div class="dropdown" id="dropdownMenu">
+                <p><strong>Nombre:</strong> <span th:text="${usuario.nombreUsuario}"></span></p>
+                <p><strong>Correo:</strong> <span th:text="${usuario.email}"></span></p>
+
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit">Cerrar sesión</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="contenido">
+    <section class="tarjeta-bienvenida">
+        <h2><span class="resaltado">Bienvenido</span><br>La Fragata Giratoria</h2>
+        <p>Una experiencia gastronómica sobre el mar</p>
+
+        <a th:href="@{/roles/cliente/menu}">
+            <button class="boton-ver-menu">Ver menú</button>
+        </a>
+    </section>
+</main>
+
+<div th:replace="~{layouts/footer :: footer}"></div>
+
+<script>
+    function toggleDropdown() {
+        const menu = document.getElementById("dropdownMenu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener("click", function(e) {
+        const box = document.querySelector(".usuario-box");
+        const menu = document.getElementById("dropdownMenu");
+
+        if (!box.contains(e.target)) {
+            menu.style.display = "none";
+        }
+    });
+</script>
+
+</body>
+</html>

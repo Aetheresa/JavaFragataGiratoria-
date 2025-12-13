@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="item(platillo)">
+
+    <img th:src="${platillo.imagenUrl}"
+         th:alt="${platillo.nombre}"
+         class="menu-img">
+
+    <div class="menu-info">
+
+        <div class="menu-title" th:text="${platillo.nombre}">Nombre</div>
+
+        <div class="menu-desc" th:text="${platillo.descripcion}">Descripción</div>
+
+        <div class="menu-price"
+             th:text="'$ ' + ${#numbers.formatDecimal(platillo.precio, 0, 'COMMA', 0, 'POINT')}">
+        </div>
+
+        <!-- FORMULARIO CORREGIDO -->
+        <form th:action="@{/roles/cliente/carrito/agregar}" method="post">
+            <input type="hidden" name="idPlatillo" th:value="${platillo.idPlatillo}">
+            <input type="hidden" name="cantidad" value="1">
+            <button type="submit" class="btn-agregar">Agregar</button>
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

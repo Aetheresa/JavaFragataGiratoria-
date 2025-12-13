@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iniciar Sesión - La Fragata Giratoria</title>
+
+  <!-- Enlace al CSS -->
+  <link rel="stylesheet" th:href="@{/css/login.css}" />
+
+  <!-- Iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-contenedor">
+      <img th:src="@{/img/icono-fragata.jpg}" alt="Icono Fragata" class="logo-img" />
+      <span class="nombre-logo">La Fragata Giratoria</span>
+    </div>
+
+    <nav>
+      <a th:href="@{/menu}">Menú</a>
+      <a th:href="@{/inicio}">Inicio</a>
+      <a th:href="@{/login}">Iniciar Sesión</a>
+      <a th:href="@{/registro}">Registrarse</a>
+      <a th:href="@{/contactanos}">Contáctanos</a>
+    </nav>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="contenido">
+    <form class="formulario tarjeta" method="post" th:action="@{/login}">
+      <h2>Iniciar Sesión</h2>
+
+      <!-- ERROR PERSONALIZADO -->
+      <div th:if="${mensajeError != null}">
+        <div class="mensaje-error" th:text="${mensajeError}"></div>
+      </div>
+
+      <!-- ERROR PROVENIENTE DE SPRING SECURITY -->
+      <div th:if="${mensajeError == null and param.error != null}">
+        <div class="mensaje-error">Credenciales incorrectas o campos vacíos.</div>
+      </div>
+
+      <div class="input-con-icono">
+        <i class="fa fa-user"></i>
+        <input type="email" id="correo" name="correo" placeholder="Ingrese su correo electrónico" required autofocus />
+      </div>
+
+      <div class="input-con-icono">
+        <i class="fa fa-lock"></i>
+        <input type="password" id="clave" name="password" placeholder="Contraseña" required />
+      </div>
+
+      <div class="recordarme">
+        <label>
+          <input type="checkbox" name="remember-me" /> Recordarme
+        </label>
+      </div>
+
+      <button type="submit" class="ingresar">Ingresar</button>
+
+      <p class="enlace">
+        <span class="texto-normal">¿Has olvidado tu</span>
+        <a th:href="@{/recuperar}">contraseña</a>
+        <span class="texto-normal">?</span>
+      </p>
+
+      <p class="enlace registro">
+        <span class="texto-normal">¿No tienes una cuenta?</span>
+        <a th:href="@{/registro}">Regístrate</a>
+      </p>
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <div th:replace="~{layouts/footer :: footer}"></div>
+</body>
+
+</html>

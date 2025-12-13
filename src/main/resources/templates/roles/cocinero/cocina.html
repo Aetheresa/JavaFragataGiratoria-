@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/cocina.css}" />
+    <title>Cocina</title>
+
+</head>
+
+<body>
+
+<!-- BARRA SUPERIOR CON BOTÓN DE CERRAR SESIÓN -->
+<div class="top-bar">
+    <form th:action="@{/logout}" method="post">
+        <button class="logout-btn" type="submit">Cerrar sesión</button>
+    </form>
+</div>
+
+<h2>Pedidos en Cocina</h2>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID Pedido</th>
+            <th>Platillo</th>
+            <th>Cantidad</th>
+            <th>Estado Cocina</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    <tr th:each="pedido : ${pedidos}">
+        <td th:text="${pedido.id}"></td>
+
+        <!-- Listar cada detalle del pedido -->
+        <td>
+            <ul>
+                <li th:each="d : ${pedido.detalles}"
+                    th:text="${d.platillo.nombre}">
+                </li>
+            </ul>
+        </td>
+
+        <td>
+            <ul>
+                <li th:each="d : ${pedido.detalles}"
+                    th:text="${d.cantidad}">
+                </li>
+            </ul>
+        </td>
+
+        <td th:text="${pedido.estadoCocina}"></td>
+
+        <td>
+            <form th:action="@{/roles/cocinero/estado-cocina/{id}(id=${pedido.id})}" method="post">
+                <select name="estado">
+                    <option value="PENDIENTE">Pendiente</option>
+                    <option value="EN_PREPARACION">En preparación</option>
+                    <option value="LISTO">Listo</option>
+                </select>
+                <button type="submit">Actualizar</button>
+            </form>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

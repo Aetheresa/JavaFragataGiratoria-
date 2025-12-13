@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>La Fragata Giratoria - Métodos de Pago</title>
+    <link rel="stylesheet" href="/css/pago.css" />
+</head>
+
+<body>
+
+<div class="layout-container">
+
+    <aside class="sidebar">
+        <div class="sidebar-top">
+            <div class="logo">La Fragata Giratoria</div>
+
+            <input class="search-input" type="search" placeholder="🔍 Búsqueda" />
+
+            <nav class="menu">
+                <a href="/roles/admin/dashboard" class="nav-button">Inicio</a>
+                <a href="/productos" class="nav-button">Productos</a>
+                <a href="/crud/platillos" class="nav-button">Platillos</a>
+                <a href="/crud/compras" class="nav-button">Compras</a>
+                <a href="/crud/pedidos" class="nav-button">Pedidos</a>
+                <a href="/crud/usuarios" class="nav-button">Usuarios</a>
+                <a th:href="@{/crud/metodosdepago}" class="nav-button active">Métodos de Pago</a>
+            </nav>
+        </div>
+
+        <div class="bottom-buttons">
+            <a href="/admin/ajustes" class="nav-button bottom-nav-button">Ajustes</a>
+            <a href="/roles/admin/ayuda" class="nav-button bottom-nav-button">Ayuda</a>
+            <a href="/logout" class="nav-button bottom-nav-button">Salir</a>
+        </div>
+    </aside>
+
+
+    <main class="main-content">
+
+        <div class="dashboard-wrapper">
+
+            <div class="header-title">
+                <h1>Gestión de Métodos de Pago</h1>
+                <p>Administra los métodos de pago disponibles en el sistema.</p>
+            </div>
+
+            <div th:if="${success}" class="alert alert-success">
+                <p th:text="${success}"></p>
+            </div>
+            <div th:if="${error}" class="alert alert-danger">
+                <p th:text="${error}"></p>
+            </div>
+
+            <div class="table-top-bar">
+                <h3>Lista de Métodos de Pago</h3>
+
+                <div class="right-actions">
+                    <a th:href="@{/crud/metodosdepago/nuevo}" class="btn-new-product">➕ Crear Nuevo Método de Pago</a>
+                    <a th:href="@{/crud/metodosdepago/export/excel}" class="btn-export excel">📗 Exportar a Excel</a>
+                    <a th:href="@{/crud/metodosdepago/export/pdf}" class="btn-export pdf">📄 Exportar a PDF</a>
+                </div>
+            </div>
+
+            <div class="products-table-container">
+                <table class="products-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre del Método</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="metodo : ${metodosPago}">
+                        <td th:text="${metodo.idMetodoPago}">1</td>
+                        <td th:text="${metodo.nombreMetodo}">Tarjeta de Crédito</td>
+                        <td class="action-buttons">
+                            <a th:href="@{/crud/metodosdepago/editar/{id}(id=${metodo.idMetodoPago})}" class="btn-action btn-edit">Editar</a>
+                            <a th:href="@{/crud/metodosdepago/eliminar/{id}(id=${metodo.idMetodoPago})}" class="btn-action btn-delete"
+                               onclick="return confirm('¿Está seguro de que desea eliminar este método de pago?');">Eliminar</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div th:if="${#lists.isEmpty(metodosPago)}" class="no-products">
+                    No hay métodos de pago registrados.
+                    <a th:href="@{/crud/metodosdepago/nuevo}">Crear primer método de pago</a>
+                </div>
+
+            </div>
+
+            <a href="/admin/dashboard" class="back-to-dashboard">← Volver al Dashboard</a>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/js/pedidos.js"></script>
+
+</body>
+</html>
