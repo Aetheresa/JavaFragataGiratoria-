@@ -97,9 +97,9 @@ http://localhost:8080
 
 ---
 
-## 📱 Aplicación Móvil – Flutter (APK)
+## 📱 Aplicación Móvil –  ()
 
-### Generar APK
+### Generar
 
 ```bash
 flutter build apk
@@ -129,7 +129,7 @@ flutter build appbundle
 ## ✔️ Resultado Final
 
 * Sistema web funcional
-* Aplicación móvil instalada en dispositivo real
+* instalada en dispositivo real
 * Gestión completa de pedidos e inventario
 
 ---
@@ -156,6 +156,8 @@ Para sugerencias o mejoras, abre un *issue* en el repositorio.
 ---
 
 <p align="center">✨ <b>La Fragata Giratoria – Tecnología al servicio del buen sabor</b> ✨</p>
+
+
 
 
 
