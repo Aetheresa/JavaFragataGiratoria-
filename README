@@ -22,32 +22,31 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
 
 ### Objetivos Específicos
 
-* Automatizar el registro y seguimiento de pedidos
-* Controlar el inventario de forma precisa
-* Reducir tiempos de atención
-* Facilitar la toma de decisiones administrativas
+- Automatizar el registro y seguimiento de pedidos
+- Controlar el inventario de forma precisa
+- Reducir tiempos de atención
+- Facilitar la toma de decisiones administrativas
 
 ---
 
 ## ⚙️ Funcionalidades Principales
 
-* 📦 **Gestión de inventario en tiempo real**
+- 📦 **Gestión de inventario en tiempo real**  
   Control de insumos, actualización automática por ventas y alertas de stock.
 
-* 🧾 **Registro y control de pedidos**
+- 🧾 **Registro y control de pedidos**  
   Gestión completa del ciclo del pedido.
 
-* 📱 **Menú digital mediante código QR**
+- 📱 **Menú digital mediante código QR**  
   Acceso al menú desde dispositivos móviles.
 
-* 👥 **Gestión de roles de usuario**
+- 👥 **Gestión de roles de usuario**
+  - 👨‍💼 Administrador
+  - 🧑‍🍳 Cocina
+  - 🧑‍💼 Mesero
+  - 👤 Cliente
 
-  * 👨‍💼 Administrador
-  * 🧑‍🍳 Cocina
-  * 🧑‍💼 Mesero
-  * 👤 Cliente
-
-* 📊 **Panel administrativo**
+- 📊 **Panel administrativo**  
   Control general del sistema.
 
 ---
@@ -56,19 +55,19 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
 
 ### Backend
 
-* ☕ Java
-* 🌱 Spring Boot (v3.4.1)
-* 📦 Maven
+- ☕ Java
+- 🌱 Spring Boot (v3.4.1)
+- 📦 Maven
 
 ### Frontend
 
-* 🎨 HTML5
-* 🎨 CSS3
-* ⚙️ JavaScript
+- 🎨 HTML5
+- 🎨 CSS3
+- ⚙️ JavaScript
 
 ### Base de Datos
 
-* 🗄️ MySQL
+- 🗄️ MySQL
 
 ---
 
@@ -76,10 +75,10 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
 
 Arquitectura en capas:
 
-* **Controladores** – Rutas y peticiones HTTP
-* **Servicios** – Lógica de negocio
-* **Repositorios** – Acceso a datos (JPA / Hibernate)
-* **Modelos** – Entidades
+- **Controladores** – Rutas y peticiones HTTP
+- **Servicios** – Lógica de negocio
+- **Repositorios** – Acceso a datos (JPA / Hibernate)
+- **Modelos** – Entidades
 
 ---
 
@@ -130,9 +129,9 @@ flutter build appbundle
 
 ## ✔️ Resultado Final
 
-* Sistema web funcional
-* Aplicación instalada en dispositivo real
-* Gestión completa de pedidos e inventario
+- Sistema web funcional
+- Aplicación instalada en dispositivo real
+- Gestión completa de pedidos e inventario
 
 ---
 
@@ -140,8 +139,8 @@ flutter build appbundle
 
 **GAES N° 1**
 
-* 👩‍💻 Arleidis Beatriz Coronado
-* 👨‍💻 Nicolas Losada Méndez
+- 👩‍💻 Arleidis Beatriz Coronado
+- 👨‍💻 Nicolas Losada Méndez
 
 ---
 
@@ -158,3 +157,4 @@ Para sugerencias o mejoras, abre un *issue* en el repositorio.
 ---
 
 ✨ **La Fragata Giratoria – Tecnología al servicio del buen sabor** ✨
+
