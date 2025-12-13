@@ -22,10 +22,10 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
 
 ### Objetivos Específicos
 
-- Automatizar el registro y seguimiento de pedidos
-- Controlar el inventario de forma precisa
-- Reducir tiempos de atención
-- Facilitar la toma de decisiones administrativas
+- Automatizar el registro y seguimiento de pedidos  
+- Controlar el inventario de forma precisa  
+- Reducir tiempos de atención  
+- Facilitar la toma de decisiones administrativas  
 
 ---
 
@@ -41,10 +41,10 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
   Acceso al menú desde dispositivos móviles.
 
 - 👥 **Gestión de roles de usuario**
-  - 👨‍💼 Administrador
-  - 🧑‍🍳 Cocina
-  - 🧑‍💼 Mesero
-  - 👤 Cliente
+  - 👨‍💼 Administrador  
+  - 🧑‍🍳 Cocina  
+  - 🧑‍💼 Mesero  
+  - 👤 Cliente  
 
 - 📊 **Panel administrativo**  
   Control general del sistema.
@@ -54,20 +54,17 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
 ## 🛠️ Tecnologías Utilizadas
 
 ### Backend
-
-- ☕ Java
-- 🌱 Spring Boot (v3.4.1)
-- 📦 Maven
+- ☕ Java  
+- 🌱 Spring Boot (v3.4.1)  
+- 📦 Maven  
 
 ### Frontend
-
-- 🎨 HTML5
-- 🎨 CSS3
-- ⚙️ JavaScript
+- 🎨 HTML5  
+- 🎨 CSS3  
+- ⚙️ JavaScript  
 
 ### Base de Datos
-
-- 🗄️ MySQL
+- 🗄️ MySQL  
 
 ---
 
@@ -75,20 +72,20 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
 
 Arquitectura en capas:
 
-- **Controladores** – Rutas y peticiones HTTP
-- **Servicios** – Lógica de negocio
-- **Repositorios** – Acceso a datos (JPA / Hibernate)
-- **Modelos** – Entidades
+- **Controladores** – Rutas y peticiones HTTP  
+- **Servicios** – Lógica de negocio  
+- **Repositorios** – Acceso a datos (JPA / Hibernate)  
+- **Modelos** – Entidades  
 
 ---
 
-## 🚀 Ejecución del Proyecto (Backend)
+## 🚀 Ejecución del Proyecto
 
 ```bash
 git clone https://github.com/Aetheresa/JavaFragataGiratoria-
 cd JavaFragataGiratoria-
 mvn spring-boot:run
-```
+
 
 🌐 Acceso:
 
@@ -98,41 +95,12 @@ http://localhost:8080
 
 ---
 
-## 📱 Aplicación Móvil
-
-### Generar APK
-
-```bash
-flutter build apk
-```
-
-📍 Ubicación:
-
-```text
-build/app/outputs/flutter-apk/app-release.apk
-```
-
-### Instalar en dispositivo Android
-
-```bash
-flutter devices
-flutter install
-```
-
-### Generar AAB (Play Store)
-
-```bash
-flutter build appbundle
-```
-
----
 
 ## ✔️ Resultado Final
 
 - Sistema web funcional
-- Aplicación instalada en dispositivo real
 - Gestión completa de pedidos e inventario
-
+- Control de usuarios y roles
 ---
 
 ## 👥 Integrantes
@@ -157,5 +125,6 @@ Para sugerencias o mejoras, abre un *issue* en el repositorio.
 ---
 
 ✨ **La Fragata Giratoria – Tecnología al servicio del buen sabor** ✨
+
 
 
