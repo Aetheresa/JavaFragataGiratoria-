@@ -1,0 +1,48 @@
+# 🍽️ La Fragata Giratoria – Sistema de Gestión y Ventas
+
+## Descripción
+
+**La Fragata Giratoria** es un software de gestión y ventas desarrollado para optimizar la administración de pedidos, inventario e insumos de un restaurante. El sistema permite un control más eficiente de los platillos y la disponibilidad de ingredientes en tiempo real, reduciendo desperdicios y mejorando el servicio al cliente.
+
+Este proyecto se desarrolla como solución a las dificultades en el control de inventario y la planificación de compras del restaurante *La Fragata Giratoria*.
+
+## Objetivo
+
+Diseñar e implementar un sistema que optimice la gestión de pedidos y el control de insumos del restaurante, mejorando la eficiencia operativa y la experiencia del cliente.
+
+## Funcionalidades Principales
+
+* Gestión de inventario en tiempo real.
+* Registro y control de pedidos.
+* Menú digital para clientes (QR).
+* Roles de usuario: administrador, mesero, cocina y cliente.
+
+## Tecnologías Utilizadas
+
+* Java
+* Spring Boot
+* Maven
+* HTML, CSS, JavaScript
+* MySQL
+
+## Ejecución del Proyecto
+
+```bash
+git clone https://github.com/Aetheresa/JavaFragataGiratoria-
+cd JavaFragataGiratoria-
+mvn spring-boot:run
+```
+
+Acceso desde el navegador:
+
+```
+http://localhost:8080
+```
+
+## Integrantes
+
+SCRUM N° 1
+
+* Arleidis Beatriz Coronado
+* Nicolas Losada Mendez
+
