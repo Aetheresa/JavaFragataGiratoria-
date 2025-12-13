@@ -1,0 +1,130 @@
+# 🍽️ La Fragata Giratoria
+
+**Sistema de Gestión y Ventas para Restaurante**
+
+![Backend](https://img.shields.io/badge/Backend-Spring%20Boot-brightgreen)
+![Frontend](https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JS-blue)
+![Database](https://img.shields.io/badge/Database-MySQL-orange)
+
+---
+
+## 📌 Descripción
+
+**La Fragata Giratoria** es un sistema de gestión y ventas desarrollado para restaurantes, diseñado para centralizar y optimizar los procesos operativos diarios como el control de inventario, la gestión de pedidos y la atención al cliente.
+
+El sistema opera en **tiempo real**, reduciendo errores humanos, minimizando desperdicios y mejorando la eficiencia del servicio.
+
+---
+
+## 🎯 Objetivo General
+
+Diseñar e implementar un sistema integral que optimice la gestión de pedidos, inventarios e insumos del restaurante **La Fragata Giratoria**, fortaleciendo el control administrativo y la experiencia del cliente.
+
+### Objetivos Específicos
+
+- Automatizar el registro y seguimiento de pedidos  
+- Controlar el inventario de forma precisa  
+- Reducir tiempos de atención  
+- Facilitar la toma de decisiones administrativas  
+
+---
+
+## ⚙️ Funcionalidades Principales
+
+- 📦 **Gestión de inventario en tiempo real**  
+  Control de insumos, actualización automática por ventas y alertas de stock.
+
+- 🧾 **Registro y control de pedidos**  
+  Gestión completa del ciclo del pedido.
+
+- 📱 **Menú digital mediante código QR**  
+  Acceso al menú desde dispositivos móviles.
+
+- 👥 **Gestión de roles de usuario**
+  - 👨‍💼 Administrador  
+  - 🧑‍🍳 Cocina  
+  - 🧑‍💼 Mesero  
+  - 👤 Cliente  
+
+- 📊 **Panel administrativo**  
+  Control general del sistema.
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+### Backend
+- ☕ Java  
+- 🌱 Spring Boot (v3.4.1)  
+- 📦 Maven  
+
+### Frontend
+- 🎨 HTML5  
+- 🎨 CSS3  
+- ⚙️ JavaScript  
+
+### Base de Datos
+- 🗄️ MySQL  
+
+---
+
+## 🏗️ Arquitectura
+
+Arquitectura en capas:
+
+- **Controladores** – Rutas y peticiones HTTP  
+- **Servicios** – Lógica de negocio  
+- **Repositorios** – Acceso a datos (JPA / Hibernate)  
+- **Modelos** – Entidades  
+
+---
+
+## 🚀 Ejecución del Proyecto
+
+```bash
+git clone https://github.com/Aetheresa/JavaFragataGiratoria-
+cd JavaFragataGiratoria-
+mvn spring-boot:run
+
+
+🌐 Acceso:
+
+```text
+http://localhost:8080
+```
+
+---
+
+
+## ✔️ Resultado Final
+
+- Sistema web funcional
+- Gestión completa de pedidos e inventario
+- Control de usuarios y roles
+---
+
+## 👥 Integrantes
+
+**GAES N° 1**
+
+- 👩‍💻 Arleidis Beatriz Coronado
+- 👨‍💻 Nicolas Losada Méndez
+
+---
+
+## 📄 Licencia
+
+Proyecto desarrollado con fines académicos y de aprendizaje.
+
+---
+
+## 📬 Soporte
+
+Para sugerencias o mejoras, abre un *issue* en el repositorio.
+
+---
+
+✨ **La Fragata Giratoria – Tecnología al servicio del buen sabor** ✨
+
+
+
