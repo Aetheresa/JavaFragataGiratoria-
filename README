@@ -1,10 +1,10 @@
-<h1 align="center">🍽️ La Fragata Giratoria</h1>
-<p align="center"><b>Sistema de Gestión y Ventas para Restaurante</b></p>
-<p align="center">
-  <img src="https://img.shields.io/badge/Backend-Spring%20Boot-brightgreen" />
-  <img src="https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JS-blue" />
-    <img src="https://img.shields.io/badge/Database-MySQL-orange" />
-</p>
+# 🍽️ La Fragata Giratoria
+
+**Sistema de Gestión y Ventas para Restaurante**
+
+![Backend](https://img.shields.io/badge/Backend-Spring%20Boot-brightgreen)
+![Frontend](https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JS-blue)
+![Database](https://img.shields.io/badge/Database-MySQL-orange)
 
 ---
 
@@ -57,7 +57,7 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
 ### Backend
 
 * ☕ Java
-* 🌱 Spring Boot
+* 🌱 Spring Boot (v3.4.1)
 * 📦 Maven
 
 ### Frontend
@@ -69,6 +69,8 @@ Diseñar e implementar un sistema integral que optimice la gestión de pedidos, 
 ### Base de Datos
 
 * 🗄️ MySQL
+
+---
 
 ## 🏗️ Arquitectura
 
@@ -97,9 +99,9 @@ http://localhost:8080
 
 ---
 
-## 📱 Aplicación Móvil –  ()
+## 📱 Aplicación Móvil
 
-### Generar
+### Generar APK
 
 ```bash
 flutter build apk
@@ -129,7 +131,7 @@ flutter build appbundle
 ## ✔️ Resultado Final
 
 * Sistema web funcional
-* instalada en dispositivo real
+* Aplicación instalada en dispositivo real
 * Gestión completa de pedidos e inventario
 
 ---
@@ -155,9 +157,4 @@ Para sugerencias o mejoras, abre un *issue* en el repositorio.
 
 ---
 
-<p align="center">✨ <b>La Fragata Giratoria – Tecnología al servicio del buen sabor</b> ✨</p>
-
-
-
-
-
+✨ **La Fragata Giratoria – Tecnología al servicio del buen sabor** ✨
