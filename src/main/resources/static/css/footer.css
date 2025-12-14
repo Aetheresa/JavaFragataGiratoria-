@@ -1,9 +1,9 @@
 /* footer.css */
 .footer {
-  background-color: #05121f;
+  background-color: #111111;
   padding: 30px 20px;
   color: #f9f9f9;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   font-size: 14px;
   line-height: 1.5;
 }
@@ -14,7 +14,7 @@
   display: flex;
   justify-content: space-between;
   gap: 40px;
-  border-top: 1px solid #1e293b; /* separating line might be subtle */
+  border-top: 1px solid #c89f4c; /* separating line might be subtle */
   padding-top: 20px;
   flex-wrap: wrap;
 }
@@ -29,6 +29,8 @@
   font-size: 35px;
   color: #b9935e; /* Dorado */
   margin-bottom: 10px;
+  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .footer-subtitle {
@@ -67,7 +69,7 @@
 }
 
 .footer-policies {
-  border-left: 1px solid #374151;
+  border-left: 1px solid #c89f4c;
   margin-top: 10px;
   padding-left: 20px;
   display: flex;
