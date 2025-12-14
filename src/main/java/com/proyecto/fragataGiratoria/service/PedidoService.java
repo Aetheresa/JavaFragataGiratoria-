@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,53 +20,131 @@ public class PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
-    
-    @Autowired
-    private PedidoDetalleRepository detalleRepository; // Asumiendo que existe
 
-    // Lista todos los pedidos
+    @Autowired
+    private PedidoDetalleRepository detalleRepository;
+
+    // ===============================
+    // LISTAR PEDIDOS
+    // ===============================
     public List<Pedido> listarPedidos() {
         return pedidoRepository.findAll();
     }
 
-    // Obtener un pedido por ID
+    // ===============================
+    // OBTENER PEDIDO POR ID
+    // ===============================
     public Optional<Pedido> obtenerPedidoPorId(Long id) {
-        // La advertencia de "Null Type Safety" se ignora aquí, ya que findById retorna Optional
         if (id == null) return Optional.empty();
         return pedidoRepository.findById(id);
     }
 
-    // Guardar o actualizar un pedido (incluyendo detalles)
+    // ===============================
+    // GUARDAR / ACTUALIZAR PEDIDO
+    // ===============================
     @Transactional
     public Pedido guardarPedido(Pedido pedido) {
-        // 1. Guardar el pedido principal para obtener el ID si es nuevo
+
+        actualizarEstadoGeneral(pedido);
+
         Pedido pedidoGuardado = pedidoRepository.save(pedido);
 
-        // 2. Procesar los detalles del pedido si existen
         if (pedido.getDetalles() != null) {
             for (PedidoDetalle detalle : pedido.getDetalles()) {
-                // CORRECCIÓN CLAVE (para resolver el error de la línea ~70): 
-                // Asignamos el objeto Pedido guardado al detalle.
-                detalle.setPedido(pedidoGuardado); // <--- CORRECCIÓN
-
-                // Guardar cada detalle
-                detalleRepository.save(detalle); 
+                detalle.setPedido(pedidoGuardado);
+                detalleRepository.save(detalle);
             }
         }
 
         return pedidoGuardado;
     }
 
-    // Eliminar un pedido
+    // ===============================
+    // ELIMINAR PEDIDO
+    // ===============================
     public void eliminarPedido(Long id) {
         if (id != null) {
-            // La advertencia de "Null Type Safety" se ignora aquí, se asume que el ID no es nulo
             pedidoRepository.deleteById(id);
         }
     }
 
-    public void registrarPedido(Map<Long,DetalleCarrito> carrito, Integer idMetodoPago) {
-        // todo Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'registrarPedido'");
+    // ===============================
+    // REGISTRAR PEDIDO DESDE CARRITO
+    // ===============================
+    @Transactional
+    public void registrarPedido(Map<Long, DetalleCarrito> carrito, Integer idMetodoPago) {
+
+        Pedido pedido = new Pedido();
+        pedido.setFecha(LocalDate.now());
+        pedido.setEstado("PENDIENTE");
+        pedido.setEstadoCocina("PENDIENTE");
+        pedido.setEstadoMesero("PENDIENTE");
+        pedido.setIdMetodoPago(idMetodoPago);
+
+        double total = carrito.values().stream()
+                .mapToDouble(DetalleCarrito::getSubtotal)
+                .sum();
+
+        pedido.setTotal(BigDecimal.valueOf(total));
+
+        Pedido pedidoGuardado = pedidoRepository.save(pedido);
+
+        for (DetalleCarrito item : carrito.values()) {
+
+            PedidoDetalle detalle = new PedidoDetalle();
+            detalle.setPedido(pedidoGuardado);
+            detalle.setPlatillo(item.getPlatillo());
+            detalle.setCantidad(item.getCantidad());
+            detalle.setPrecioUnitario(
+                    BigDecimal.valueOf(item.getPlatillo().getPrecio())
+            );
+            detalle.setSubtotal(
+                    BigDecimal.valueOf(item.getSubtotal())
+            );
+
+            detalleRepository.save(detalle);
+        }
+    }
+
+    // ===============================
+    // COCINA MARCA LISTO
+    // ===============================
+    @Transactional
+    public void marcarPedidoListo(Long idPedido) {
+
+        Pedido pedido = pedidoRepository.findById(idPedido)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        pedido.setEstadoCocina("LISTO");
+
+        actualizarEstadoGeneral(pedido);
+
+        pedidoRepository.save(pedido);
+    }
+
+    // ===============================
+    // MESERO ENTREGA PEDIDO
+    // ===============================
+    @Transactional
+    public void marcarPedidoEntregado(Long idPedido) {
+
+        Pedido pedido = pedidoRepository.findById(idPedido)
+                .orElseThrow(() -> new RuntimeException("Pedido no encontrado"));
+
+        pedido.setEstadoMesero("ENTREGADO");
+
+        actualizarEstadoGeneral(pedido);
+
+        pedidoRepository.save(pedido);
+    }
+
+    // ===============================
+    // LÓGICA CENTRAL (NO SE DUPLICA)
+    // ===============================
+    private void actualizarEstadoGeneral(Pedido pedido) {
+        if ("LISTO".equalsIgnoreCase(pedido.getEstadoCocina())
+                && "ENTREGADO".equalsIgnoreCase(pedido.getEstadoMesero())) {
+            pedido.setEstado("FINALIZADO");
+        }
     }
 }
