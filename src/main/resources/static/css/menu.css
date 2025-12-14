@@ -13,71 +13,69 @@ body {
     padding: 20px 40px 40px 40px;
 }
 
-/* ================= HEADER ================= */
+/* =======================
+          HEADER 
+======================= */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem 2rem; /* Igual que login */
-    background-color: rgba(0, 0, 0, 0.6); /* Igual que login */
+    padding: 1.8rem 2.5rem;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 215, 130, 0.25);
 }
 
-header .logo-contenedor {
+/* Logo */
+.logo-contenedor {
     display: flex;
     align-items: center;
-    gap: 0.5rem; /* Igual que login */
+    gap: 0.7rem;
 }
 
-header .logo-img {
-    height: 60px; /* Igual que login */
-    width: auto;
+.logo-img {
+    height: 68px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
 }
 
 .nombre-logo {
-    color: white;
-    font-size: 1.8rem; /* Igual que login */
+    color: #f5d487;
+    font-size: 2.1rem;
     font-weight: bold;
+    letter-spacing: 1px;
     font-family: 'Georgia', serif;
 }
 
-
-.icono-carrito img {
-    height: 24px; /* Igual que login */
-    vertical-align: middle;
-}
-
-/* Fondo oscuro y estilo base */
-body {
-    background-color: #1A1A1A;
-    color: #E0E0E0;
-    font-family: 'Roboto', 'Montserrat', sans-serif;
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
+/* Navegación */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
 
 nav a {
-    color: #E0E0E0;
-    margin-left: 25px;
-    font-size: 1.5em;
+    color: #ffffff;
+    font-size: 1.45rem;
     padding: 5px 0;
     position: relative;
-    transition: color 0.3s;
-    text-decoration: none;/* ESTA LÍNEA QUITA EL SUBRAYADO PERMANENTE */
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
 nav a:hover {
-    color: #c89f4c;
+    color: #f5d487;
+    text-shadow: 0 0 8px rgba(245, 212, 135, 0.7);
 }
 
 nav a::after {
-    content: '';
+    content: "";
     position: absolute;
-    width: 0;
+    width: 0%;
     height: 2px;
-    bottom: 0;
+    bottom: -3px;
     left: 0;
-    background-color: #c89f4c;
+    background: #f5d487;
     transition: width 0.3s ease-in-out;
 }
 
@@ -85,10 +83,22 @@ nav a:hover::after {
     width: 100%;
 }
 
+/* Carrito */
 .icono-carrito img {
-    width: 34px;
-    height: 36px;
+    height: 28px;
+    filter: drop-shadow(0 0 5px rgba(245, 212, 135, 0.5));
 }
+
+/* Usuario */
+.usuario-box {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+}
+
 
 /* ====================== TÍTULOS DE SECCIÓN ========================= */
 
@@ -202,6 +212,7 @@ nav a:hover::after {
     background-color: #c89f4c;
     color: #1A1A1A;
 }
+
 
 /* ========================= RESPONSIVE DESIGN ================== */
 
